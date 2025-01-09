@@ -28,13 +28,15 @@ public class EnemyLongAttack : PISMonoBehaviour
         AnimatorStateInfo stateInfo = _enemyLongAbstract.Anim.GetCurrentAnimatorStateInfo(0);
         _enemyLongAbstract.Agent.isStopped = (currentState == EnemyState.Idle || currentState == EnemyState.Attack);
 
+        if (currentState == EnemyState.Attack && stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
+        {
+            ChangeState(_enemyLongAbstract.EnemyMoving.IsStopMoving ? EnemyState.Idle : EnemyState.Walk);
+            return;
+        }
+
         if (!_enemyLongAbstract.EnemyMoving.IsStopMoving)
         {
             if (currentState != EnemyState.Attack)
-            {
-                ChangeState(EnemyState.Walk);
-            }
-            else if (stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
             {
                 ChangeState(EnemyState.Walk);
             }
@@ -53,10 +55,6 @@ public class EnemyLongAttack : PISMonoBehaviour
                 {
                     ChangeState(EnemyState.Idle);
                 }
-            }
-            else if (stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
-            {
-                ChangeState(EnemyState.Idle);
             }
         }
     }

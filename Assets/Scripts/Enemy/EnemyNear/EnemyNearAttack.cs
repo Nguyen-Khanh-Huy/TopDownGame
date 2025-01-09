@@ -5,36 +5,65 @@ using UnityEngine;
 public class EnemyNearAttack : PISMonoBehaviour
 {
     [SerializeField] private EnemyNearCtrlAbstract _enemyNearAbstract;
-    private bool _isAttackComplete;
+    [SerializeField] private EnemyState currentState;
+    [SerializeField] private float _timeAttack = 0.5f;
+    private float _timeCount;
     private void Update()
     {
         EnemyAttack();
     }
 
-    private void ChangeState(EnemyState State)
+    private void ChangeState(EnemyState newState)
     {
-        _enemyNearAbstract.Anim.SetInteger("State", (int)State);
+        if (currentState != newState)
+        {
+            currentState = newState;
+            _enemyNearAbstract.Anim.SetInteger("State", (int)newState);
+        }
     }
-
     private void EnemyAttack()
     {
+        AnimatorStateInfo stateInfo = _enemyNearAbstract.Anim.GetCurrentAnimatorStateInfo(0);
+        _enemyNearAbstract.Agent.isStopped = (currentState == EnemyState.Idle || currentState == EnemyState.Attack);
+
+        if (currentState == EnemyState.Attack && stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
+        {
+            ChangeState(_enemyNearAbstract.EnemyMoving.IsStopMoving ? EnemyState.Idle : EnemyState.Walk);
+            return;
+        }
+
         if (!_enemyNearAbstract.EnemyMoving.IsStopMoving)
         {
-            _isAttackComplete = false;
-            ChangeState(EnemyState.Walk);
+            if (currentState != EnemyState.Attack)
+            {
+                ChangeState(EnemyState.Walk);
+            }
         }
         else
         {
-            if (!_isAttackComplete)
+            if (currentState != EnemyState.Attack)
             {
-                ChangeState(EnemyState.Attack);
-                AnimatorStateInfo stateInfo = _enemyNearAbstract.Anim.GetCurrentAnimatorStateInfo(0);
-                if (stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
+                _timeCount += Time.deltaTime;
+                if (_timeCount >= _timeAttack)
                 {
-                    _isAttackComplete = true;
+                    _timeCount = 0;
+                    ChangeState(EnemyState.Attack);
+                }
+                else
+                {
                     ChangeState(EnemyState.Idle);
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerController player = other.GetComponent<PlayerController>();
+        if(player != null)
+        {
+            if (player.Hp <= 0) return;
+            player.Hp--;
         }
     }
 
