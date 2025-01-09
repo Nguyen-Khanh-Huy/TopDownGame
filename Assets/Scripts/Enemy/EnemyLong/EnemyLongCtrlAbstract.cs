@@ -4,14 +4,14 @@ using UnityEngine;
 
 public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
 {
-    [SerializeField] private EnemyLongMoving _enemyLongMoving;
-    public EnemyLongMoving EnemyLongMoving { get => _enemyLongMoving; set => _enemyLongMoving = value; }
+    [SerializeField] private EnemyLongAttack _enemyLongAttack;
+    public EnemyLongAttack EnemyLongAttack { get => _enemyLongAttack; set => _enemyLongAttack = value; }
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        if (_enemyLongMoving != null) return;
-        _enemyLongMoving = GetComponentInChildren<EnemyLongMoving>();
+        if (_enemyLongAttack != null) return;
+        _enemyLongAttack = GetComponentInChildren<EnemyLongAttack>();
     }
 
     private void OnEnable()

@@ -7,3 +7,11 @@ public enum PlayerState
     Idle,
     Walk
 }
+
+public enum EnemyState
+{
+    Idle,
+    Walk,
+    Attack,
+    Dying
+}

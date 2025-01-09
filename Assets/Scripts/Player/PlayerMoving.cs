@@ -17,7 +17,7 @@ public class PlayerMoving : PISMonoBehaviour
     [SerializeField] private float _moveSpeed = 3f;
     [SerializeField] private float _jumpSpeed = 5f;
 
-    private float _hozCheck, _vertCheck;
+    private float _hozMove, _vertMove;
 
     private bool IsIdle
     {
@@ -34,15 +34,27 @@ public class PlayerMoving : PISMonoBehaviour
 
     private void Update()
     {
+        SetUpIsOnMobile();
+        LookAtTarget();
+        Moving();
+    }
+    protected override void LoadComponents()
+    {
+        if (_playerController != null) return;
+        _playerController = GetComponentInParent<PlayerController>();
+    }
+
+    private void SetUpIsOnMobile()
+    {
         if (!IsOnMobile)
         {
-            _hozCheck = Input.GetAxisRaw("Horizontal");
-            _vertCheck = Input.GetAxisRaw("Vertical");
+            _hozMove = Input.GetAxisRaw("Horizontal");
+            _vertMove = Input.GetAxisRaw("Vertical");
 
-            _canMoveLeft = _hozCheck < 0;
-            _canMoveRight = _hozCheck > 0;
-            _canMoveUp = _vertCheck > 0;
-            _canMoveDown = _vertCheck < 0;
+            _canMoveLeft = _hozMove < 0;
+            _canMoveRight = _hozMove > 0;
+            _canMoveUp = _vertMove > 0;
+            _canMoveDown = _vertMove < 0;
 
             _canJump = Input.GetKeyDown(KeyCode.Space);
         }
@@ -54,13 +66,6 @@ public class PlayerMoving : PISMonoBehaviour
             //_canMoveUp = Joystick.yValue > 0 ? true : false;
             //_canMoveDown = Joystick.yValue < 0 ? true : false;
         }
-        Moving();
-        LookAtTarget();
-    }
-    protected override void LoadComponents()
-    {
-        if (_playerController != null) return;
-        _playerController = GetComponentInParent<PlayerController>();
     }
 
     private void ChangeState(PlayerState State)
@@ -73,39 +78,63 @@ public class PlayerMoving : PISMonoBehaviour
         if (_playerController.PlayerTarget.Target == null)
         {
             if (!_canMoveLeft && !_canMoveRight && !_canMoveUp && !_canMoveDown) return;
-            Vector3 moveDirection = new Vector3(_hozCheck, 0, _vertCheck).normalized;
+
+            Vector3 moveDirection = new Vector3(_hozMove, 0, _vertMove).normalized;
             Quaternion toRotation = Quaternion.LookRotation(moveDirection);
-            _playerController.transform.rotation = Quaternion.RotateTowards(_playerController.transform.rotation, toRotation, 540f * Time.deltaTime);
+
+            Quaternion targetRotation = Quaternion.RotateTowards(_playerController.transform.rotation, toRotation, 540f * Time.deltaTime);
+            targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
+
+            _playerController.transform.rotation = targetRotation;
         }
         else
         {
-            _playerController.transform.LookAt(_playerController.PlayerTarget.Target.transform);
+            Vector3 targetPosition = _playerController.PlayerTarget.Target.transform.position;
+            targetPosition.y = _playerController.transform.position.y;
+            _playerController.transform.LookAt(targetPosition);
         }
     }
 
     private void Moving()
     {
-        int _hoz = _canMoveLeft ? -1 : _canMoveRight ? 1 : 0;
-        int _vert = _canMoveDown ? -1 : _canMoveUp ? 1 : 0;
-        if (_hoz != 0)
+        Vector3 move = new Vector3(_hozMove, 0f, _vertMove).normalized * _moveSpeed;
+        if (_canMoveLeft || _canMoveRight || _canMoveUp || _canMoveDown)
         {
             ChangeState(PlayerState.Walk);
-            _playerController.Rb.velocity = new Vector3(_hoz * _moveSpeed, _playerController.Rb.velocity.y, _playerController.Rb.velocity.z);
-        }
-        if (_vert != 0)
-        {
-            ChangeState(PlayerState.Walk);
-            _playerController.Rb.velocity = new Vector3(_playerController.Rb.velocity.x, _playerController.Rb.velocity.y, _vert * _moveSpeed);
+            _playerController.Rb.velocity = new Vector3(move.x, _playerController.Rb.velocity.y, move.z);
         }
         if (_canJump && Mathf.Abs(_playerController.Rb.velocity.y) < 0.01f)
         {
             _canJump = false;
-            _playerController.Rb.velocity = new Vector3(_playerController.Rb.velocity.x, _jumpSpeed, _playerController.Rb.velocity.z);
+            _playerController.Rb.velocity = new Vector3(move.x, _jumpSpeed, move.z);
         }
         if (IsIdle && Mathf.Abs(_playerController.Rb.velocity.y) < 0.01f)
         {
             ChangeState(PlayerState.Idle);
             _playerController.Rb.velocity = Vector3.zero;
         }
+
+        //int _hoz = _canMoveLeft ? -1 : _canMoveRight ? 1 : 0;
+        //int _vert = _canMoveDown ? -1 : _canMoveUp ? 1 : 0;
+        //if (_hoz != 0)
+        //{
+        //    ChangeState(PlayerState.Walk);
+        //    _playerController.Rb.velocity = new Vector3(_hoz * _moveSpeed, _playerController.Rb.velocity.y, _playerController.Rb.velocity.z);
+        //}
+        //if (_vert != 0)
+        //{
+        //    ChangeState(PlayerState.Walk);
+        //    _playerController.Rb.velocity = new Vector3(_playerController.Rb.velocity.x, _playerController.Rb.velocity.y, _vert * _moveSpeed);
+        //}
+        //if (_canJump && Mathf.Abs(_playerController.Rb.velocity.y) < 0.01f)
+        //{
+        //    _canJump = false;
+        //    _playerController.Rb.velocity = new Vector3(_playerController.Rb.velocity.x, _jumpSpeed, _playerController.Rb.velocity.z);
+        //}
+        //if (IsIdle && Mathf.Abs(_playerController.Rb.velocity.y) < 0.01f)
+        //{
+        //    ChangeState(PlayerState.Idle);
+        //    _playerController.Rb.velocity = Vector3.zero;
+        //}
     }
 }

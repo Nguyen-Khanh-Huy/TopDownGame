@@ -4,14 +4,14 @@ using UnityEngine;
 
 public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
 {
-    [SerializeField] private EnemyNearMoving _enemyNearMoving;
-    public EnemyNearMoving EnemyNearMoving { get => _enemyNearMoving; set => _enemyNearMoving = value; }
+    [SerializeField] private EnemyNearAttack _enemyNearAttack;
+    public EnemyNearAttack EnemyNearAttack { get => _enemyNearAttack; set => _enemyNearAttack = value; }
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        if (_enemyNearMoving != null) return;
-        _enemyNearMoving = GetComponentInChildren<EnemyNearMoving>();
+        if (_enemyNearAttack != null) return;
+        _enemyNearAttack = GetComponentInChildren<EnemyNearAttack>();
     }
 
     private void OnEnable()
