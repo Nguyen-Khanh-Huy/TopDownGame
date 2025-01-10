@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletParabol : BulletCtrlAbstract
 {
     [SerializeField] private PlayerController _player;
-    [SerializeField] private MuzzleParabol _muzzleParabol;
+    [SerializeField] private HitParabol _hitParabol;
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private SphereCollider _colliderAttack;
 
@@ -15,9 +15,9 @@ public class BulletParabol : BulletCtrlAbstract
 
     protected override void LoadComponents()
     {
-        if (_player != null && _muzzleParabol != null && _rb != null && _colliderAttack != null) return;
+        if (_player != null && _hitParabol != null && _rb != null && _colliderAttack != null) return;
         _player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        _muzzleParabol = Resources.Load<MuzzleParabol>("Muzzle/MuzzleParabol");
+        _hitParabol = Resources.Load<HitParabol>("Hits/HitParabol");
         _rb = GetComponent<Rigidbody>();
         _colliderAttack = GetComponent<SphereCollider>();
     }
@@ -62,7 +62,7 @@ public class BulletParabol : BulletCtrlAbstract
 
     private void SpawnMuzzleParabol()
     {
-        PoolManager<EffectCtrlAbstract>.Ins.Spawn(_muzzleParabol, transform.position, Quaternion.identity);
+        PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitParabol, transform.position, Quaternion.identity);
     }
 
     private void OnTriggerEnter(Collider other)

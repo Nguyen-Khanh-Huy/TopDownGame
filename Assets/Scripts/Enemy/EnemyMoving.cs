@@ -45,7 +45,7 @@ public class EnemyMoving : PISMonoBehaviour
     private void CheckEnemy()
     {
         if(GetComponentInParent<EnemyNearCtrlAbstract>() != null)
-        { _distance = 0.8f; }
+        { _distance = 0.9f; }
 
         else { _distance = 6f; }
     }
