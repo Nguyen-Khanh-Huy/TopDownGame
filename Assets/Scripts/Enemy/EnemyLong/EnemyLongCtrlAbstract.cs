@@ -25,6 +25,6 @@ public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
 
     public void EventFireBulletParabol()
     {
-        Instantiate(_bulletParabol, _firePoint.position, Quaternion.identity);
+        PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletParabol, _firePoint.position, Quaternion.identity);
     }
 }

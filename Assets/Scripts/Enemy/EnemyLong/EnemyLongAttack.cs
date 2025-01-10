@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEngine;
 
 public class EnemyLongAttack : PISMonoBehaviour
@@ -9,6 +8,7 @@ public class EnemyLongAttack : PISMonoBehaviour
     [SerializeField] private EnemyState currentState;
     [SerializeField] private float _timeAttack = 3f;
     private float _timeCount;
+
     private void Update()
     {
         EnemyAttack();

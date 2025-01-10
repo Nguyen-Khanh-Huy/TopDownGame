@@ -35,12 +35,10 @@ public class EnemyMoving : PISMonoBehaviour
         if (checkDistance >= _distance)
         {
             _isStopMoving = false;
-            //_enemyCtrlAbstract.Agent.isStopped = false;
         }
         else
         {
             _isStopMoving = true;
-            //_enemyCtrlAbstract.Agent.isStopped = true;
         }
     }
 
