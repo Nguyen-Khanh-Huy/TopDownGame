@@ -90,6 +90,7 @@ public class PlayerMoving : PISMonoBehaviour
         else
         {
             Vector3 targetPosition = _playerController.PlayerTarget.Target.transform.position;
+            targetPosition.x -= 0.12f;
             targetPosition.y = _playerController.transform.position.y;
             _playerController.transform.LookAt(targetPosition);
         }

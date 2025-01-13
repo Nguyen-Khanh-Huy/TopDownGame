@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyLongAttack : PISMonoBehaviour
 {
     [SerializeField] private EnemyLongCtrlAbstract _enemyLongAbstract;
-    [SerializeField] private EnemyState currentState;
+    [SerializeField] private EnemyState _curState;
     [SerializeField] private float _timeAttack = 3f;
     private float _timeCount;
 
@@ -16,9 +16,9 @@ public class EnemyLongAttack : PISMonoBehaviour
 
     private void ChangeState(EnemyState newState)
     {
-        if (currentState != newState)
+        if (_curState != newState)
         {
-            currentState = newState;
+            _curState = newState;
             _enemyLongAbstract.Anim.SetInteger("State", (int)newState);
         }
     }
@@ -26,9 +26,15 @@ public class EnemyLongAttack : PISMonoBehaviour
     private void EnemyAttack()
     {
         AnimatorStateInfo stateInfo = _enemyLongAbstract.Anim.GetCurrentAnimatorStateInfo(0);
-        _enemyLongAbstract.Agent.isStopped = (currentState == EnemyState.Idle || currentState == EnemyState.Attack);
+        _enemyLongAbstract.Agent.isStopped = (_curState == EnemyState.Dying || _curState == EnemyState.Idle || _curState == EnemyState.Attack);
 
-        if (currentState == EnemyState.Attack && stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
+        if (_enemyLongAbstract.Hp <= 0)
+        {
+            ChangeState(EnemyState.Dying);
+            return;
+        }
+
+        if (_curState == EnemyState.Attack && stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
         {
             ChangeState(_enemyLongAbstract.EnemyMoving.IsStopMoving ? EnemyState.Idle : EnemyState.Walk);
             return;
@@ -36,14 +42,14 @@ public class EnemyLongAttack : PISMonoBehaviour
 
         if (!_enemyLongAbstract.EnemyMoving.IsStopMoving)
         {
-            if (currentState != EnemyState.Attack)
+            if (_curState != EnemyState.Attack)
             {
                 ChangeState(EnemyState.Walk);
             }
         }
         else
         {
-            if (currentState != EnemyState.Attack)
+            if (_curState != EnemyState.Attack)
             {
                 _timeCount += Time.deltaTime;
                 if (_timeCount >= _timeAttack)
