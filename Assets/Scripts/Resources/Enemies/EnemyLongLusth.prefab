@@ -586,7 +586,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
+  m_Radius: 0.3
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.97, z: 0}
@@ -630,7 +630,7 @@ MonoBehaviour:
   _enemyMoving: {fileID: 5829898454483108344}
   _player: {fileID: 0}
   _enemyLongAttack: {fileID: 2636210275603861797}
-  _bulletParabol: {fileID: 3556444917982788591, guid: e59b839350715804eaeadf3e86e7f8b4, type: 3}
+  _bulletParabol: {fileID: 8879088643768916012, guid: e59b839350715804eaeadf3e86e7f8b4, type: 3}
   _firePoint: {fileID: 8007795772448501616}
 --- !u!1 &1849939049912012327
 GameObject:
@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyLongAbstract: {fileID: 1197785041297933665}
-  currentState: 0
+  _curState: 0
   _timeAttack: 3
 --- !u!1 &5133296828367927241
 GameObject:

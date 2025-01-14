@@ -90,7 +90,30 @@ public class PlayerMoving : PISMonoBehaviour
         else
         {
             Vector3 targetPosition = _playerController.PlayerTarget.Target.transform.position;
-            targetPosition.x -= 0.12f;
+            float playerZ = _playerController.transform.position.z;
+            float targetZ = _playerController.PlayerTarget.Target.transform.position.z;
+
+            float playerX = _playerController.transform.position.x;
+            float targetX = _playerController.PlayerTarget.Target.transform.position.x;
+
+            if (playerZ > targetZ)
+            {
+                targetPosition.x += 0.12f;
+            }
+            else if (playerZ < targetZ)
+            {
+                targetPosition.x -= 0.12f;
+            }
+
+            if(playerX > targetX)
+            {
+                targetPosition.z -= 0.2f;
+            }
+            else if (playerX < targetX)
+            {
+                targetPosition.z += 0.2f;
+            }
+
             targetPosition.y = _playerController.transform.position.y;
             _playerController.transform.LookAt(targetPosition);
         }

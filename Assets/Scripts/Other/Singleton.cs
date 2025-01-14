@@ -12,10 +12,6 @@ public abstract class Singleton<T> : PISMonoBehaviour where T : PISMonoBehaviour
     {
         DontDestroy(true);
     }
-    //public virtual void Awake()
-    //{
-    //    DontDestroy(true);
-    //}
 
     public void DontDestroy(bool dontDestroyOnLoad)
     {

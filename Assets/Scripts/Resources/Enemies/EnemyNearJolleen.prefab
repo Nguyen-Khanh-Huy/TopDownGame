@@ -350,7 +350,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.3
   m_Height: 1.63
   m_Direction: 1
   m_Center: {x: 0, y: 0.8, z: 0}
@@ -2067,7 +2067,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyNearAbstract: {fileID: 8778607339776674792}
-  currentState: 0
+  _curState: 0
   _timeAttack: 0.5
 --- !u!1 &7417660313886629021
 GameObject:

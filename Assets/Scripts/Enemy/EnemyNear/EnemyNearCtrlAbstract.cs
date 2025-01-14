@@ -21,6 +21,11 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
         _hp = 5;
     }
 
+    private void OnDisable()
+    {
+        EnemyManager.Ins.ListEnemyNearSpawn.Remove(this);
+    }
+
     public void EventOnColliderAttack()
     {
         _colliderAttack.enabled = true;

@@ -23,6 +23,11 @@ public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
         _hp = 3;
     }
 
+    private void OnDisable()
+    {
+        EnemyManager.Ins.ListEnemyLongSpawn.Remove(this);
+    }
+
     public void EventFireBulletParabol()
     {
         PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletParabol, _firePoint.position, Quaternion.identity);
