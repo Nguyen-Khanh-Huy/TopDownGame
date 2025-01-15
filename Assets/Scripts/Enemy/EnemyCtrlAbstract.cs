@@ -10,19 +10,22 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     [SerializeField] protected NavMeshAgent _agent;
     [SerializeField] protected EnemyMoving _enemyMoving;
     [SerializeField] protected PlayerController _player;
+    [SerializeField] protected ItemDropCoin _itemDropCoin;
 
     public int Hp { get => _hp; set => _hp = value; }
     public Animator Anim { get => _anim; }
     public NavMeshAgent Agent { get => _agent; set => _agent = value; }
     public EnemyMoving EnemyMoving { get => _enemyMoving; }
     public PlayerController Player { get => _player; }
+    public ItemDropCoin ItemDropCoin { get => _itemDropCoin; }
 
     protected override void LoadComponents()
     {
-        if (_anim != null && _agent != null && _enemyMoving != null && _player != null) return;
+        if (_anim != null && _agent != null && _enemyMoving != null && _player != null && _itemDropCoin != null) return;
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _enemyMoving = GetComponentInChildren<EnemyMoving>();
         _player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+        _itemDropCoin = Resources.Load<ItemDropCoin>("ItemsDrop/ItemDropCoin");
     }
 }

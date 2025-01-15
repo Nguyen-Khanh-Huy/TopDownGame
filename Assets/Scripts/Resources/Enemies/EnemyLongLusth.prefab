@@ -582,7 +582,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -629,6 +629,7 @@ MonoBehaviour:
   _agent: {fileID: 3956304198523098301}
   _enemyMoving: {fileID: 5829898454483108344}
   _player: {fileID: 0}
+  _itemDropCoin: {fileID: 0}
   _enemyLongAttack: {fileID: 2636210275603861797}
   _bulletParabol: {fileID: 8879088643768916012, guid: e59b839350715804eaeadf3e86e7f8b4, type: 3}
   _firePoint: {fileID: 8007795772448501616}
@@ -2278,6 +2279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAbstract: {fileID: 1197785041297933665}
   _despawnByTime: 3
+  _isSpawnedItemDrop: 0
 --- !u!1 &7996254921457799505
 GameObject:
   m_ObjectHideFlags: 0

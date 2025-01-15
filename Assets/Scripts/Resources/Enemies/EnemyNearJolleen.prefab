@@ -112,6 +112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAbstract: {fileID: 8778607339776674792}
   _despawnByTime: 3
+  _isSpawnedItemDrop: 0
 --- !u!1 &226141264503506537
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,7 +347,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -393,6 +394,7 @@ MonoBehaviour:
   _agent: {fileID: 7268034290586557352}
   _enemyMoving: {fileID: 3592892285049422266}
   _player: {fileID: 0}
+  _itemDropCoin: {fileID: 0}
   _enemyNearAttack: {fileID: 5896874757490127821}
   _colliderAttack: {fileID: 4249523711892375125}
 --- !u!1 &1191731329795351534
