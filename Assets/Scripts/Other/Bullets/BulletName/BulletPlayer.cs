@@ -7,7 +7,6 @@ public class BulletPlayer : BulletCtrlAbstract
 {
     [SerializeField] private float _speedBullet = 10f;
     [SerializeField] private float _despawnByTime = 2f;
-    //[SerializeField] private bool isCollided;
 
     private void Update()
     {
@@ -22,7 +21,6 @@ public class BulletPlayer : BulletCtrlAbstract
 
     private void OnDisable()
     {
-        //isCollided = false;
         CancelInvoke(nameof(DespawnBullet));
     }
 
@@ -33,13 +31,11 @@ public class BulletPlayer : BulletCtrlAbstract
 
     private void BulletRayCast()
     {
-        //if (Physics.SphereCast(transform.position, 0.2f, Vector3.forward, out RaycastHit hitInfo, _speedBullet * Time.deltaTime))
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 0.1f))
         {
             EnemyCtrlAbstract enemy = hitInfo.collider.GetComponent<EnemyCtrlAbstract>();
-            if (enemy != null && enemy.Hp > 0)// && !isCollided)
+            if (enemy != null && enemy.Hp > 0)
             {
-                //isCollided = true;
                 UpdateHpEnemy(enemy);
                 DespawnBullet();
             }
@@ -61,6 +57,7 @@ public class BulletPlayer : BulletCtrlAbstract
     {
         if (enemy.Hp <= 0) return;
         enemy.Hp--;
+        enemy.HpBar.value = (float)enemy.Hp / enemy.EnemySO.Hp;
     }
 
     public override string GetName()

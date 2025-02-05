@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
 {
+
     [SerializeField] private EnemyLongAttack _enemyLongAttack;
     [SerializeField] private BulletParabol _bulletParabol;
     [SerializeField] private Transform _firePoint;
@@ -12,7 +13,8 @@ public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        if (_enemyLongAttack != null && _bulletParabol != null && _firePoint != null) return;
+        if (_enemySO != null && _enemyLongAttack != null && _bulletParabol != null && _firePoint != null) return;
+        _enemySO = Resources.Load<EnemySO>("SO/EnemyLongSO");
         _enemyLongAttack = GetComponentInChildren<EnemyLongAttack>();
         _bulletParabol = Resources.Load<BulletParabol>("Bullets/BulletParabol");
         _firePoint = transform.Find("Model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/FirePoint");
@@ -20,7 +22,8 @@ public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
 
     private void OnEnable()
     {
-        _hp = 3;
+        _hp = _enemySO.Hp;
+        _hpBar.value = _hp / _enemySO.Hp;
     }
 
     private void OnDisable()

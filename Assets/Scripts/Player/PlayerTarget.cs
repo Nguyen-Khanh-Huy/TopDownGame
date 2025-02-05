@@ -62,12 +62,12 @@ public class PlayerTarget : PISMonoBehaviour
     }
     private void AddAndRemoveEnemy(EnemyCtrlAbstract enemy)
     {
-        Vector3 playerPosition = _playerCtrl.transform.position;
-        Vector3 enemyPosition = enemy.transform.position;
-        playerPosition.y += 1;
-        enemyPosition.y += 1;
-        Vector3 direction = enemyPosition - playerPosition;
-        if (Physics.Raycast(playerPosition, direction, out RaycastHit hitInfo))
+        Vector3 playerPos = _playerCtrl.transform.position;
+        Vector3 enemyPos = enemy.transform.position;
+        playerPos.y += 1;
+        enemyPos.y += 1;
+        Vector3 direction = enemyPos - playerPos;
+        if (Physics.Raycast(playerPos, direction, out RaycastHit hitInfo))
         {
             if (hitInfo.collider.gameObject.layer != LayerMask.NameToLayer("BG"))
             {

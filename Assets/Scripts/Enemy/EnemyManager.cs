@@ -12,6 +12,7 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private List<EnemyNearCtrlAbstract> _listEnemyNearSpawn = new();
     [SerializeField] private List<EnemyLongCtrlAbstract> _listEnemyLongSpawn = new();
     [SerializeField] private List<Vector3> _listPosSpawn = new();
+
     public List<EnemyNearCtrlAbstract> ListEnemyNearSpawn { get => _listEnemyNearSpawn; set => _listEnemyNearSpawn = value; }
     public List<EnemyLongCtrlAbstract> ListEnemyLongSpawn { get => _listEnemyLongSpawn; set => _listEnemyLongSpawn = value; }
 

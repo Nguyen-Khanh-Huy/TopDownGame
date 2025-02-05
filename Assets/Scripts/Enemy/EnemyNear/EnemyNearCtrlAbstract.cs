@@ -11,14 +11,16 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        if (_enemyNearAttack != null && _colliderAttack != null) return;
+        if (_enemySO != null && _enemyNearAttack != null && _colliderAttack != null) return;
+        _enemySO = Resources.Load<EnemySO>("SO/EnemyNearSO");
         _enemyNearAttack = GetComponentInChildren<EnemyNearAttack>();
         _colliderAttack = GetComponentInChildren<SphereCollider>();
     }
 
     private void OnEnable()
     {
-        _hp = 5;
+        _hp = _enemySO.Hp;
+        _hpBar.value = _hp / _enemySO.Hp;
     }
 
     private void OnDisable()
