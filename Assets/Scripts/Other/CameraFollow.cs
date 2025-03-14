@@ -8,7 +8,7 @@ public class CameraFollow : PISMonoBehaviour
 
     private void Update()
     {
-        transform.SetPositionAndRotation(new Vector3(_player.transform.position.x, _player.transform.position.y + 9f, _player.transform.position.z - 6f), 
+        transform.SetPositionAndRotation(new Vector3(_player.transform.position.x, _player.transform.position.y + 6f, _player.transform.position.z - 4f), 
             Quaternion.Euler(50f,0f,0f));
     }
     protected override void LoadComponents()

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 public class BulletPlayer : BulletCtrlAbstract
@@ -31,7 +30,7 @@ public class BulletPlayer : BulletCtrlAbstract
 
     private void BulletRayCast()
     {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hitInfo, 0.1f))
+        if (Physics.Raycast(transform.position - transform.forward * 0.7f, transform.forward, out RaycastHit hitInfo, 0.7f + _speedBullet * Time.deltaTime))
         {
             EnemyCtrlAbstract enemy = hitInfo.collider.GetComponent<EnemyCtrlAbstract>();
             if (enemy != null && enemy.Hp > 0)
@@ -45,7 +44,7 @@ public class BulletPlayer : BulletCtrlAbstract
     //private void OnDrawGizmos()
     //{
     //    Gizmos.color = Color.green;
-    //    Gizmos.DrawLine(transform.position, transform.position + transform.forward * 0.1f);
+    //    Gizmos.DrawLine(transform.position, transform.position + transform.forward);
     //}
 
     private void DespawnBullet()

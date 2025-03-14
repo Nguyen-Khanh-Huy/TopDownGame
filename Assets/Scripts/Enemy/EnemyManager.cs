@@ -6,8 +6,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private EnemyPrefab _enemyPrefab;
-    [SerializeField] private int _maxEnemyNear = 15;
-    [SerializeField] private int _maxEnemyLong = 5;
+    [SerializeField] private int _maxEnemyNear;
+    [SerializeField] private int _maxEnemyLong;
     [SerializeField] private float _spawnSpeed = 2f;
     [SerializeField] private List<EnemyNearCtrlAbstract> _listEnemyNearSpawn = new();
     [SerializeField] private List<EnemyLongCtrlAbstract> _listEnemyLongSpawn = new();

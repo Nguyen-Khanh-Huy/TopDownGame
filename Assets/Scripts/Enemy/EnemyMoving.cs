@@ -6,9 +6,9 @@ public class EnemyMoving : PISMonoBehaviour
 {
     [SerializeField] private EnemyCtrlAbstract _enemyCtrlAbstract;
     [SerializeField] private float _distance;
-    [SerializeField] private bool _isStopMoving;
+    [SerializeField] private bool _isMoving;
 
-    public bool IsStopMoving { get => _isStopMoving; }
+    public bool IsMoving { get => _isMoving; }
 
     private void Start()
     {
@@ -32,13 +32,13 @@ public class EnemyMoving : PISMonoBehaviour
     {
         _enemyCtrlAbstract.Agent.SetDestination(_enemyCtrlAbstract.Player.transform.position);
         float checkDistance = Vector3.Distance(_enemyCtrlAbstract.Player.transform.position, _enemyCtrlAbstract.transform.position);
-        if (checkDistance >= _distance)
+        if (checkDistance > _distance)
         {
-            _isStopMoving = false;
+            _isMoving = true;
         }
         else
         {
-            _isStopMoving = true;
+            _isMoving = false;
         }
     }
 

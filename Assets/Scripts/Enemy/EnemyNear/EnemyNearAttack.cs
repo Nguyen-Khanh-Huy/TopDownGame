@@ -6,7 +6,7 @@ public class EnemyNearAttack : PISMonoBehaviour
 {
     [SerializeField] private EnemyNearCtrlAbstract _enemyNearAbstract;
     [SerializeField] private EnemyState _curState;
-    [SerializeField] private float _timeAttack = 0.5f;
+    [SerializeField] private float _timeAttack = 0.3f;
     private float _timeCount;
     private void Update()
     {
@@ -18,7 +18,8 @@ public class EnemyNearAttack : PISMonoBehaviour
         if (_curState != newState)
         {
             _curState = newState;
-            _enemyNearAbstract.Anim.SetInteger("State", (int)newState);
+            //_enemyNearAbstract.Anim.SetInteger("State", (int)newState);
+            _enemyNearAbstract.Anim.SetInteger("State", (int)_curState);
         }
     }
     private void EnemyAttack()
@@ -34,11 +35,11 @@ public class EnemyNearAttack : PISMonoBehaviour
 
         if (_curState == EnemyState.Attack && stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
         {
-            ChangeState(_enemyNearAbstract.EnemyMoving.IsStopMoving ? EnemyState.Idle : EnemyState.Walk);
+            ChangeState(_enemyNearAbstract.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
             return;
         }
 
-        if (!_enemyNearAbstract.EnemyMoving.IsStopMoving)
+        if (_enemyNearAbstract.EnemyMoving.IsMoving)
         {
             if (_curState != EnemyState.Attack)
             {

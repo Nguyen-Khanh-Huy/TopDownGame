@@ -36,11 +36,11 @@ public class EnemyLongAttack : PISMonoBehaviour
 
         if (_curState == EnemyState.Attack && stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
         {
-            ChangeState(_enemyLongAbstract.EnemyMoving.IsStopMoving ? EnemyState.Idle : EnemyState.Walk);
+            ChangeState(_enemyLongAbstract.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
             return;
         }
 
-        if (!_enemyLongAbstract.EnemyMoving.IsStopMoving)
+        if (_enemyLongAbstract.EnemyMoving.IsMoving)
         {
             if (_curState != EnemyState.Attack)
             {
