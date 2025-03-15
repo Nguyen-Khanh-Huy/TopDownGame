@@ -15,3 +15,9 @@ public enum EnemyState
     Attack,
     Dying
 }
+
+public enum ObserverID
+{
+    PlayerTakeDmg,
+    EnemyTakeDmg
+}

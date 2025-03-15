@@ -515,7 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyNearAbstract: {fileID: 317858282575269831}
   _curState: 0
-  _timeAttack: 0.3
+  _timeAttack: 0.2
 --- !u!1 &1514151944228978768
 GameObject:
   m_ObjectHideFlags: 0
@@ -3076,4 +3076,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyCtrlAbstract: {fileID: 317858282575269831}
   _distance: 0
-  _isStopMoving: 0
+  _isMoving: 0

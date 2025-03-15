@@ -6,7 +6,7 @@ public class EnemyNearAttack : PISMonoBehaviour
 {
     [SerializeField] private EnemyNearCtrlAbstract _enemyNearAbstract;
     [SerializeField] private EnemyState _curState;
-    [SerializeField] private float _timeAttack = 0.3f;
+    [SerializeField] private float _timeAttack = 0.2f;
     private float _timeCount;
     private void Update()
     {
@@ -18,7 +18,6 @@ public class EnemyNearAttack : PISMonoBehaviour
         if (_curState != newState)
         {
             _curState = newState;
-            //_enemyNearAbstract.Anim.SetInteger("State", (int)newState);
             _enemyNearAbstract.Anim.SetInteger("State", (int)_curState);
         }
     }
@@ -69,8 +68,7 @@ public class EnemyNearAttack : PISMonoBehaviour
         PlayerController player = other.GetComponent<PlayerController>();
         if(player != null)
         {
-            if (player.Hp <= 0) return;
-            player.Hp--;
+            Observer.Notify(ObserverID.PlayerTakeDmg);
         }
     }
 

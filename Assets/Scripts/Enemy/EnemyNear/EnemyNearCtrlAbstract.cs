@@ -17,15 +17,17 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
         _colliderAttack = GetComponentInChildren<SphereCollider>();
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
         _hp = _enemySO.Hp;
         _hpBar.value = _hp / _enemySO.Hp;
+        base.OnEnable();
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         EnemyManager.Ins.ListEnemyNearSpawn.Remove(this);
+        base.OnDisable();
     }
 
     public void EventOnColliderAttack()

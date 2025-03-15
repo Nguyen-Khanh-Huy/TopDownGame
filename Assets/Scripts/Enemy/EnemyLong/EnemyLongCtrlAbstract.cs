@@ -20,15 +20,17 @@ public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
         _firePoint = transform.Find("Model/mixamorig:Hips/mixamorig:Spine/mixamorig:Spine1/mixamorig:Spine2/mixamorig:RightShoulder/mixamorig:RightArm/mixamorig:RightForeArm/mixamorig:RightHand/FirePoint");
     }
 
-    private void OnEnable()
+    protected override void OnEnable()
     {
+        base.OnEnable();
         _hp = _enemySO.Hp;
         _hpBar.value = _hp / _enemySO.Hp;
     }
 
-    private void OnDisable()
+    protected override void OnDisable()
     {
         EnemyManager.Ins.ListEnemyLongSpawn.Remove(this);
+        base.OnDisable();
     }
 
     public void EventFireBulletParabol()

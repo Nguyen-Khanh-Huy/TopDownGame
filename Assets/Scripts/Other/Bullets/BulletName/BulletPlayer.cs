@@ -35,7 +35,7 @@ public class BulletPlayer : BulletCtrlAbstract
             EnemyCtrlAbstract enemy = hitInfo.collider.GetComponent<EnemyCtrlAbstract>();
             if (enemy != null && enemy.Hp > 0)
             {
-                UpdateHpEnemy(enemy);
+                Observer.Notify(ObserverID.EnemyTakeDmg, enemy);
                 DespawnBullet();
             }
         }
@@ -52,12 +52,12 @@ public class BulletPlayer : BulletCtrlAbstract
         PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
     }
 
-    private void UpdateHpEnemy(EnemyCtrlAbstract enemy)
-    {
-        if (enemy.Hp <= 0) return;
-        enemy.Hp--;
-        enemy.HpBar.value = (float)enemy.Hp / enemy.EnemySO.Hp;
-    }
+    //private void UpdateHpEnemy(EnemyCtrlAbstract enemy)
+    //{
+    //    if (enemy.Hp <= 0) return;
+    //    enemy.Hp--;
+    //    enemy.HpBar.value = (float)enemy.Hp / enemy.EnemySO.Hp;
+    //}
 
     public override string GetName()
     {

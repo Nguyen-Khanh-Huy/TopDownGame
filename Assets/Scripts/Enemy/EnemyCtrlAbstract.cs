@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -33,5 +34,24 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
         _player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
         _itemDropCoin = Resources.Load<ItemDropCoin>("ItemsDrop/ItemDropCoin");
         _hpBar = GetComponentInChildren<Slider>();
+    }
+
+    protected virtual void OnEnable()
+    {
+        Observer.AddObserver(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
+    }
+
+    protected virtual void OnDisable()
+    {
+        Observer.RemoveObserver(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
+    }
+    private void EnemyTakeDamage(object[] parameters)
+    {
+        if (parameters.Length < 1) return;
+        EnemyCtrlAbstract enemy = (EnemyCtrlAbstract)parameters[0];
+        if (enemy != this) return;
+        if (_hp <= 0) return;
+        _hp--;
+        _hpBar.value = (float)_hp / EnemySO.Hp;
     }
 }

@@ -4425,6 +4425,7 @@ MonoBehaviour:
   _bulletPlayer: {fileID: 790739973775230754, guid: 52d9abdc359a94e44bd57260a8ecabf7, type: 3}
   _playerMoving: {fileID: 837467823}
   _playerTarget: {fileID: 1850197151}
+  _playerFire: {fileID: 925811961}
   _hp: 10
 --- !u!1 &525616967
 GameObject:

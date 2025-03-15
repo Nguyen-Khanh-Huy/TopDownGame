@@ -70,8 +70,7 @@ public class BulletParabol : BulletCtrlAbstract
         PlayerController player = other.GetComponent<PlayerController>();
         if (player != null)
         {
-            if (player.Hp <= 0) return;
-            player.Hp--;
+            Observer.Notify(ObserverID.PlayerTakeDmg);
         }
     }
 

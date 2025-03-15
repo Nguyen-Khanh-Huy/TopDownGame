@@ -6,7 +6,7 @@ public class EnemyLongAttack : PISMonoBehaviour
 {
     [SerializeField] private EnemyLongCtrlAbstract _enemyLongAbstract;
     [SerializeField] private EnemyState _curState;
-    [SerializeField] private float _timeAttack = 3f;
+    [SerializeField] private float _timeAttack = 2f;
     private float _timeCount;
 
     private void Update()
