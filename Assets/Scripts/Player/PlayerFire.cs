@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerFire : PISMonoBehaviour
 {
     [SerializeField] private PlayerController _playerCtrl;
-    [SerializeField] private float _fireSpeed = 0.5f;
 
     protected override void LoadComponents()
     {
@@ -15,12 +14,12 @@ public class PlayerFire : PISMonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(FireBullet), _fireSpeed);
+        Invoke(nameof(FireBullet), _playerCtrl.FireSpeed);
     }
 
     private void FireBullet()
     {
-        Invoke(nameof(FireBullet), _fireSpeed);
+        Invoke(nameof(FireBullet), _playerCtrl.FireSpeed);
         if (_playerCtrl.PlayerTarget.Target == null) return;
         PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerCtrl.BulletPlayer, _playerCtrl.FirePoint.position, _playerCtrl.transform.rotation);
     }

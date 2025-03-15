@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Enemy SO", menuName = "PIS/Enemy SO")]
+[CreateAssetMenu(fileName = "EnemySO", menuName = "PIS/EnemySO")]
 public class EnemySO : ScriptableObject
 {
     public int Hp;

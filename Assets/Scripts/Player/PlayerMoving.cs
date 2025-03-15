@@ -13,7 +13,6 @@ public class PlayerMoving : PISMonoBehaviour
     private bool _canMoveDown;
 
     [SerializeField] private PlayerController _playerController;
-    [SerializeField] private float _moveSpeed = 3f;
 
     private float _hozMove, _vertMove;
     private float _yRotation;
@@ -71,7 +70,7 @@ public class PlayerMoving : PISMonoBehaviour
 
     private void Moving()
     {
-        Vector3 move = new Vector3(_hozMove, 0f, _vertMove).normalized * _moveSpeed;
+        Vector3 move = new Vector3(_hozMove, 0f, _vertMove).normalized * _playerController.MoveSpeed;
         if (_canMoveLeft || _canMoveRight || _canMoveUp || _canMoveDown)
         {
             ChangeState(PlayerState.Walk);

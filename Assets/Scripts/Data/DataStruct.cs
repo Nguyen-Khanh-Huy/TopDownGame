@@ -19,5 +19,8 @@ public enum EnemyState
 public enum ObserverID
 {
     PlayerTakeDmg,
-    EnemyTakeDmg
+    EnemyTakeDmg,
+    PlayerSkill1,
+    PlayerSkill2,
+    PlayerSkill3
 }
