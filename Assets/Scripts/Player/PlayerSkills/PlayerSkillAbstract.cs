@@ -6,15 +6,20 @@ using UnityEngine;
 public abstract class PlayerSkillAbstract : PISMonoBehaviour
 {
     [SerializeField] protected PlayerController _playerCtrl;
-    [SerializeField] protected int _levelSkill;
+    [SerializeField] protected int _levelSkill = 1;
+    [SerializeField] protected int _maxLevel = 3;
 
     public int LevelSkill { get => _levelSkill; }
 
-    public abstract void LaunchSkill();
+    public virtual void SkillBullet(){}
 
-    protected virtual void Start()
+    public virtual void SkillIndex(){}
+
+
+    public virtual void Upgrade()
     {
-        _levelSkill = 1;
+        if (_levelSkill >= _maxLevel) return;
+        _levelSkill++;
     }
 
     protected override void LoadComponents()

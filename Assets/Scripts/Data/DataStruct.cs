@@ -22,5 +22,7 @@ public enum ObserverID
     EnemyTakeDmg,
     PlayerSkill1,
     PlayerSkill2,
-    PlayerSkill3
+    PlayerSkill3,
+    PlayerSkill4,
+    PlayerSkill5
 }

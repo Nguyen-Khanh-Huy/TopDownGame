@@ -17,8 +17,16 @@ public class UIPrbBtnSkill : PISMonoBehaviour
 
     public void SetLevelItem(UIPrbBtnSkill uiPrbSkill, PlayerSkillAbstract playerSkill)
     {
-        uiPrbSkill.TxtBtnSkill.text = playerSkill.GetType().Name;
+        //uiPrbSkill.TxtBtnSkill.text = playerSkill.GetType().Name;
+        uiPrbSkill.TxtBtnSkill.text = playerSkill.LevelSkill.ToString();
         uiPrbSkill.BtnSkill.onClick.RemoveAllListeners();
-        uiPrbSkill.BtnSkill.onClick.AddListener(() => playerSkill.LaunchSkill());
+        uiPrbSkill.BtnSkill.onClick.AddListener(() => BtnAction(playerSkill));
+    }
+
+    private void BtnAction(PlayerSkillAbstract playerSkill)
+    {
+        playerSkill.Upgrade();
+        if (playerSkill is PlayerSkillBulletAbstract) playerSkill.SkillBullet();
+        else if (playerSkill is PlayerSkillBulletAbstract) playerSkill.SkillIndex();
     }
 }
