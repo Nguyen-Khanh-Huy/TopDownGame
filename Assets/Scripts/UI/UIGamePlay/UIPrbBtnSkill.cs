@@ -26,7 +26,5 @@ public class UIPrbBtnSkill : PISMonoBehaviour
     private void BtnAction(PlayerSkillAbstract playerSkill)
     {
         playerSkill.Upgrade();
-        if (playerSkill is PlayerSkillBulletAbstract) playerSkill.SkillBullet();
-        else if (playerSkill is PlayerSkillBulletAbstract) playerSkill.SkillIndex();
     }
 }

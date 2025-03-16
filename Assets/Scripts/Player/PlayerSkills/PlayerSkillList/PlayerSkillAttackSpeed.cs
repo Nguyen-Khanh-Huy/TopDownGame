@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSkillIndexAttackSpeed : PlayerSkillIndexAbstract
+public class PlayerSkillAttackSpeed : PlayerSkillAbstract
 {
-    public override void SkillIndex()
+    public override void Upgrade()
     {
+        base.Upgrade();
         Debug.Log("Skill Index Attack Speed");
     }
 }

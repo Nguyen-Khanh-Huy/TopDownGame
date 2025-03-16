@@ -21,7 +21,8 @@ public class PlayerFire : PISMonoBehaviour
     {
         Invoke(nameof(FireBullet), _playerCtrl.FireSpeed);
         if (_playerCtrl.PlayerTarget.Target == null) return;
-        PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerCtrl.BulletPlayer, _playerCtrl.FirePoint.position, _playerCtrl.transform.rotation);
+        //PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerCtrl.BulletPlayer, _playerCtrl.FirePoint.position, _playerCtrl.transform.rotation);
+        _playerCtrl.PlayerSkillsCtrl.PlayerSkillMain.SkillBulletMain();
     }
 
     public void PlayerTakeDamage()

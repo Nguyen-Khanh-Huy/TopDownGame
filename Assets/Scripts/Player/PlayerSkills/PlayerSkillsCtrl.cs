@@ -7,42 +7,42 @@ public class PlayerSkillsCtrl : PISMonoBehaviour
 {
     [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
 
-    [SerializeField] private PlayerSkillBulletDefault _playerSkillBulletDefault;
-    [SerializeField] private PlayerSkillBulletThreeTime _playerSkillBulletThreeTime;
-    [SerializeField] private PlayerSkillBulletTripleBeam _playerSkillBulletTripleBeam;
-    [SerializeField] private PlayerSkillIndexAttackRange _playerSkillIndexAttackRange;
-    [SerializeField] private PlayerSkillIndexAttackSpeed _playerSkillIndexAttackSpeed;
+    [SerializeField] private PlayerSkillMain _playerSkillMain;
+    [SerializeField] private PlayerSkillFiveShots _playerSkillBulletFiveShots;
+    [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
+    [SerializeField] private PlayerSkillAttackRange _playerSkillAttackRange;
+    [SerializeField] private PlayerSkillAttackSpeed _playerSkillAttackSpeed;
+
+    public PlayerSkillMain PlayerSkillMain { get => _playerSkillMain; }
+
+    public PlayerSkillFiveShots PlayerSkillBulletFiveShots { get => _playerSkillBulletFiveShots; }
+    public PlayerSkillMultiDirection PlayerSkillBulletTripleBeam { get => _playerSkillMultiDirection; }
+    public PlayerSkillAttackRange PlayerSkillIndexAttackRange { get => _playerSkillAttackRange; }
+    public PlayerSkillAttackSpeed PlayerSkillIndexAttackSpeed { get => _playerSkillAttackSpeed; }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillBulletDefault != null && _playerSkillBulletThreeTime != null && _playerSkillBulletTripleBeam != null && _playerSkillIndexAttackRange != null && _playerSkillIndexAttackSpeed != null) return;
-        _playerSkillBulletDefault = GetComponentInChildren<PlayerSkillBulletDefault>();
-        _playerSkillBulletThreeTime = GetComponentInChildren<PlayerSkillBulletThreeTime>();
-        _playerSkillBulletTripleBeam = GetComponentInChildren<PlayerSkillBulletTripleBeam>();
-        _playerSkillIndexAttackRange = GetComponentInChildren<PlayerSkillIndexAttackRange>();
-        _playerSkillIndexAttackSpeed = GetComponentInChildren<PlayerSkillIndexAttackSpeed>();
-
-        //if (_listSkillPrefabs.Count > 0) return;
-        //_listSkillPrefabs.Clear();
-        //PlayerSkillAbstract[] skillPrefabs = Resources.LoadAll<PlayerSkillAbstract>("Enemies");
-        //foreach (PlayerSkillAbstract enemyPrefab in enemyPrefabs)
-        //{
-        //    if (enemyPrefab != null)
-        //    {
-        //        _listSkillPrefabs.Add(enemyPrefab);
-        //    }
-        //}
+        if (_playerSkillMain != null && _playerSkillBulletFiveShots != null && _playerSkillMultiDirection != null && _playerSkillAttackRange != null && _playerSkillAttackSpeed != null) return;
+        _playerSkillMain = GetComponentInChildren<PlayerSkillMain>();
+        _playerSkillBulletFiveShots = GetComponentInChildren<PlayerSkillFiveShots>();
+        _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
+        _playerSkillAttackRange = GetComponentInChildren<PlayerSkillAttackRange>();
+        _playerSkillAttackSpeed = GetComponentInChildren<PlayerSkillAttackSpeed>();
 
         if (_listAllPbSkills.Count == transform.childCount) return;
         foreach (Transform child in transform)
         {
-            _listAllPbSkills.Add(child.GetComponent<PlayerSkillAbstract>());
+            PlayerSkillAbstract skill = child.GetComponent<PlayerSkillAbstract>();
+            if (skill != null && !(skill is PlayerSkillMain))
+            {
+                _listAllPbSkills.Add(skill);
+            }
         }
     }
 
     public PlayerSkillAbstract GetRandomSkill()
     {
-        List<PlayerSkillAbstract> filteredSkills = _listAllPbSkills.Where(skill => skill.LevelSkill > 0 && skill.LevelSkill < 3).ToList();
+        List<PlayerSkillAbstract> filteredSkills = _listAllPbSkills.Where(skill => skill.LevelSkill > 0 && skill.LevelSkill < 3 && !(skill is PlayerSkillMain)).ToList();
         if (filteredSkills.Count == 0)
             return null;
 

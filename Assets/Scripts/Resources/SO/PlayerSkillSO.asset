@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8024d1323c5be8a4993f898fedce5f9d, type: 3}
-  m_Name: PlayerSO
+  m_Script: {fileID: 11500000, guid: f951c8e30698b7e48941c7a0d09637a8, type: 3}
+  m_Name: PlayerSkillSO
   m_EditorClassIdentifier: 
-  Hp: 10
-  MoveSpeed: 3
-  FireSpeed: 1
+  LevelSkill: 1
+  MaxLevel: 3
+  ThreeTime: 1
+  TripleBeam: 0

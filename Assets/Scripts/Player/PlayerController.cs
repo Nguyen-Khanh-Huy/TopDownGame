@@ -13,6 +13,7 @@ public class PlayerController : PISMonoBehaviour
     [SerializeField] private PlayerFire _playerFire;
     [SerializeField] private PlayerSkillsCtrl _playerSkillsCtrl;
     [SerializeField] private PlayerSO _playerSO;
+    [SerializeField] private PlayerSkillSO _playerSkillSO;
     [SerializeField] private int _hp;
     [SerializeField] private float _moveSpeed;
     [SerializeField] private float _fireSpeed;
@@ -25,13 +26,14 @@ public class PlayerController : PISMonoBehaviour
     public PlayerTarget PlayerTarget { get => _playerTarget; }
     public PlayerFire PlayerFire { get => _playerFire; }
     public PlayerSkillsCtrl PlayerSkillsCtrl { get => _playerSkillsCtrl; }
+    public PlayerSkillSO PlayerSkillSO { get => _playerSkillSO; }
     public int Hp { get => _hp; set => _hp = value; }
     public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
     public float FireSpeed { get => _fireSpeed; set => _fireSpeed = value; }
 
     protected override void LoadComponents()
     {
-        if(_rb != null && _anim != null && _firePoint && _bulletPlayer && _playerMoving != null && _playerTarget != null && _playerFire != null && _playerSkillsCtrl != null && _playerSO != null) return;
+        if(_rb != null && _anim != null && _firePoint && _bulletPlayer && _playerMoving != null && _playerTarget != null && _playerFire != null && _playerSkillsCtrl != null && _playerSO != null && _playerSkillSO != null) return;
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
         _firePoint = transform.Find("Model/Bip001/FirePoint").GetComponent<Transform>();
@@ -41,6 +43,7 @@ public class PlayerController : PISMonoBehaviour
         _playerFire = GetComponentInChildren<PlayerFire>();
         _playerSkillsCtrl = GetComponentInChildren<PlayerSkillsCtrl>();
         _playerSO = Resources.Load<PlayerSO>("SO/PlayerSO");
+        _playerSkillSO = Resources.Load<PlayerSkillSO>("SO/PlayerSkillSO");
     }
 
     private void OnEnable()

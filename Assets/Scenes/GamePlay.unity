@@ -1577,7 +1577,7 @@ GameObject:
   - component: {fileID: 205558071}
   - component: {fileID: 205558072}
   m_Layer: 0
-  m_Name: PlayerSkillIndexAttackRange
+  m_Name: PlayerSkillAttackRange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4143,7 +4143,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2030938744}
+  - {fileID: 1375929878}
   - {fileID: 1442426921}
   - {fileID: 1219896841}
   - {fileID: 205558071}
@@ -4163,16 +4163,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listAllPbSkills:
-  - {fileID: 2030938745}
   - {fileID: 1442426922}
   - {fileID: 1219896842}
   - {fileID: 205558072}
   - {fileID: 1444436889}
-  _playerSkillBulletDefault: {fileID: 2030938745}
-  _playerSkillBulletThreeTime: {fileID: 1442426922}
-  _playerSkillBulletTripleBeam: {fileID: 1219896842}
-  _playerSkillIndexAttackRange: {fileID: 205558072}
-  _playerSkillIndexAttackSpeed: {fileID: 1444436889}
+  _playerSkillMain: {fileID: 1375929879}
+  _playerSkillBulletFiveShots: {fileID: 1442426922}
+  _playerSkillMultiDirection: {fileID: 1219896842}
+  _playerSkillAttackRange: {fileID: 205558072}
+  _playerSkillAttackSpeed: {fileID: 1444436889}
 --- !u!4 &525589249
 Transform:
   m_ObjectHideFlags: 0
@@ -4986,6 +4985,7 @@ MonoBehaviour:
   _playerFire: {fileID: 925811961}
   _playerSkillsCtrl: {fileID: 524961273}
   _playerSO: {fileID: 11400000, guid: 32f3ae363c72d0342bc0a47e99223380, type: 2}
+  _playerSkillSO: {fileID: 11400000, guid: 618868d5ef550954299e55a085495849, type: 2}
   _hp: 0
   _moveSpeed: 0
   _fireSpeed: 0
@@ -11414,7 +11414,7 @@ GameObject:
   - component: {fileID: 1219896841}
   - component: {fileID: 1219896842}
   m_Layer: 0
-  m_Name: PlayerSkillBulletTripleBeam
+  m_Name: PlayerSkillMultiDirection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11450,6 +11450,7 @@ MonoBehaviour:
   _playerCtrl: {fileID: 525616966}
   _levelSkill: 1
   _maxLevel: 3
+  TripleBeam: 0
 --- !u!1 &1226329813
 GameObject:
   m_ObjectHideFlags: 0
@@ -13122,6 +13123,53 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366220687}
   m_Mesh: {fileID: 8243879411280590840, guid: 64f4be06a92a5dd4a99c31e59ac47d42, type: 3}
+--- !u!1 &1375929877
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1375929878}
+  - component: {fileID: 1375929879}
+  m_Layer: 0
+  m_Name: PlayerSkillMain
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1375929878
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375929877}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 524961272}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1375929879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375929877}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c0a05f59453364468a5e2fa17abbfc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerCtrl: {fileID: 525616966}
+  _levelSkill: 0
+  _maxLevel: 0
 --- !u!1 &1376876460
 GameObject:
   m_ObjectHideFlags: 0
@@ -14225,7 +14273,7 @@ GameObject:
   - component: {fileID: 1442426921}
   - component: {fileID: 1442426922}
   m_Layer: 0
-  m_Name: PlayerSkillBulletThreeTime
+  m_Name: PlayerSkillFiveShots
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14261,6 +14309,7 @@ MonoBehaviour:
   _playerCtrl: {fileID: 525616966}
   _levelSkill: 1
   _maxLevel: 3
+  ShotCount: 1
 --- !u!1 &1444436887
 GameObject:
   m_ObjectHideFlags: 0
@@ -14272,7 +14321,7 @@ GameObject:
   - component: {fileID: 1444436888}
   - component: {fileID: 1444436889}
   m_Layer: 0
-  m_Name: PlayerSkillIndexAttackSpeed
+  m_Name: PlayerSkillAttackSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19268,53 +19317,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2030844899}
   m_Mesh: {fileID: -837091336493386933, guid: d05fa8828be199048bb709f826cc3c53, type: 3}
---- !u!1 &2030938743
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2030938744}
-  - component: {fileID: 2030938745}
-  m_Layer: 0
-  m_Name: PlayerSkillBulletDefault
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2030938744
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030938743}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 524961272}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2030938745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2030938743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca423cc7533b1fe48a22bb83a7bf44f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerCtrl: {fileID: 525616966}
-  _levelSkill: 1
-  _maxLevel: 3
 --- !u!1 &2041739293
 GameObject:
   m_ObjectHideFlags: 0
