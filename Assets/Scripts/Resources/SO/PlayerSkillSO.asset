@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelSkill: 1
   MaxLevel: 3
-  ThreeTime: 1
-  TripleBeam: 0
+  ShotCount: 1
+  DirCount: 0

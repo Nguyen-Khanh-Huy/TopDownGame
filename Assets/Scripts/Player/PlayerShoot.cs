@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFire : PISMonoBehaviour
+public class PlayerShoot : PISMonoBehaviour
 {
     [SerializeField] private PlayerController _playerCtrl;
 
@@ -14,12 +14,12 @@ public class PlayerFire : PISMonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(FireBullet), _playerCtrl.FireSpeed);
+        Invoke(nameof(FireBullet), _playerCtrl.ShootSpeed);
     }
 
     private void FireBullet()
     {
-        Invoke(nameof(FireBullet), _playerCtrl.FireSpeed);
+        Invoke(nameof(FireBullet), _playerCtrl.ShootSpeed);
         if (_playerCtrl.PlayerTarget.Target == null) return;
         //PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerCtrl.BulletPlayer, _playerCtrl.FirePoint.position, _playerCtrl.transform.rotation);
         _playerCtrl.PlayerSkillsCtrl.PlayerSkillMain.SkillBulletMain();

@@ -8,5 +8,6 @@ public class PlayerSO : ScriptableObject
 {
     public int Hp;
     public float MoveSpeed;
-    public float FireSpeed;
+    public float ShootSpeed;
+    public float ShootRange;
 }

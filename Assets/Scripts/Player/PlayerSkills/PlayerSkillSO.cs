@@ -8,6 +8,6 @@ public class PlayerSkillSO : ScriptableObject
 {
     public int LevelSkill;
     public int MaxLevel;
-    public int ThreeTime;
-    public int TripleBeam;
+    public int ShotCount;
+    public int DirCount;
 }

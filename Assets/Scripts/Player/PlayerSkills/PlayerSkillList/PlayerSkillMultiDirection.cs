@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerSkillMultiDirection : PlayerSkillAbstract
 {
-    public int TripleBeam = 0;
+    public int DirCount = 0;
     public override void Upgrade()
     {
         base.Upgrade();
-        TripleBeam++;
-        Debug.Log("Skill Bullet Triple Beam");
+        if (DirCount >= _levelSkill - 1) return;
+        DirCount++;
+        Debug.Log("Skill Bullet Multi Direction");
     }
 }

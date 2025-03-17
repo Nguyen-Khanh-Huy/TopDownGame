@@ -1,0 +1,55 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+public class PlayerSkillList : PISMonoBehaviour
+{
+    [SerializeField] private PlayerSkillsCtrl _playerSkillCtrl;
+    [SerializeField] private PlayerSkillFiveShots _playerSkillFiveShots;
+    [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
+    [SerializeField] private PlayerSkillShootRange _playerSkillShootRange;
+    [SerializeField] private PlayerSkillShootSpeed _playerSkillShootSpeed;
+
+    [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
+
+    public PlayerSkillFiveShots PlayerSkillFiveShots { get => _playerSkillFiveShots; }
+    public PlayerSkillMultiDirection PlayerSkillMultiDirection { get => _playerSkillMultiDirection; }
+    public PlayerSkillShootRange PlayerSkillShootRange { get => _playerSkillShootRange; }
+    public PlayerSkillShootSpeed PlayerSkillShootSpeed { get => _playerSkillShootSpeed; }
+
+    protected override void LoadComponents()
+    {
+        if (_playerSkillCtrl != null && _playerSkillFiveShots != null && _playerSkillMultiDirection != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null) return;
+        _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
+        _playerSkillFiveShots = GetComponentInChildren<PlayerSkillFiveShots>();
+        _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
+        _playerSkillShootRange = GetComponentInChildren<PlayerSkillShootRange>();
+        _playerSkillShootSpeed = GetComponentInChildren<PlayerSkillShootSpeed>();
+
+        if (_listAllPbSkills.Count == transform.childCount) return;
+        foreach (Transform child in transform)
+        {
+            PlayerSkillAbstract skill = child.GetComponent<PlayerSkillAbstract>();
+            if (skill != null)
+            {
+                _listAllPbSkills.Add(skill);
+            }
+        }
+    }
+
+    public PlayerSkillAbstract GetRandomSkill()
+    {
+        List<PlayerSkillAbstract> SelectedSkills = _listAllPbSkills.Where(skill => skill.LevelSkill > 0 && skill.LevelSkill < 3).ToList();
+        if (SelectedSkills.Count == 0)
+            return null;
+
+        int rand = Random.Range(0, SelectedSkills.Count);
+        return SelectedSkills[rand];
+    }
+
+    public BulletCtrlAbstract GetBullet()
+    {
+        return _playerSkillCtrl.PlayerCtrl.BulletPlayer; // Get Type Bullet
+    }
+}

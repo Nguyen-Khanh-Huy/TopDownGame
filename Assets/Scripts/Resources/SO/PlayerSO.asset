@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Hp: 10
   MoveSpeed: 3
-  FireSpeed: 1
+  ShootSpeed: 1.2
+  ShootRange: 9

@@ -10,13 +10,13 @@ public class PlayerController : PISMonoBehaviour
     [SerializeField] private BulletPlayer _bulletPlayer;
     [SerializeField] private PlayerMoving _playerMoving;
     [SerializeField] private PlayerTarget _playerTarget;
-    [SerializeField] private PlayerFire _playerFire;
+    [SerializeField] private PlayerShoot _playerFire;
     [SerializeField] private PlayerSkillsCtrl _playerSkillsCtrl;
     [SerializeField] private PlayerSO _playerSO;
     [SerializeField] private PlayerSkillSO _playerSkillSO;
     [SerializeField] private int _hp;
     [SerializeField] private float _moveSpeed;
-    [SerializeField] private float _fireSpeed;
+    [SerializeField] private float _shootSpeed;
 
     public Rigidbody Rb { get => _rb; set => _rb = value; }
     public Animator Anim { get => _anim; set => _anim = value; }
@@ -24,12 +24,13 @@ public class PlayerController : PISMonoBehaviour
     public BulletPlayer BulletPlayer { get => _bulletPlayer; }
     public PlayerMoving PlayerMoving { get => _playerMoving; }
     public PlayerTarget PlayerTarget { get => _playerTarget; }
-    public PlayerFire PlayerFire { get => _playerFire; }
+    public PlayerShoot PlayerFire { get => _playerFire; }
     public PlayerSkillsCtrl PlayerSkillsCtrl { get => _playerSkillsCtrl; }
+    public PlayerSO PlayerSO { get => _playerSO; }
     public PlayerSkillSO PlayerSkillSO { get => _playerSkillSO; }
     public int Hp { get => _hp; set => _hp = value; }
     public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
-    public float FireSpeed { get => _fireSpeed; set => _fireSpeed = value; }
+    public float ShootSpeed { get => _shootSpeed; set => _shootSpeed = value; }
 
     protected override void LoadComponents()
     {
@@ -40,7 +41,7 @@ public class PlayerController : PISMonoBehaviour
         _bulletPlayer = Resources.Load<BulletPlayer>("Bullets/BulletPlayer");
         _playerMoving = GetComponentInChildren<PlayerMoving>();
         _playerTarget = GetComponentInChildren<PlayerTarget>();
-        _playerFire = GetComponentInChildren<PlayerFire>();
+        _playerFire = GetComponentInChildren<PlayerShoot>();
         _playerSkillsCtrl = GetComponentInChildren<PlayerSkillsCtrl>();
         _playerSO = Resources.Load<PlayerSO>("SO/PlayerSO");
         _playerSkillSO = Resources.Load<PlayerSkillSO>("SO/PlayerSkillSO");
@@ -48,14 +49,16 @@ public class PlayerController : PISMonoBehaviour
 
     private void OnEnable()
     {
-        StartInfor();
+        Init();
         Observer.AddObserver(ObserverID.PlayerTakeDmg, _playerFire.PlayerTakeDamage);
     }
 
-    private void StartInfor()
+    private void Init()
     {
         _hp = _playerSO.Hp;
         _moveSpeed = _playerSO.MoveSpeed;
-        _fireSpeed = _playerSO.FireSpeed;
+        _shootSpeed = _playerSO.ShootSpeed;
+        _playerTarget.PlayerCollider.isTrigger = true;
+        _playerTarget.PlayerCollider.radius = _playerSO.ShootRange;
     }
 }

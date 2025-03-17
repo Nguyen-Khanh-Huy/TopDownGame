@@ -8,7 +8,8 @@ public class PlayerSkillFiveShots : PlayerSkillAbstract
     public override void Upgrade()
     {
         base.Upgrade();
+        if (ShotCount >= _levelSkill) return;
         ShotCount++;
-        Debug.Log("Skill Bullet Three Time");
+        Debug.Log("Skill Bullet Five Shots");
     }
 }

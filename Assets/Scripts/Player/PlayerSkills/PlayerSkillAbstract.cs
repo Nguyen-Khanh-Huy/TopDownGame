@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class PlayerSkillAbstract : PISMonoBehaviour
 {
-    [SerializeField] protected PlayerController _playerCtrl;
+    [SerializeField] protected PlayerSkillsCtrl _playerSkillCtr;
     [SerializeField] protected int _levelSkill;
     [SerializeField] protected int _maxLevel;
 
@@ -18,15 +18,11 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
         // For Override
     }
 
-    public BulletCtrlAbstract GetBullet()
-    {
-        return _playerCtrl.BulletPlayer; // Get Type Bullet
-    }
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null) return;
-        _playerCtrl = GetComponentInParent<PlayerController>();
+        if (_playerSkillCtr != null) return;
+        _playerSkillCtr = GetComponentInParent<PlayerSkillsCtrl>();
     }
 
     private void OnEnable()
@@ -36,9 +32,9 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
 
     private void Init()
     {
-        _levelSkill = _playerCtrl.PlayerSkillSO.LevelSkill;
-        _maxLevel = _playerCtrl.PlayerSkillSO.MaxLevel;
-        _playerCtrl.PlayerSkillsCtrl.PlayerSkillBulletFiveShots.ShotCount = _playerCtrl.PlayerSkillSO.ThreeTime;
-        _playerCtrl.PlayerSkillsCtrl.PlayerSkillBulletTripleBeam.TripleBeam = _playerCtrl.PlayerSkillSO.TripleBeam;
+        _levelSkill = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.LevelSkill;
+        _maxLevel = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MaxLevel;
+        _playerSkillCtr.PlayerSkillList.PlayerSkillFiveShots.ShotCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.ShotCount;
+        _playerSkillCtr.PlayerSkillList.PlayerSkillMultiDirection.DirCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.DirCount;
     }
 }

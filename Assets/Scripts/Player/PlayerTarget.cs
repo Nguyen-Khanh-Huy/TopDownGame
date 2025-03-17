@@ -5,10 +5,12 @@ using UnityEngine;
 public class PlayerTarget : PISMonoBehaviour
 {
     [SerializeField] private PlayerController _playerCtrl;
+    [SerializeField] private SphereCollider _playerCollider;
     [SerializeField] private EnemyCtrlAbstract _target;
     [SerializeField] private List<EnemyCtrlAbstract> _listEnemyTarget;
 
     public EnemyCtrlAbstract Target { get => _target; }
+    public SphereCollider PlayerCollider { get => _playerCollider; set => _playerCollider = value; }
 
     private void Update()
     {
@@ -101,7 +103,8 @@ public class PlayerTarget : PISMonoBehaviour
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null) return;
+        if (_playerCtrl != null && _playerCollider != null) return;
         _playerCtrl = GetComponentInParent<PlayerController>();
+        _playerCollider = GetComponent<SphereCollider>();
     }
 }

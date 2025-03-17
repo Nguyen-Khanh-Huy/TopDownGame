@@ -17,8 +17,7 @@ public class UIPrbBtnSkill : PISMonoBehaviour
 
     public void SetLevelItem(UIPrbBtnSkill uiPrbSkill, PlayerSkillAbstract playerSkill)
     {
-        //uiPrbSkill.TxtBtnSkill.text = playerSkill.GetType().Name;
-        uiPrbSkill.TxtBtnSkill.text = playerSkill.LevelSkill.ToString();
+        TextSkill(uiPrbSkill.TxtBtnSkill, playerSkill);
         uiPrbSkill.BtnSkill.onClick.RemoveAllListeners();
         uiPrbSkill.BtnSkill.onClick.AddListener(() => BtnAction(playerSkill));
     }
@@ -26,5 +25,53 @@ public class UIPrbBtnSkill : PISMonoBehaviour
     private void BtnAction(PlayerSkillAbstract playerSkill)
     {
         playerSkill.Upgrade();
+    }
+
+    private void TextSkill(TMP_Text txtSkill, PlayerSkillAbstract playerSkill)
+    {
+        if (playerSkill is PlayerSkillFiveShots)
+        {
+            if(playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "PlayerSkill Five Shots LV1";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "PlayerSkill Five Shots LV2";
+            }
+        }
+        else if(playerSkill is PlayerSkillMultiDirection)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "PlayerSkill Multi Direction LV1";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "PlayerSkill Multi Direction LV2";
+            }
+        }
+        else if (playerSkill is PlayerSkillShootRange)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "PlayerSkill Shoot Range LV1";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "PlayerSkill Shoot Range LV2";
+            }
+        }
+        else if (playerSkill is PlayerSkillShootSpeed)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "PlayerSkill Shoot Speed LV1";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "PlayerSkill Shoot Speed LV2";
+            }
+        }
     }
 }
