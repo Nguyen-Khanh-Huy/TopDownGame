@@ -17,6 +17,7 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void Update()
     {
+        if (_enemyCtrlAbstract.Hp <= 0) return;
         LookAtTarget();
         EnemyMove();
     }

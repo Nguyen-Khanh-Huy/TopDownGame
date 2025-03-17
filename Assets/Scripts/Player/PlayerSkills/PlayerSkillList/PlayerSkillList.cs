@@ -6,23 +6,23 @@ using UnityEngine;
 public class PlayerSkillList : PISMonoBehaviour
 {
     [SerializeField] private PlayerSkillsCtrl _playerSkillCtrl;
-    [SerializeField] private PlayerSkillFiveShots _playerSkillFiveShots;
+    [SerializeField] private PlayerSkillMultiShot _playerSkillMultiShot;
     [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
     [SerializeField] private PlayerSkillShootRange _playerSkillShootRange;
     [SerializeField] private PlayerSkillShootSpeed _playerSkillShootSpeed;
 
     [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
 
-    public PlayerSkillFiveShots PlayerSkillFiveShots { get => _playerSkillFiveShots; }
+    public PlayerSkillMultiShot PlayerSkillFiveShots { get => _playerSkillMultiShot; }
     public PlayerSkillMultiDirection PlayerSkillMultiDirection { get => _playerSkillMultiDirection; }
     public PlayerSkillShootRange PlayerSkillShootRange { get => _playerSkillShootRange; }
     public PlayerSkillShootSpeed PlayerSkillShootSpeed { get => _playerSkillShootSpeed; }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillCtrl != null && _playerSkillFiveShots != null && _playerSkillMultiDirection != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null) return;
+        if (_playerSkillCtrl != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null) return;
         _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
-        _playerSkillFiveShots = GetComponentInChildren<PlayerSkillFiveShots>();
+        _playerSkillMultiShot = GetComponentInChildren<PlayerSkillMultiShot>();
         _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
         _playerSkillShootRange = GetComponentInChildren<PlayerSkillShootRange>();
         _playerSkillShootSpeed = GetComponentInChildren<PlayerSkillShootSpeed>();

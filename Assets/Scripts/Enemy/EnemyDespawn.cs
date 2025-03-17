@@ -23,7 +23,7 @@ public class EnemyDespawn : PISMonoBehaviour
     private void DespawnEnemy()
     {
         if (_enemyAbstract.Hp > 0) return;
-        SpawnItemDropCoin();
+        SpawnItemDropMana();
         StartCoroutine(DelayDespawnEnemy());
     }
 
@@ -34,13 +34,13 @@ public class EnemyDespawn : PISMonoBehaviour
         PoolManager<EnemyCtrlAbstract>.Ins.Despawn(_enemyAbstract);
     }
 
-    private void SpawnItemDropCoin()
+    private void SpawnItemDropMana()
     {
         if (!_isSpawnedItemDrop)
         {
             _isSpawnedItemDrop = true;
-            Vector3 randomPosDrop = _enemyAbstract.transform.position + new Vector3(Random.Range(-0.5f, 0.5f), 1f, Random.Range(-0.5f, 0.5f));
-            PoolManager<ItemDropCtrlAbstract>.Ins.Spawn(_enemyAbstract.ItemDropCoin, randomPosDrop, Quaternion.identity);
+            Vector3 changeDropPos = _enemyAbstract.transform.position + new Vector3(0, 1f, 0);
+            PoolManager<ItemDropCtrlAbstract>.Ins.Spawn(_enemyAbstract.ItemDropMana, changeDropPos, Quaternion.identity);
         }
     }
 }

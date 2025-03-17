@@ -29,48 +29,48 @@ public class UIPrbBtnSkill : PISMonoBehaviour
 
     private void TextSkill(TMP_Text txtSkill, PlayerSkillAbstract playerSkill)
     {
-        if (playerSkill is PlayerSkillFiveShots)
+        if (playerSkill is PlayerSkillMultiShot)
         {
             if(playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "PlayerSkill Five Shots LV1";
+                txtSkill.text = "Double Shot";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "PlayerSkill Five Shots LV2";
+                txtSkill.text = "Triple Shot";
             }
         }
         else if(playerSkill is PlayerSkillMultiDirection)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "PlayerSkill Multi Direction LV1";
+                txtSkill.text = "Three-Way Bullet";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "PlayerSkill Multi Direction LV2";
+                txtSkill.text = "Five-Way Bullet";
             }
         }
         else if (playerSkill is PlayerSkillShootRange)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "PlayerSkill Shoot Range LV1";
+                txtSkill.text = "+10% Range";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "PlayerSkill Shoot Range LV2";
+                txtSkill.text = "+20% Range";
             }
         }
         else if (playerSkill is PlayerSkillShootSpeed)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "PlayerSkill Shoot Speed LV1";
+                txtSkill.text = "+15% Fire Rate";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "PlayerSkill Shoot Speed LV2";
+                txtSkill.text = "+25% Fire Rate";
             }
         }
     }

@@ -13,7 +13,7 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     [SerializeField] protected NavMeshAgent _agent;
     [SerializeField] protected EnemyMoving _enemyMoving;
     [SerializeField] protected PlayerController _player;
-    [SerializeField] protected ItemDropCoin _itemDropCoin;
+    [SerializeField] protected ItemDropMana _itemDropMana;
     [SerializeField] protected Slider _hpBar;
 
     public int Hp { get => _hp; set => _hp = value; }
@@ -21,18 +21,18 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     public NavMeshAgent Agent { get => _agent; set => _agent = value; }
     public EnemyMoving EnemyMoving { get => _enemyMoving; }
     public PlayerController Player { get => _player; }
-    public ItemDropCoin ItemDropCoin { get => _itemDropCoin; }
+    public ItemDropMana ItemDropMana { get => _itemDropMana; }
     public Slider HpBar { get => _hpBar; set => _hpBar = value; }
     public EnemySO EnemySO { get => _enemySO; }
 
     protected override void LoadComponents()
     {
-        if (_anim != null && _agent != null && _enemyMoving != null && _player != null && _itemDropCoin != null && _hpBar != null) return;
+        if (_anim != null && _agent != null && _enemyMoving != null && _player != null && _itemDropMana != null && _hpBar != null) return;
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _enemyMoving = GetComponentInChildren<EnemyMoving>();
         _player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
-        _itemDropCoin = Resources.Load<ItemDropCoin>("ItemsDrop/ItemDropCoin");
+        _itemDropMana = Resources.Load<ItemDropMana>("ItemsDrop/ItemDropMana");
         _hpBar = GetComponentInChildren<Slider>();
     }
 
@@ -45,12 +45,13 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     {
         Observer.RemoveObserver(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
     }
-    private void EnemyTakeDamage(object[] parameters)
+    private void EnemyTakeDamage(object[] param)
     {
-        if (parameters.Length < 1) return;
-        EnemyCtrlAbstract enemy = (EnemyCtrlAbstract)parameters[0];
-        if (enemy != this) return;
-        if (_hp <= 0) return;
+        //if (parameters.Length < 1) return;
+        //EnemyCtrlAbstract enemy = (EnemyCtrlAbstract)parameters[0];
+        //if (enemy != this) return;
+        //if (_hp <= 0) return;
+        if (param.Length < 1 || param[0] is not EnemyCtrlAbstract enemy || enemy != this || _hp <= 0) return;
         _hp--;
         _hpBar.value = (float)_hp / EnemySO.Hp;
     }

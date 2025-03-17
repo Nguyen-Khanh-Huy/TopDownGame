@@ -52,13 +52,6 @@ public class BulletPlayer : BulletCtrlAbstract
         PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
     }
 
-    //private void UpdateHpEnemy(EnemyCtrlAbstract enemy)
-    //{
-    //    if (enemy.Hp <= 0) return;
-    //    enemy.Hp--;
-    //    enemy.HpBar.value = (float)enemy.Hp / enemy.EnemySO.Hp;
-    //}
-
     public override string GetName()
     {
         return "BulletPlayer";
