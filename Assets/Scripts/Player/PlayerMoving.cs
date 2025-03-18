@@ -6,28 +6,19 @@ public class PlayerMoving : PISMonoBehaviour
 {
     //public Joystick Joystick;
     //public bool IsOnMobile;
+    [SerializeField] private PlayerController _playerController;
+    [SerializeField] private float _moveSpeed;
 
     private bool _canMoveLeft;
     private bool _canMoveRight;
     private bool _canMoveUp;
     private bool _canMoveDown;
 
-    [SerializeField] private PlayerController _playerController;
-
     private float _hozMove, _vertMove;
     private float _yRotation;
-    private bool IsIdle
-    {
-        get => !_canMoveLeft && !_canMoveRight && !_canMoveUp && !_canMoveDown;
-    }
+    private bool IsIdle { get => !_canMoveLeft && !_canMoveRight && !_canMoveUp && !_canMoveDown; }
 
-    //private void Start()
-    //{
-    //    //if (IsOnMobile)
-    //    //{ UIGamePlayManager.Ins.UIMobileGamepad.SetActive(true); }
-    //    //else
-    //    //{ UIGamePlayManager.Ins.UIMobileGamepad.SetActive(false); }
-    //}
+    public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
 
     private void Update()
     {
@@ -70,7 +61,7 @@ public class PlayerMoving : PISMonoBehaviour
 
     private void Moving()
     {
-        Vector3 move = new Vector3(_hozMove, 0f, _vertMove).normalized * _playerController.MoveSpeed;
+        Vector3 move = new Vector3(_hozMove, 0f, _vertMove).normalized * _moveSpeed;
         if (_canMoveLeft || _canMoveRight || _canMoveUp || _canMoveDown)
         {
             ChangeState(PlayerState.Walk);
@@ -80,7 +71,6 @@ public class PlayerMoving : PISMonoBehaviour
         if (IsIdle)
         {
             ChangeState(PlayerState.Idle);
-            //_playerController.Rb.velocity = Vector3.zero;
             _playerController.Rb.velocity = new Vector3(0, _playerController.Rb.velocity.y, 0);
         }
     }

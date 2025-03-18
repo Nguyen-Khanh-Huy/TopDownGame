@@ -24,15 +24,15 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void LookAtTarget()
     {
-        Vector3 targetPosition = _enemyCtrlAbstract.Player.transform.position;
+        Vector3 targetPosition = _enemyCtrlAbstract.PlayerCtrl.transform.position;
         targetPosition.y = _enemyCtrlAbstract.transform.position.y;
         _enemyCtrlAbstract.transform.LookAt(targetPosition);
     }
 
     private void EnemyMove()
     {
-        _enemyCtrlAbstract.Agent.SetDestination(_enemyCtrlAbstract.Player.transform.position);
-        float checkDistance = Vector3.Distance(_enemyCtrlAbstract.Player.transform.position, _enemyCtrlAbstract.transform.position);
+        _enemyCtrlAbstract.Agent.SetDestination(_enemyCtrlAbstract.PlayerCtrl.transform.position);
+        float checkDistance = Vector3.Distance(_enemyCtrlAbstract.PlayerCtrl.transform.position, _enemyCtrlAbstract.transform.position);
         if (checkDistance > _distance)
         {
             _isMoving = true;

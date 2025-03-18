@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIGamePlayOnOffSkill : PISMonoBehaviour
+public class UIGamePlayMainSkills : PISMonoBehaviour
 {
     [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private UIPrbBtnSkill _uiPrbBtnSkill;

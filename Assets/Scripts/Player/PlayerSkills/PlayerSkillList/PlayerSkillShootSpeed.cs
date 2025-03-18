@@ -17,12 +17,12 @@ public class PlayerSkillShootSpeed : PlayerSkillAbstract
         if (_levelSkill == 2)
         {
             Debug.Log("Skill Index Attack Speed LV2");
-            _playerSkillCtr.PlayerCtrl.ShootSpeed = SO - (SO * 0.15f);
+            _playerSkillCtr.PlayerCtrl.PlayerShoot.ShootSpeed = SO - (SO * 0.15f);
         }
         else if (_levelSkill == 3)
         {
             Debug.Log("Skill Index Attack Speed LV3");
-            _playerSkillCtr.PlayerCtrl.ShootSpeed = SO - (SO * 0.25f);
+            _playerSkillCtr.PlayerCtrl.PlayerShoot.ShootSpeed = SO - (SO * 0.25f);
         }
     }
 }

@@ -25,6 +25,7 @@ public class UIPrbBtnSkill : PISMonoBehaviour
     private void BtnAction(PlayerSkillAbstract playerSkill)
     {
         playerSkill.Upgrade();
+        UIGamePlayManager.Ins.Close(UIGamePlayManager.Ins.PanelSkillsDialog);
     }
 
     private void TextSkill(TMP_Text txtSkill, PlayerSkillAbstract playerSkill)

@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerShoot : PISMonoBehaviour
 {
     [SerializeField] private PlayerController _playerCtrl;
+    [SerializeField] private float _shootSpeed;
+    [SerializeField] private int _countEnemyDead;
+
+    public float ShootSpeed { get => _shootSpeed; set => _shootSpeed = value; }
+    public int CountEnemyDead { get => _countEnemyDead; set => _countEnemyDead = value; }
 
     protected override void LoadComponents()
     {
@@ -14,20 +19,14 @@ public class PlayerShoot : PISMonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(FireBullet), _playerCtrl.ShootSpeed);
+        Invoke(nameof(FireBullet), _shootSpeed);
     }
 
     private void FireBullet()
     {
-        Invoke(nameof(FireBullet), _playerCtrl.ShootSpeed);
+        Invoke(nameof(FireBullet), _shootSpeed);
         if (_playerCtrl.PlayerTarget.Target == null) return;
         //PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerCtrl.BulletPlayer, _playerCtrl.FirePoint.position, _playerCtrl.transform.rotation);
         _playerCtrl.PlayerSkillsCtrl.PlayerSkillMain.SkillBulletMain();
-    }
-
-    public void PlayerTakeDamage()
-    {
-        if (_playerCtrl.Hp <= 0) return;
-        _playerCtrl.Hp--;
     }
 }

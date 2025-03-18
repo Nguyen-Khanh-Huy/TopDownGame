@@ -12,7 +12,7 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     [SerializeField] protected Animator _anim;
     [SerializeField] protected NavMeshAgent _agent;
     [SerializeField] protected EnemyMoving _enemyMoving;
-    [SerializeField] protected PlayerController _player;
+    [SerializeField] protected PlayerController _playerCtrl;
     [SerializeField] protected ItemDropMana _itemDropMana;
     [SerializeField] protected Slider _hpBar;
 
@@ -20,38 +20,44 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     public Animator Anim { get => _anim; }
     public NavMeshAgent Agent { get => _agent; set => _agent = value; }
     public EnemyMoving EnemyMoving { get => _enemyMoving; }
-    public PlayerController Player { get => _player; }
+    public PlayerController PlayerCtrl { get => _playerCtrl; }
     public ItemDropMana ItemDropMana { get => _itemDropMana; }
     public Slider HpBar { get => _hpBar; set => _hpBar = value; }
     public EnemySO EnemySO { get => _enemySO; }
 
     protected override void LoadComponents()
     {
-        if (_anim != null && _agent != null && _enemyMoving != null && _player != null && _itemDropMana != null && _hpBar != null) return;
+        if (_anim != null && _agent != null && _enemyMoving != null && _playerCtrl != null && _itemDropMana != null && _hpBar != null) return;
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _enemyMoving = GetComponentInChildren<EnemyMoving>();
-        _player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+        _playerCtrl = GameObject.Find("PlayerController").GetComponent<PlayerController>();
         _itemDropMana = Resources.Load<ItemDropMana>("ItemsDrop/ItemDropMana");
         _hpBar = GetComponentInChildren<Slider>();
     }
 
     protected virtual void OnEnable()
     {
-        Observer.AddObserver(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
+        Observer.AddObserver<EnemyCtrlAbstract>(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
     }
 
     protected virtual void OnDisable()
     {
-        Observer.RemoveObserver(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
+        Observer.RemoveObserver<EnemyCtrlAbstract>(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
     }
-    private void EnemyTakeDamage(object[] param)
+    //private void EnemyTakeDamage(object[] param)
+    //{
+    //    //if (parameters.Length < 1) return;
+    //    //EnemyCtrlAbstract enemy = (EnemyCtrlAbstract)parameters[0];
+    //    //if (enemy != this) return;
+    //    //if (_hp <= 0) return;
+    //    if (param.Length < 1 || param[0] is not EnemyCtrlAbstract enemy || enemy != this || _hp <= 0) return;
+    //    _hp--;
+    //    _hpBar.value = (float)_hp / EnemySO.Hp;
+    //}
+    private void EnemyTakeDamage(EnemyCtrlAbstract enemy)
     {
-        //if (parameters.Length < 1) return;
-        //EnemyCtrlAbstract enemy = (EnemyCtrlAbstract)parameters[0];
-        //if (enemy != this) return;
-        //if (_hp <= 0) return;
-        if (param.Length < 1 || param[0] is not EnemyCtrlAbstract enemy || enemy != this || _hp <= 0) return;
+        if (enemy != this || _hp <= 0) return;
         _hp--;
         _hpBar.value = (float)_hp / EnemySO.Hp;
     }

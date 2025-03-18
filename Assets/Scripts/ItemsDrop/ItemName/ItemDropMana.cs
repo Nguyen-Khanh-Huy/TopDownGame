@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class ItemDropMana : ItemDropCtrlAbstract
 {
+    [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private SphereCollider _col;
     private Vector3 _fallPosition;
     private float _fallSpeed = 3f;
@@ -26,13 +27,16 @@ public class ItemDropMana : ItemDropCtrlAbstract
     {
         if (other.TryGetComponent<PlayerController>(out var player))
         {
+            _playerCtrl.PlayerMana.AddMana();
+            UIGamePlayManager.Ins.Slider.value = (float)_playerCtrl.PlayerMana.CurMana / _playerCtrl.PlayerMana.ManaNextLevel;
             DespawnItem();
         }
     }
 
     protected override void LoadComponents()
     {
-        if (_col != null) return;
+        if (_playerCtrl != null && _col != null) return;
+        _playerCtrl = FindObjectOfType<PlayerController>();
         _col = GetComponent<SphereCollider>();
     }
     public override string GetName()

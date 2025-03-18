@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8024d1323c5be8a4993f898fedce5f9d, type: 3}
   m_Name: PlayerSO
   m_EditorClassIdentifier: 
-  Hp: 10
+  Hp: 5
   MoveSpeed: 3
   ShootSpeed: 1.2
   ShootRange: 9
+  CurMana: 0
+  CurLevel: 1
+  ManaNextLevel: 10
+  CountEnemyDead: 0
