@@ -18,12 +18,14 @@ public class EnemyDespawn : PISMonoBehaviour
 
     private void FixedUpdate()
     {
+        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         DespawnEnemy();
     }
 
     private void DespawnEnemy()
     {
         if (_enemyAbstract.Hp > 0) return;
+        SetActiveEnemyHpBar();
         CountEnemyDead();
         SpawnItemDropMana();
         StartCoroutine(DelayDespawnEnemy());
@@ -54,6 +56,14 @@ public class EnemyDespawn : PISMonoBehaviour
             _isDead = true;
             _enemyAbstract.PlayerCtrl.PlayerShoot.CountEnemyDead++;
             UIGamePlayManager.Ins.TxtCountEnemyDead.text = _enemyAbstract.PlayerCtrl.PlayerShoot.CountEnemyDead.ToString();
+        }
+    }
+
+    private void SetActiveEnemyHpBar()
+    {
+        if (_enemyAbstract.HpBar.gameObject.activeSelf)
+        {
+            _enemyAbstract.HpBar.gameObject.SetActive(false);
         }
     }
 }

@@ -19,6 +19,7 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
 
     protected override void OnEnable()
     {
+        _hpBar.gameObject.SetActive(true);
         _hp = _enemySO.Hp;
         _hpBar.value = _hp / _enemySO.Hp;
         base.OnEnable();

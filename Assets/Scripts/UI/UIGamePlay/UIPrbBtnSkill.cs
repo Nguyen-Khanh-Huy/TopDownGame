@@ -26,6 +26,7 @@ public class UIPrbBtnSkill : PISMonoBehaviour
     {
         playerSkill.Upgrade();
         UIGamePlayManager.Ins.Close(UIGamePlayManager.Ins.PanelSkillsDialog);
+        UIGamePlayManager.Ins.CheckPlayTime = true;
     }
 
     private void TextSkill(TMP_Text txtSkill, PlayerSkillAbstract playerSkill)

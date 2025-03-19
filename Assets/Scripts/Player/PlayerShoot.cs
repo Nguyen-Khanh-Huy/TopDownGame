@@ -25,8 +25,9 @@ public class PlayerShoot : PISMonoBehaviour
     private void FireBullet()
     {
         Invoke(nameof(FireBullet), _shootSpeed);
+        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         if (_playerCtrl.PlayerTarget.Target == null) return;
-        //PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerCtrl.BulletPlayer, _playerCtrl.FirePoint.position, _playerCtrl.transform.rotation);
+
         _playerCtrl.PlayerSkillsCtrl.PlayerSkillMain.SkillBulletMain();
     }
 }

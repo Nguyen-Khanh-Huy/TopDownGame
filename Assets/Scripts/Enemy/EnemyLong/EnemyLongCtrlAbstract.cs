@@ -22,9 +22,10 @@ public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
 
     protected override void OnEnable()
     {
-        base.OnEnable();
+        _hpBar.gameObject.SetActive(true);
         _hp = _enemySO.Hp;
         _hpBar.value = _hp / _enemySO.Hp;
+        base.OnEnable();
     }
 
     protected override void OnDisable()

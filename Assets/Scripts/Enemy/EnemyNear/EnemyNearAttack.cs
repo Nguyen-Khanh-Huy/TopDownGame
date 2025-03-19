@@ -10,7 +10,18 @@ public class EnemyNearAttack : PISMonoBehaviour
     private float _timeCount;
     private void Update()
     {
+        if (!UIGamePlayManager.Ins.CheckPlayTime)
+        {
+            PauseGame();
+            return;
+        }
         EnemyAttack();
+    }
+
+    private void PauseGame()
+    {
+        ChangeState(EnemyState.Idle);
+        _enemyNearAbstract.Agent.isStopped = true;
     }
 
     private void ChangeState(EnemyState newState)
@@ -24,11 +35,17 @@ public class EnemyNearAttack : PISMonoBehaviour
     private void EnemyAttack()
     {
         AnimatorStateInfo stateInfo = _enemyNearAbstract.Anim.GetCurrentAnimatorStateInfo(0);
-        _enemyNearAbstract.Agent.isStopped = (_curState == EnemyState.Dying || _curState == EnemyState.Idle || _curState == EnemyState.Attack);
+        _enemyNearAbstract.Agent.isStopped = (_curState == EnemyState.Dying || _curState == EnemyState.Idle || _curState == EnemyState.Attack || !UIGamePlayManager.Ins.CheckPlayTime);
 
         if(_enemyNearAbstract.Hp <= 0)
         {
             ChangeState(EnemyState.Dying);
+            return;
+        }
+
+        if (!UIGamePlayManager.Ins.CheckPlayTime)
+        {
+            ChangeState(EnemyState.Idle);
             return;
         }
 

@@ -22,6 +22,7 @@ public class PlayerMoving : PISMonoBehaviour
 
     private void Update()
     {
+        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         SetUpIsOnMobile();
         LookAtTarget();
         Moving();

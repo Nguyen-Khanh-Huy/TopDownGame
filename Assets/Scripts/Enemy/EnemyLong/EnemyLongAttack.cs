@@ -11,7 +11,18 @@ public class EnemyLongAttack : PISMonoBehaviour
 
     private void Update()
     {
+        if (!UIGamePlayManager.Ins.CheckPlayTime)
+        {
+            PauseGame();
+            return;
+        }
         EnemyAttack();
+    }
+
+    private void PauseGame()
+    {
+        ChangeState(EnemyState.Idle);
+        _enemyLongAbstract.Agent.isStopped = true;
     }
 
     private void ChangeState(EnemyState newState)

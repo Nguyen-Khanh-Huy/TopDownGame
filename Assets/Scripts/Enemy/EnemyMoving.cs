@@ -17,7 +17,7 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void Update()
     {
-        if (_enemyCtrlAbstract.Hp <= 0) return;
+        if (_enemyCtrlAbstract.Hp <= 0 || !UIGamePlayManager.Ins.CheckPlayTime) return;
         LookAtTarget();
         EnemyMove();
     }

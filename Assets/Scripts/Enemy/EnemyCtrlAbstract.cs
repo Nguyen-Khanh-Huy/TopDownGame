@@ -45,6 +45,14 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     {
         Observer.RemoveObserver<EnemyCtrlAbstract>(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
     }
+
+    private void EnemyTakeDamage(EnemyCtrlAbstract enemy)
+    {
+        if (enemy != this || _hp <= 0) return;
+        _hp--;
+        _hpBar.value = (float)_hp / EnemySO.Hp;
+    }
+
     //private void EnemyTakeDamage(object[] param)
     //{
     //    //if (parameters.Length < 1) return;
@@ -55,10 +63,4 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     //    _hp--;
     //    _hpBar.value = (float)_hp / EnemySO.Hp;
     //}
-    private void EnemyTakeDamage(EnemyCtrlAbstract enemy)
-    {
-        if (enemy != this || _hp <= 0) return;
-        _hp--;
-        _hpBar.value = (float)_hp / EnemySO.Hp;
-    }
 }

@@ -30,6 +30,7 @@ public class UIGamePlayMainSkills : PISMonoBehaviour
 
     private void OnEnable()
     {
+        UIGamePlayManager.Ins.CheckPlayTime = false;
         ShowListSkill();
     }
 
