@@ -75,5 +75,16 @@ public class UIPrbBtnSkill : PISMonoBehaviour
                 txtSkill.text = "+25% Fire Rate";
             }
         }
+        else if (playerSkill is PlayerSkillAoeBullet)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "+2 AoE Bullet";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "+3 AoE Bullet";
+            }
+        }
     }
 }

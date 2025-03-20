@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -48,19 +49,11 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
 
     private void EnemyTakeDamage(EnemyCtrlAbstract enemy)
     {
-        if (enemy != this || _hp <= 0) return;
-        _hp--;
-        _hpBar.value = (float)_hp / EnemySO.Hp;
+        if (_hp <= 0) return;
+        if (enemy == this || Vector3.Distance(enemy.transform.position, transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet)
+        {
+            _hp--;
+            _hpBar.value = (float)_hp / EnemySO.Hp;
+        }
     }
-
-    //private void EnemyTakeDamage(object[] param)
-    //{
-    //    //if (parameters.Length < 1) return;
-    //    //EnemyCtrlAbstract enemy = (EnemyCtrlAbstract)parameters[0];
-    //    //if (enemy != this) return;
-    //    //if (_hp <= 0) return;
-    //    if (param.Length < 1 || param[0] is not EnemyCtrlAbstract enemy || enemy != this || _hp <= 0) return;
-    //    _hp--;
-    //    _hpBar.value = (float)_hp / EnemySO.Hp;
-    //}
 }

@@ -6441,6 +6441,54 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 564890321}
   m_Mesh: {fileID: 8243879411280590840, guid: 64f4be06a92a5dd4a99c31e59ac47d42, type: 3}
+--- !u!1 &567558819
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 567558820}
+  - component: {fileID: 567558821}
+  m_Layer: 0
+  m_Name: PlayerSkillAoeBullet
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &567558820
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567558819}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1633824328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &567558821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 567558819}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f3448c1106ad854096068b8c155d65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerSkillCtr: {fileID: 524961273}
+  _levelSkill: 0
+  _maxLevel: 0
+  AoeBullet: 0
 --- !u!1 &567609173
 GameObject:
   m_ObjectHideFlags: 0
@@ -17825,11 +17873,13 @@ MonoBehaviour:
   _playerSkillMultiDirection: {fileID: 1219896842}
   _playerSkillShootRange: {fileID: 205558072}
   _playerSkillShootSpeed: {fileID: 1444436889}
+  _playerSkillAoeBullet: {fileID: 567558821}
   _listAllPbSkills:
   - {fileID: 1442426922}
   - {fileID: 1219896842}
   - {fileID: 205558072}
   - {fileID: 1444436889}
+  - {fileID: 567558821}
 --- !u!4 &1633824328
 Transform:
   m_ObjectHideFlags: 0
@@ -17847,6 +17897,7 @@ Transform:
   - {fileID: 1219896841}
   - {fileID: 205558071}
   - {fileID: 1444436888}
+  - {fileID: 567558820}
   m_Father: {fileID: 524961272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635987979

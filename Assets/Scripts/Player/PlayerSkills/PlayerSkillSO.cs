@@ -10,4 +10,5 @@ public class PlayerSkillSO : ScriptableObject
     public int MaxLevel;
     public int ShotCount;
     public int DirCount;
+    public int AoeBullet;
 }

@@ -10,6 +10,7 @@ public class PlayerSkillList : PISMonoBehaviour
     [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
     [SerializeField] private PlayerSkillShootRange _playerSkillShootRange;
     [SerializeField] private PlayerSkillShootSpeed _playerSkillShootSpeed;
+    [SerializeField] private PlayerSkillAoeBullet _playerSkillAoeBullet;
 
     [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
 
@@ -17,15 +18,17 @@ public class PlayerSkillList : PISMonoBehaviour
     public PlayerSkillMultiDirection PlayerSkillMultiDirection { get => _playerSkillMultiDirection; }
     public PlayerSkillShootRange PlayerSkillShootRange { get => _playerSkillShootRange; }
     public PlayerSkillShootSpeed PlayerSkillShootSpeed { get => _playerSkillShootSpeed; }
+    public PlayerSkillAoeBullet PlayerSkillAoeBullet { get => _playerSkillAoeBullet; }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillCtrl != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null) return;
+        if (_playerSkillCtrl != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillAoeBullet != null) return;
         _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
         _playerSkillMultiShot = GetComponentInChildren<PlayerSkillMultiShot>();
         _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
         _playerSkillShootRange = GetComponentInChildren<PlayerSkillShootRange>();
         _playerSkillShootSpeed = GetComponentInChildren<PlayerSkillShootSpeed>();
+        _playerSkillAoeBullet = GetComponentInChildren<PlayerSkillAoeBullet>();
 
         if (_listAllPbSkills.Count == transform.childCount) return;
         foreach (Transform child in transform)
