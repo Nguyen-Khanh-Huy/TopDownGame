@@ -16,11 +16,11 @@ public class PlayerSkillAoeBullet : PlayerSkillAbstract
         if (_levelSkill < 2 || _levelSkill > 3) return;
         if (_levelSkill == 2)
         {
-            AoeBullet = 2;
+            AoeBullet = 1;
         }
         else if (_levelSkill == 3)
         {
-            AoeBullet = 3;
+            AoeBullet = 2;
         }
     }
 

@@ -62,15 +62,13 @@ public class PlayerController : PISMonoBehaviour
     private void Init()
     {
         _hp = _playerSO.Hp;
-        _playerMoving.MoveSpeed = _playerSO.MoveSpeed;
-        _playerShoot.ShootSpeed = _playerSO.ShootSpeed;
-        _playerTarget.PlayerCollider.isTrigger = true;
-        _playerTarget.PlayerCollider.radius = _playerSO.ShootRange;
-
         _playerMana.CurMana = _playerSO.CurMana;
         _playerMana.CurLevel = _playerSO.CurLevel;
         _playerMana.ManaNextLevel = _playerSO.ManaNextLevel;
-
         _playerShoot.CountEnemyDead = _playerSO.CountEnemyDead;
+
+        _playerMoving.MoveSpeed = _playerSkillSO.MoveSpeed;
+        _playerShoot.ShootSpeed = _playerSkillSO.ShootSpeed;
+        _playerTarget.PlayerCollider.radius = _playerSkillSO.ShootRange;
     }
 }

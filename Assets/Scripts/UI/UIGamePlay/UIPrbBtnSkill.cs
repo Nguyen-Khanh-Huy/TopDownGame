@@ -57,33 +57,44 @@ public class UIPrbBtnSkill : PISMonoBehaviour
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "+10% Range";
+                txtSkill.text = "Attack Range: +10%";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "+20% Range";
+                txtSkill.text = "Attack Range: +20%";
             }
         }
         else if (playerSkill is PlayerSkillShootSpeed)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "+15% Fire Rate";
+                txtSkill.text = "Attack Speed: +15%";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "+25% Fire Rate";
+                txtSkill.text = "Attack Speed: +25%";
             }
         }
         else if (playerSkill is PlayerSkillAoeBullet)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "+2 AoE Bullet";
+                txtSkill.text = "AoE Bullet: +1";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "+3 AoE Bullet";
+                txtSkill.text = "AoE Bullet: +2";
+            }
+        }
+        else if (playerSkill is PlayerSkillMoveSpeed)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "Move Speed: +15%";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "Move Speed: +25%";
             }
         }
     }

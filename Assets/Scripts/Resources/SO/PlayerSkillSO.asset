@@ -14,5 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   LevelSkill: 1
   MaxLevel: 3
-  ShotCount: 1
-  DirCount: 0
+  MoveSpeed: 3
+  ShootRange: 9
+  ShootSpeed: 1.2
+  MultiShotCount: 1
+  MultiDirCount: 0
+  AoeBullet: 0

@@ -34,15 +34,25 @@ public class PlayerMana : PISMonoBehaviour
         _curLevel++;
         _curMana = _playerCtrl.PlayerSO.CurMana;
         int SO = _playerCtrl.PlayerSO.ManaNextLevel;    // SO = 10
-        switch (_curLevel)
-        {
-            case 2:
-                _manaNextLevel += SO * 1;
-                break;
-            case 3:
-                _manaNextLevel += SO * 2;
-                break;
-        }
+        _manaNextLevel += SO;
+        //switch (_curLevel)
+        //{
+        //    case 2:
+        //        _manaNextLevel += SO;
+        //        break;
+        //    case 3:
+        //        _manaNextLevel += SO * 1;
+        //        break;
+        //    case 4:
+        //        _manaNextLevel += SO * 2;
+        //        break;
+        //    case 5:
+        //        _manaNextLevel += SO * 3;
+        //        break;
+        //    case 6:
+        //        _manaNextLevel += SO * 4;
+        //        break;
+        //}
 
         UIGamePlayManager.Ins.Show(UIGamePlayManager.Ins.PanelSkillsDialog);
     }

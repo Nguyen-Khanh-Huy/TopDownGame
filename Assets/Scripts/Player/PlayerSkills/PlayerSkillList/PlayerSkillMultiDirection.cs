@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerSkillMultiDirection : PlayerSkillAbstract
 {
-    public int DirCount = 0;
+    public int MultiDirCount = 0;
     public override void Upgrade()
     {
         base.Upgrade();
-        if (DirCount >= _levelSkill - 1) return;
-        DirCount++;
+        if (MultiDirCount >= _levelSkill - 1) return;
+        MultiDirCount++;
         Debug.Log("Skill Bullet Multi Direction");
     }
 }

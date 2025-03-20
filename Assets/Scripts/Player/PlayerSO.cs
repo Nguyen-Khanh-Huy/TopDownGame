@@ -7,13 +7,9 @@ using UnityEngine;
 public class PlayerSO : ScriptableObject
 {
     public int Hp;
-    public float MoveSpeed;
-    public float ShootSpeed;
-    public float ShootRange;
 
     public int CurMana;
     public int CurLevel;
     public int ManaNextLevel;
-
     public int CountEnemyDead;
 }

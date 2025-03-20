@@ -8,7 +8,11 @@ public class PlayerSkillSO : ScriptableObject
 {
     public int LevelSkill;
     public int MaxLevel;
-    public int ShotCount;
-    public int DirCount;
+
+    public float MoveSpeed;
+    public float ShootRange;
+    public float ShootSpeed;
+    public int MultiShotCount;
+    public int MultiDirCount;
     public int AoeBullet;
 }

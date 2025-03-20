@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class PlayerSkillMultiShot : PlayerSkillAbstract
 {
-    public int ShotCount = 1;
+    public int MultiShotCount = 1;
     public override void Upgrade()
     {
         base.Upgrade();
-        if (ShotCount >= _levelSkill) return;
-        ShotCount++;
+        if (MultiShotCount >= _levelSkill) return;
+        MultiShotCount++;
         Debug.Log("Skill Bullet Multi Shot");
     }
 }

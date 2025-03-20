@@ -6,28 +6,31 @@ using UnityEngine;
 public class PlayerSkillList : PISMonoBehaviour
 {
     [SerializeField] private PlayerSkillsCtrl _playerSkillCtrl;
-    [SerializeField] private PlayerSkillMultiShot _playerSkillMultiShot;
-    [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
+    [SerializeField] private PlayerSkillMoveSpeed _playerSkillMoveSpeed;
     [SerializeField] private PlayerSkillShootRange _playerSkillShootRange;
     [SerializeField] private PlayerSkillShootSpeed _playerSkillShootSpeed;
+    [SerializeField] private PlayerSkillMultiShot _playerSkillMultiShot;
+    [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
     [SerializeField] private PlayerSkillAoeBullet _playerSkillAoeBullet;
 
     [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
 
-    public PlayerSkillMultiShot PlayerSkillFiveShots { get => _playerSkillMultiShot; }
-    public PlayerSkillMultiDirection PlayerSkillMultiDirection { get => _playerSkillMultiDirection; }
+    public PlayerSkillMoveSpeed PlayerSkillMoveSpeed { get => _playerSkillMoveSpeed; }
     public PlayerSkillShootRange PlayerSkillShootRange { get => _playerSkillShootRange; }
     public PlayerSkillShootSpeed PlayerSkillShootSpeed { get => _playerSkillShootSpeed; }
+    public PlayerSkillMultiShot PlayerSkillMultiShot { get => _playerSkillMultiShot; }
+    public PlayerSkillMultiDirection PlayerSkillMultiDirection { get => _playerSkillMultiDirection; }
     public PlayerSkillAoeBullet PlayerSkillAoeBullet { get => _playerSkillAoeBullet; }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillCtrl != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillAoeBullet != null) return;
+        if (_playerSkillCtrl != null  && _playerSkillMoveSpeed != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillAoeBullet != null) return;
         _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
-        _playerSkillMultiShot = GetComponentInChildren<PlayerSkillMultiShot>();
-        _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
+        _playerSkillMoveSpeed = GetComponentInChildren<PlayerSkillMoveSpeed>();
         _playerSkillShootRange = GetComponentInChildren<PlayerSkillShootRange>();
         _playerSkillShootSpeed = GetComponentInChildren<PlayerSkillShootSpeed>();
+        _playerSkillMultiShot = GetComponentInChildren<PlayerSkillMultiShot>();
+        _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
         _playerSkillAoeBullet = GetComponentInChildren<PlayerSkillAoeBullet>();
 
         if (_listAllPbSkills.Count == transform.childCount) return;

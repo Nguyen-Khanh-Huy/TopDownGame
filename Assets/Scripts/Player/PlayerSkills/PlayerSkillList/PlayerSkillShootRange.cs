@@ -13,7 +13,7 @@ public class PlayerSkillShootRange : PlayerSkillAbstract
     public void CheckLevelShootRange()
     {
         if (_levelSkill < 2 || _levelSkill > 3) return;
-        float SO = _playerSkillCtr.PlayerCtrl.PlayerSO.ShootRange;
+        float SO = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.ShootRange;
         if (_levelSkill == 2)
         {
             Debug.Log("Skill Index Shoot Range LV2");

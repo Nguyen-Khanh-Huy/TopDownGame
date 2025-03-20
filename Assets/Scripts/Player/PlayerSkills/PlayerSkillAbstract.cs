@@ -34,8 +34,8 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
     {
         _levelSkill = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.LevelSkill;
         _maxLevel = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MaxLevel;
-        _playerSkillCtr.PlayerSkillList.PlayerSkillFiveShots.ShotCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.ShotCount;
-        _playerSkillCtr.PlayerSkillList.PlayerSkillMultiDirection.DirCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.DirCount;
+        _playerSkillCtr.PlayerSkillList.PlayerSkillMultiShot.MultiShotCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MultiShotCount;
+        _playerSkillCtr.PlayerSkillList.PlayerSkillMultiDirection.MultiDirCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MultiDirCount;
         _playerSkillCtr.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.AoeBullet;
     }
 }

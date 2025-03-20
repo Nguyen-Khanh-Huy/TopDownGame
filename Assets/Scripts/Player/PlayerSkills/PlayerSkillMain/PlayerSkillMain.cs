@@ -15,7 +15,7 @@ public class PlayerSkillMain : PISMonoBehaviour
 
     private void StartShooting()
     {
-        if (_shotCount >= _playerSkillCtrl.PlayerSkillList.PlayerSkillFiveShots.ShotCount) return;
+        if (_shotCount >= _playerSkillCtrl.PlayerSkillList.PlayerSkillMultiShot.MultiShotCount) return;
 
         CheckLvSkillMultiDirection();
 
@@ -31,7 +31,7 @@ public class PlayerSkillMain : PISMonoBehaviour
 
     private void CheckLvSkillMultiDirection()
     {
-        int check = _playerSkillCtrl.PlayerSkillList.PlayerSkillMultiDirection.DirCount;
+        int check = _playerSkillCtrl.PlayerSkillList.PlayerSkillMultiDirection.MultiDirCount;
         switch (check)
         {
             case 0:
