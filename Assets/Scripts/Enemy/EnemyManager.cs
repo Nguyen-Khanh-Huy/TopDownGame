@@ -29,7 +29,9 @@ public class EnemyManager : Singleton<EnemyManager>
     private void SpawnEnemy()
     {
         Invoke(nameof(SpawnEnemy), _spawnSpeed);
+
         if (!UIGamePlayManager.Ins.CheckPlayTime) return;
+
         if (_listEnemyNearSpawn.Count < _maxEnemyNear)
         {
             EnemyCtrlAbstract newEnemyNear = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyNear(), GetVector3ForSpawn(), Quaternion.identity);

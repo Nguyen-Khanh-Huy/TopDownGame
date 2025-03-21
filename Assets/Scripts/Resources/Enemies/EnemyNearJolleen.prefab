@@ -277,6 +277,7 @@ MonoBehaviour:
   _enemyAbstract: {fileID: 8778607339776674792}
   _despawnByTime: 3
   _isSpawnedItemDrop: 0
+  _isDead: 0
 --- !u!1 &226141264503506537
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,14 +556,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 0
+  _playerCtrl: {fileID: 0}
   _enemySO: {fileID: 11400000, guid: d62987b9915ceb540afb987351306f27, type: 2}
   _anim: {fileID: 610710989345930290}
   _agent: {fileID: 7268034290586557352}
   _enemyMoving: {fileID: 3592892285049422266}
-  _player: {fileID: 0}
-  _itemDropCoin: {fileID: 5220770969359461500, guid: ad0ea460558e0c1409df67eafcddc9a7, type: 3}
+  _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 2852349640754489970}
-  _enemyNearAttack: {fileID: 5896874757490127821}
   _colliderAttack: {fileID: 4249523711892375125}
 --- !u!1 &1191731329795351534
 GameObject:
@@ -2290,7 +2290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4725381189973547668}
   - component: {fileID: 4249523711892375125}
-  - component: {fileID: 5896874757490127821}
+  - component: {fileID: 529804297935031897}
   m_Layer: 0
   m_Name: EnemyNearAttack
   m_TagString: Untagged
@@ -2334,7 +2334,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.6
   m_Center: {x: 0, y: 1, z: 0.7}
---- !u!114 &5896874757490127821
+--- !u!114 &529804297935031897
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2346,9 +2346,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76871fe7b2303874d83454c259701bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyNearAbstract: {fileID: 8778607339776674792}
+  _enemyCtrl: {fileID: 8778607339776674792}
   _curState: 0
-  _timeAttack: 0.2
+  _timeAttack: 0
 --- !u!1 &7401344758995190603
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,16 +4,13 @@ using UnityEngine;
 
 public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
 {
-    [SerializeField] private EnemyNearAttack _enemyNearAttack;
     [SerializeField] private SphereCollider _colliderAttack;
-    public EnemyNearAttack EnemyNearAttack { get => _enemyNearAttack; set => _enemyNearAttack = value; }
 
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        if (_enemySO != null && _enemyNearAttack != null && _colliderAttack != null) return;
+        if (_enemySO != null && _colliderAttack != null) return;
         _enemySO = Resources.Load<EnemySO>("SO/EnemyNearSO");
-        _enemyNearAttack = GetComponentInChildren<EnemyNearAttack>();
         _colliderAttack = GetComponentInChildren<SphereCollider>();
     }
 

@@ -626,14 +626,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 0
+  _playerCtrl: {fileID: 0}
   _enemySO: {fileID: 11400000, guid: b4a44e7ff18a52c449a47937516263fe, type: 2}
   _anim: {fileID: 1137824715913090377}
   _agent: {fileID: 3956304198523098301}
   _enemyMoving: {fileID: 5829898454483108344}
-  _player: {fileID: 0}
-  _itemDropCoin: {fileID: 5220770969359461500, guid: ad0ea460558e0c1409df67eafcddc9a7, type: 3}
+  _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 6980316814178852604}
-  _enemyLongAttack: {fileID: 2636210275603861797}
   _bulletParabol: {fileID: 8879088643768916012, guid: e59b839350715804eaeadf3e86e7f8b4, type: 3}
   _firePoint: {fileID: 8007795772448501616}
 --- !u!1 &1849939049912012327
@@ -1627,7 +1626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1373717221412191604}
-  - component: {fileID: 2636210275603861797}
+  - component: {fileID: 5684126125375314448}
   m_Layer: 0
   m_Name: EnemyLongAttack
   m_TagString: Untagged
@@ -1650,7 +1649,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4744928103363491530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2636210275603861797
+--- !u!114 &5684126125375314448
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1662,9 +1661,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efd93a19df723ce4a9ff19776a065c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyLongAbstract: {fileID: 1197785041297933665}
+  _enemyCtrl: {fileID: 1197785041297933665}
   _curState: 0
-  _timeAttack: 2
+  _timeAttack: 0
 --- !u!1 &5133296828367927241
 GameObject:
   m_ObjectHideFlags: 0
@@ -2563,6 +2562,7 @@ MonoBehaviour:
   _enemyAbstract: {fileID: 1197785041297933665}
   _despawnByTime: 3
   _isSpawnedItemDrop: 0
+  _isDead: 0
 --- !u!1 &7996254921457799505
 GameObject:
   m_ObjectHideFlags: 0
