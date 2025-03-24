@@ -14,7 +14,6 @@ public class EnemyHpBar : PISMonoBehaviour
     private void Update()
     {
         transform.LookAt(Camera.main.transform);
-        //transform.Rotate(0, 180, 0);
     }
 
     protected override void LoadComponents()

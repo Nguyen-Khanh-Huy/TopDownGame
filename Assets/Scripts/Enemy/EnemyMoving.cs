@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMoving : PISMonoBehaviour
 {
-    [SerializeField] private EnemyCtrlAbstract _enemyCtrlAbstract;
+    [SerializeField] private EnemyCtrlAbstract _enemyCtrl;
     [SerializeField] private float _distance;
     [SerializeField] private bool _isMoving;
 
@@ -17,31 +17,29 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void Update()
     {
-        //if (_enemyCtrlAbstract.Hp <= 0 || !UIGamePlayManager.Ins.CheckPlayTime) return;
         EnemyMove();
         LookAtTarget();
     }
 
     private void LookAtTarget()
     {
-        if (_enemyCtrlAbstract.EnemyAttack.CurState == EnemyState.Dying) return;
-        Vector3 targetPosition = _enemyCtrlAbstract.PlayerCtrl.transform.position;
-        targetPosition.y = _enemyCtrlAbstract.transform.position.y;
-        _enemyCtrlAbstract.transform.LookAt(targetPosition);
+        if (_enemyCtrl.EnemyAttack.CurState == EnemyState.Dying) return;
+        Vector3 targetPosition = _enemyCtrl.PlayerCtrl.transform.position;
+        targetPosition.y = _enemyCtrl.transform.position.y;
+        _enemyCtrl.transform.LookAt(targetPosition);
     }
 
     private void EnemyMove()
     {
-        _enemyCtrlAbstract.Agent.SetDestination(_enemyCtrlAbstract.PlayerCtrl.transform.position);
-        float checkDistance = Vector3.Distance(_enemyCtrlAbstract.PlayerCtrl.transform.position, _enemyCtrlAbstract.transform.position);
+        _enemyCtrl.Agent.SetDestination(_enemyCtrl.PlayerCtrl.transform.position);
+        float checkDistance = Vector3.Distance(_enemyCtrl.PlayerCtrl.transform.position, _enemyCtrl.transform.position);
         _isMoving = checkDistance > _distance;
 
-        bool shouldStop = (_enemyCtrlAbstract.EnemyAttack.CurState == EnemyState.Idle
-                        || _enemyCtrlAbstract.EnemyAttack.CurState == EnemyState.Attack
-                        || _enemyCtrlAbstract.EnemyAttack.CurState == EnemyState.Hit
-                        || _enemyCtrlAbstract.EnemyAttack.CurState == EnemyState.Dying);
+        bool shouldStop = (_enemyCtrl.EnemyAttack.CurState == EnemyState.Idle
+                        || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
+                        || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying);
 
-        _enemyCtrlAbstract.Agent.isStopped = shouldStop || !_isMoving;
+        _enemyCtrl.Agent.isStopped = shouldStop || !_isMoving;
     }
 
     private void CheckEnemy()
@@ -53,7 +51,7 @@ public class EnemyMoving : PISMonoBehaviour
     }
     protected override void LoadComponents()
     {
-        if (_enemyCtrlAbstract != null) return;
-        _enemyCtrlAbstract = GetComponentInParent<EnemyCtrlAbstract>();
+        if (_enemyCtrl != null) return;
+        _enemyCtrl = GetComponentInParent<EnemyCtrlAbstract>();
     }
 }

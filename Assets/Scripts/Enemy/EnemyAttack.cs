@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EnemyAttack : PISMonoBehaviour
 {
-    [SerializeField] private EnemyCtrlAbstract _enemyCtrlAbstract;
+    [SerializeField] private EnemyCtrlAbstract _enemyCtrl;
     [SerializeField] private EnemyState _curState;
     [SerializeField] protected float _timeAttack;
     protected float _timeCount;
@@ -14,25 +14,7 @@ public class EnemyAttack : PISMonoBehaviour
 
     private void Update()
     {
-        if (!UIGamePlayManager.Ins.CheckPlayTime)
-        {
-            PauseGame();
-            return;
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ChangeState(EnemyState.Hit);
-            if (_curState == EnemyState.Hit)
-            {
-                Debug.Log("zzzzzzzz");
-            }
-        }
         Attack();
-    }
-
-    private void PauseGame()
-    {
-        ChangeState(EnemyState.Idle);
     }
 
     public void ChangeState(EnemyState newState)
@@ -40,57 +22,95 @@ public class EnemyAttack : PISMonoBehaviour
         if (_curState != newState)
         {
             _curState = newState;
-            _enemyCtrlAbstract.Anim.SetInteger("State", (int)newState);
+            _enemyCtrl.Anim.SetInteger("State", (int)newState);
         }
     }
 
     private void Attack()
     {
-        AnimatorStateInfo stateInfo = _enemyCtrlAbstract.Anim.GetCurrentAnimatorStateInfo(0);
-        if (_enemyCtrlAbstract.Hp <= 0)
+        AnimatorStateInfo stateInfo = _enemyCtrl.Anim.GetCurrentAnimatorStateInfo(0);
+        if (_enemyCtrl.Hp <= 0)
         {
             ChangeState(EnemyState.Dying);
             return;
         }
 
-        if (_curState == EnemyState.Hit)
+        if (!UIGamePlayManager.Ins.CheckPlayTime)
         {
-            if (stateInfo.IsName(EnemyState.Hit.ToString()) && stateInfo.normalizedTime >= 1f)
-                ChangeState(_enemyCtrlAbstract.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
+            ChangeState(EnemyState.Idle);
             return;
         }
 
         if (_curState == EnemyState.Attack)
         {
-            if (stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
-                ChangeState(_enemyCtrlAbstract.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
+            if (stateInfo.IsName(_curState.ToString()) && stateInfo.normalizedTime >= 1f)
+                ChangeState(_enemyCtrl.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
             return;
         }
 
-        if (_curState != EnemyState.Attack && _enemyCtrlAbstract.EnemyMoving.IsMoving)
+        if (_enemyCtrl.EnemyMoving.IsMoving)
         {
             ChangeState(EnemyState.Walk);
         }
-
+        else if (_timeCount >= _timeAttack)
+        {
+            _timeCount = 0;
+            ChangeState(EnemyState.Attack);
+        }
         else
         {
-            if (_curState != EnemyState.Attack)
-            {
-                _timeCount += Time.deltaTime;
-                if (_timeCount >= _timeAttack)
-                {
-                    _timeCount = 0;
-                    ChangeState(EnemyState.Attack);
-                }
-                else
-                    ChangeState(EnemyState.Idle);
-            }
+            _timeCount += Time.deltaTime;
+            ChangeState(EnemyState.Idle);
         }
     }
 
+    //private void Attack()
+    //{
+    //    AnimatorStateInfo stateInfo = _enemyCtrlAbstract.Anim.GetCurrentAnimatorStateInfo(0);
+    //    if (_enemyCtrlAbstract.Hp <= 0)
+    //    {
+    //        ChangeState(EnemyState.Dying);
+    //        return;
+    //    }
+
+    //    if (_curState == EnemyState.Hit)
+    //    {
+    //        if (stateInfo.IsName(EnemyState.Hit.ToString()) && stateInfo.normalizedTime >= 1f)
+    //            ChangeState(_enemyCtrlAbstract.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
+    //        return;
+    //    }
+
+    //    if (_curState == EnemyState.Attack)
+    //    {
+    //        if (stateInfo.IsName(EnemyState.Attack.ToString()) && stateInfo.normalizedTime >= 1f)
+    //            ChangeState(_enemyCtrlAbstract.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
+    //        return;
+    //    }
+
+    //    if (_curState != EnemyState.Attack && _enemyCtrlAbstract.EnemyMoving.IsMoving)
+    //    {
+    //        ChangeState(EnemyState.Walk);
+    //    }
+
+    //    else
+    //    {
+    //        if (_curState != EnemyState.Attack)
+    //        {
+    //            _timeCount += Time.deltaTime;
+    //            if (_timeCount >= _timeAttack)
+    //            {
+    //                _timeCount = 0;
+    //                ChangeState(EnemyState.Attack);
+    //            }
+    //            else
+    //                ChangeState(EnemyState.Idle);
+    //        }
+    //    }
+    //}
+
     protected override void LoadComponents()
     {
-        if (_enemyCtrlAbstract != null) return;
-        _enemyCtrlAbstract = GetComponentInParent<EnemyCtrlAbstract>();
+        if (_enemyCtrl != null) return;
+        _enemyCtrl = GetComponentInParent<EnemyCtrlAbstract>();
     }
 }

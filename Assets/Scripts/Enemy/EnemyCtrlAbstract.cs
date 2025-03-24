@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -12,6 +10,7 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     [SerializeField] protected PlayerController _playerCtrl;
     [SerializeField] protected EnemyMoving _enemyMoving;
     [SerializeField] protected EnemyAttack _enemyAttack;
+    [SerializeField] protected EnemyFlashingEffect _enemyFlashingEffect;
     [SerializeField] protected EnemySO _enemySO;
     [SerializeField] protected Animator _anim;
     [SerializeField] protected NavMeshAgent _agent;
@@ -30,10 +29,11 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null && _enemyMoving != null && _enemyAttack && _anim != null && _agent != null && _itemDropMana != null && _hpBar != null) return;
+        if (_playerCtrl != null && _enemyMoving != null && _enemyAttack && _enemyFlashingEffect != null && _anim != null && _agent != null && _itemDropMana != null && _hpBar != null) return;
         _playerCtrl = GameObject.Find("PlayerController").GetComponent<PlayerController>();
         _enemyMoving = GetComponentInChildren<EnemyMoving>();
         _enemyAttack = GetComponentInChildren<EnemyAttack>();
+        _enemyFlashingEffect = GetComponentInChildren<EnemyFlashingEffect>();
         _anim = GetComponent<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _itemDropMana = Resources.Load<ItemDropMana>("ItemsDrop/ItemDropMana");
@@ -57,12 +57,12 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
         {
             _hp--;
             _hpBar.value = (float)_hp / EnemySO.Hp;
-            //_enemyAttack.ChangeState(EnemyState.Hit);
+            _enemyFlashingEffect.StartFlash();
         }
     }
 
     private bool EnemyTakeDmgSkillAoeBullet(EnemyCtrlAbstract enemy)
     {
-        return Vector3.Distance(enemy.transform.position, transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet;
+        return Vector3.Distance(transform.position, enemy.transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet;
     }
 }

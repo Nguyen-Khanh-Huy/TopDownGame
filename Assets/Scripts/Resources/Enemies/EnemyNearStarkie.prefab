@@ -513,7 +513,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76871fe7b2303874d83454c259701bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCtrlAbstract: {fileID: 0}
+  _enemyCtrl: {fileID: 0}
   _curState: 0
   _timeAttack: 0
 --- !u!1 &1514151944228978768
@@ -1216,6 +1216,55 @@ Transform:
   - {fileID: 7664801774578382511}
   m_Father: {fileID: 6275751570452359259}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3229005411233461297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8422786077377255377}
+  - component: {fileID: 270757595607227814}
+  m_Layer: 0
+  m_Name: EnemyFlashingEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8422786077377255377
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229005411233461297}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5892008440014255859}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &270757595607227814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3229005411233461297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9714e178976652d4481fd1b0c3465fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyCtrl: {fileID: 317858282575269831}
+  _renderer: {fileID: 9054256535826859871}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _timeFlashing: 0.5
+  _timeInterval: 0.1
 --- !u!1 &3389829036097566012
 GameObject:
   m_ObjectHideFlags: 0
@@ -2295,6 +2344,7 @@ Transform:
   - {fileID: 2717944803142790514}
   - {fileID: 7657005352270898433}
   - {fileID: 5744073726466055957}
+  - {fileID: 8422786077377255377}
   - {fileID: 8865452000403892547}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2380,6 +2430,7 @@ MonoBehaviour:
   _playerCtrl: {fileID: 0}
   _enemyMoving: {fileID: 8302960368277044763}
   _enemyAttack: {fileID: 5952760316337377000}
+  _enemyFlashingEffect: {fileID: 270757595607227814}
   _enemySO: {fileID: 11400000, guid: d62987b9915ceb540afb987351306f27, type: 2}
   _anim: {fileID: 4457943895203761269}
   _agent: {fileID: 7006133032343367401}
@@ -2597,7 +2648,6 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 5a1b31a4c2752bc4db7e14dc52e3d1eb, type: 2}
-  - {fileID: 2100000, guid: 67aa92976f3f46f4cb95b35e58aec3e4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -2696,8 +2746,8 @@ SkinnedMeshRenderer:
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 3116655375731953291}
   m_AABB:
-    m_Center: {x: -0.0000012516975, y: -0.19560558, z: -0.01724583}
-    m_Extent: {x: 1.122472, y: 1.0765536, z: 0.28813463}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   m_DirtyAABB: 0
 --- !u!1 &7800142982033804360
 GameObject:
@@ -3075,6 +3125,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77c8a8c0b691c84490d2e6649b3ee9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCtrlAbstract: {fileID: 317858282575269831}
+  _enemyCtrl: {fileID: 317858282575269831}
   _distance: 0
   _isMoving: 0

@@ -474,6 +474,7 @@ Transform:
   - {fileID: 4725381189973547668}
   - {fileID: 6535514092869172016}
   - {fileID: 4036127658352489235}
+  - {fileID: 270519758122437702}
   - {fileID: 7617194105251088893}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -557,10 +558,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _playerCtrl: {fileID: 0}
+  _enemyMoving: {fileID: 3592892285049422266}
+  _enemyAttack: {fileID: 529804297935031897}
+  _enemyFlashingEffect: {fileID: 2206924418056577851}
   _enemySO: {fileID: 11400000, guid: d62987b9915ceb540afb987351306f27, type: 2}
   _anim: {fileID: 610710989345930290}
   _agent: {fileID: 7268034290586557352}
-  _enemyMoving: {fileID: 3592892285049422266}
   _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 2852349640754489970}
   _colliderAttack: {fileID: 4249523711892375125}
@@ -832,7 +835,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77c8a8c0b691c84490d2e6649b3ee9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCtrlAbstract: {fileID: 8778607339776674792}
+  _enemyCtrl: {fileID: 0}
   _distance: 0
   _isMoving: 0
 --- !u!1 &2689064987153172097
@@ -1311,6 +1314,55 @@ Transform:
   - {fileID: 5426831900494379716}
   m_Father: {fileID: 5317685059334656317}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4429439433717569942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 270519758122437702}
+  - component: {fileID: 2206924418056577851}
+  m_Layer: 0
+  m_Name: EnemyFlashingEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &270519758122437702
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4429439433717569942}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.5, y: 0, z: 0}
+  m_LocalScale: {x: 0.875, y: 0.875, z: 0.875}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1249391158507124625}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2206924418056577851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4429439433717569942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9714e178976652d4481fd1b0c3465fa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyCtrl: {fileID: 8778607339776674792}
+  _renderer: {fileID: 4565380434356524840}
+  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _timeFlashing: 0.5
+  _timeInterval: 0.1
 --- !u!1 &4444687699850189391
 GameObject:
   m_ObjectHideFlags: 0
@@ -2346,7 +2398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76871fe7b2303874d83454c259701bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCtrl: {fileID: 8778607339776674792}
+  _enemyCtrl: {fileID: 0}
   _curState: 0
   _timeAttack: 0
 --- !u!1 &7401344758995190603

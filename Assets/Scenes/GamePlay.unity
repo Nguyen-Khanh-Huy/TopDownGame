@@ -740,7 +740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &104396646
 Transform:
   m_ObjectHideFlags: 0
@@ -15522,75 +15522,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1404038301}
   m_Mesh: {fileID: 8733429697405204941, guid: 38b797ba6cc77df40a51cd3200365644, type: 3}
---- !u!1001 &1411643457
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 317858282575269831, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: _playerCtrl
-      value: 
-      objectReference: {fileID: 525616966}
-    - target: {fileID: 3294046436995086214, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3294046436995086214, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -5.8721423
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.029999971
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -6.607224
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5892008440014255859, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6965852084029760560, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
-      propertyPath: m_Name
-      value: EnemyNearStarkie
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
 --- !u!1 &1413073628
 GameObject:
   m_ObjectHideFlags: 0
@@ -22648,4 +22579,3 @@ SceneRoots:
   - {fileID: 104396646}
   - {fileID: 116498295}
   - {fileID: 392567381}
-  - {fileID: 1411643457}
