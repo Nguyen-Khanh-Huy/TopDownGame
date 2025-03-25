@@ -7,6 +7,7 @@ public class PlayerController : PISMonoBehaviour
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Animator _anim;
     [SerializeField] private Transform _firePoint;
+    [SerializeField] private SpriteRenderer _playerSpriteAttackRange;
     [SerializeField] private BulletPlayer _bulletPlayer;
     [SerializeField] private PlayerMoving _playerMoving;
     [SerializeField] private PlayerTarget _playerTarget;
@@ -20,6 +21,7 @@ public class PlayerController : PISMonoBehaviour
     public Rigidbody Rb { get => _rb; set => _rb = value; }
     public Animator Anim { get => _anim; set => _anim = value; }
     public Transform FirePoint { get => _firePoint; }
+    public SpriteRenderer PlayerSpriteAttackRange { get => _playerSpriteAttackRange; set => _playerSpriteAttackRange = value; }
     public BulletPlayer BulletPlayer { get => _bulletPlayer; }
     public PlayerMoving PlayerMoving { get => _playerMoving; }
     public PlayerTarget PlayerTarget { get => _playerTarget; }
@@ -32,10 +34,11 @@ public class PlayerController : PISMonoBehaviour
 
     protected override void LoadComponents()
     {
-        if(_rb != null && _anim != null && _firePoint && _bulletPlayer && _playerMoving != null && _playerTarget != null && _playerShoot != null && _playerMana != null && _playerSkillsCtrl != null && _playerSO != null && _playerSkillSO != null) return;
+        if(_rb != null && _anim != null && _firePoint && _playerSpriteAttackRange != null && _bulletPlayer && _playerMoving != null && _playerTarget != null && _playerShoot != null && _playerMana != null && _playerSkillsCtrl != null && _playerSO != null && _playerSkillSO != null) return;
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
         _firePoint = transform.Find("Model/Bip001/FirePoint").GetComponent<Transform>();
+        _playerSpriteAttackRange = GetComponentInChildren<SpriteRenderer>();
         _bulletPlayer = Resources.Load<BulletPlayer>("Bullets/BulletPlayer");
         _playerMoving = GetComponentInChildren<PlayerMoving>();
         _playerTarget = GetComponentInChildren<PlayerTarget>();
@@ -70,5 +73,6 @@ public class PlayerController : PISMonoBehaviour
         _playerMoving.MoveSpeed = _playerSkillSO.MoveSpeed;
         _playerShoot.ShootSpeed = _playerSkillSO.ShootSpeed;
         _playerTarget.PlayerCollider.radius = _playerSkillSO.ShootRange;
+        _playerSpriteAttackRange.transform.localScale = new Vector3(_playerTarget.PlayerCollider.radius * 1.5f, _playerTarget.PlayerCollider.radius * 1.5f, 1);
     }
 }

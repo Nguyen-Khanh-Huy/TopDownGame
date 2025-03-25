@@ -16,13 +16,20 @@ public class PlayerSkillShootRange : PlayerSkillAbstract
         float SO = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.ShootRange;
         if (_levelSkill == 2)
         {
-            Debug.Log("Skill Index Shoot Range LV2");
             _playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius = SO + (SO * 0.10f);
+            ChangePlayerSpriteAttackRange();
         }
         else if (_levelSkill == 3)
         {
-            Debug.Log("Skill Index Shoot Range LV3");
             _playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius = SO + (SO * 0.20f);
+            ChangePlayerSpriteAttackRange();
         }
+    }
+
+    private void ChangePlayerSpriteAttackRange()
+    {
+        _playerSkillCtr.PlayerCtrl.PlayerSpriteAttackRange.transform.localScale =
+                new Vector3(_playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f,
+                            _playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f, 1);
     }
 }
