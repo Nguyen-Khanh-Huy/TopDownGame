@@ -10,6 +10,5 @@ public class PlayerSkillMultiDirection : PlayerSkillAbstract
         base.Upgrade();
         if (MultiDirCount >= _levelSkill - 1) return;
         MultiDirCount++;
-        Debug.Log("Skill Bullet Multi Direction");
     }
 }

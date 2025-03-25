@@ -12,6 +12,7 @@ public class PlayerSkillList : PISMonoBehaviour
     [SerializeField] private PlayerSkillMultiShot _playerSkillMultiShot;
     [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
     [SerializeField] private PlayerSkillAoeBullet _playerSkillAoeBullet;
+    [SerializeField] private PlayerSkillLightning _playerSkillLightning;
 
     [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
 
@@ -21,10 +22,11 @@ public class PlayerSkillList : PISMonoBehaviour
     public PlayerSkillMultiShot PlayerSkillMultiShot { get => _playerSkillMultiShot; }
     public PlayerSkillMultiDirection PlayerSkillMultiDirection { get => _playerSkillMultiDirection; }
     public PlayerSkillAoeBullet PlayerSkillAoeBullet { get => _playerSkillAoeBullet; }
+    public PlayerSkillLightning PlayerSkillLightning { get => _playerSkillLightning; }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillCtrl != null  && _playerSkillMoveSpeed != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillAoeBullet != null) return;
+        if (_playerSkillCtrl != null  && _playerSkillMoveSpeed != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillAoeBullet != null && _playerSkillLightning != null) return;
         _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
         _playerSkillMoveSpeed = GetComponentInChildren<PlayerSkillMoveSpeed>();
         _playerSkillShootRange = GetComponentInChildren<PlayerSkillShootRange>();
@@ -32,6 +34,7 @@ public class PlayerSkillList : PISMonoBehaviour
         _playerSkillMultiShot = GetComponentInChildren<PlayerSkillMultiShot>();
         _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
         _playerSkillAoeBullet = GetComponentInChildren<PlayerSkillAoeBullet>();
+        _playerSkillLightning = GetComponentInChildren<PlayerSkillLightning>();
 
         if (_listAllPbSkills.Count == transform.childCount) return;
         foreach (Transform child in transform)

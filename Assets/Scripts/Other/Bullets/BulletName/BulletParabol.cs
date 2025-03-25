@@ -51,7 +51,7 @@ public class BulletParabol : BulletCtrlAbstract
 
     private void DespawnBulletParabol()
     {
-        SpawnMuzzleParabol();
+        SpawnHitParabol();
         PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
     }
 
@@ -60,7 +60,7 @@ public class BulletParabol : BulletCtrlAbstract
         _colliderAttack.enabled = true;
     }
 
-    private void SpawnMuzzleParabol()
+    private void SpawnHitParabol()
     {
         PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitParabol, transform.position, Quaternion.identity);
     }

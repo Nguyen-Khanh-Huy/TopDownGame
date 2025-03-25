@@ -10,6 +10,5 @@ public class PlayerSkillMultiShot : PlayerSkillAbstract
         base.Upgrade();
         if (MultiShotCount >= _levelSkill) return;
         MultiShotCount++;
-        Debug.Log("Skill Bullet Multi Shot");
     }
 }

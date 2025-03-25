@@ -37,5 +37,6 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
         _playerSkillCtr.PlayerSkillList.PlayerSkillMultiShot.MultiShotCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MultiShotCount;
         _playerSkillCtr.PlayerSkillList.PlayerSkillMultiDirection.MultiDirCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MultiDirCount;
         _playerSkillCtr.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.AoeBullet;
+        _playerSkillCtr.PlayerSkillList.PlayerSkillLightning.TimeLightning = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.TimeLightning;
     }
 }

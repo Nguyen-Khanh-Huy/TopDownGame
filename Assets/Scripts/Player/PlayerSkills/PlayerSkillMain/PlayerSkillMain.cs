@@ -5,7 +5,13 @@ using UnityEngine;
 public class PlayerSkillMain : PISMonoBehaviour
 {
     [SerializeField] private PlayerSkillsCtrl _playerSkillCtrl;
+    [SerializeField] private HitLightning _hitLightning;
     private int _shotCount = 0;
+
+    private void Start()
+    {
+        Invoke(nameof(CheckLvSkillLightning), _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning);
+    }
 
     public void SkillBulletMain()
     {
@@ -52,9 +58,22 @@ public class PlayerSkillMain : PISMonoBehaviour
         }
     }
 
+    private void CheckLvSkillLightning()
+    {
+        Invoke(nameof(CheckLvSkillLightning), _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning);
+        if (_playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.LevelSkill <= 1) return;
+        if (_playerSkillCtrl.PlayerCtrl.PlayerTarget.Target == null) return;
+        foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
+        {
+            Observer.Notify(ObserverID.EnemyTakeDmg, enemy);
+            PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitLightning, enemy.transform.position, Quaternion.identity);
+        }
+    }
+
     protected override void LoadComponents()
     {
-        if (_playerSkillCtrl != null) return;
+        if (_playerSkillCtrl != null && _hitLightning != null) return;
         _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
+        _hitLightning = Resources.Load<HitLightning>("Hits/HitLightning");
     }
 }

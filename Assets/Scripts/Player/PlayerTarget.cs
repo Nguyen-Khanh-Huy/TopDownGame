@@ -9,8 +9,9 @@ public class PlayerTarget : PISMonoBehaviour
     [SerializeField] private EnemyCtrlAbstract _target;
     [SerializeField] private List<EnemyCtrlAbstract> _listEnemyTarget;
 
-    public EnemyCtrlAbstract Target { get => _target; }
     public SphereCollider PlayerCollider { get => _playerCollider; set => _playerCollider = value; }
+    public EnemyCtrlAbstract Target { get => _target; }
+    public List<EnemyCtrlAbstract> ListEnemyTarget { get => _listEnemyTarget; }
 
     private void Update()
     {

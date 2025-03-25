@@ -97,5 +97,16 @@ public class UIPrbBtnSkill : PISMonoBehaviour
                 txtSkill.text = "Move Speed: +25%";
             }
         }
+        else if (playerSkill is PlayerSkillLightning)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "Every 5 seconds: Lightning strikes all enemies within attack range";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "Every 3 seconds: Lightning strikes all enemies within attack range";
+            }
+        }
     }
 }

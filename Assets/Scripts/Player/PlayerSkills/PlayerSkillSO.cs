@@ -15,4 +15,5 @@ public class PlayerSkillSO : ScriptableObject
     public int MultiShotCount;
     public int MultiDirCount;
     public int AoeBullet;
+    public int TimeLightning;
 }
