@@ -61,6 +61,7 @@ public class PlayerSkillMain : PISMonoBehaviour
     private void CheckLvSkillLightning()
     {
         Invoke(nameof(CheckLvSkillLightning), _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning);
+        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         if (_playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.LevelSkill <= 1) return;
         if (_playerSkillCtrl.PlayerCtrl.PlayerTarget.Target == null) return;
         foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
