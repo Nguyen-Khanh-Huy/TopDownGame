@@ -5,11 +5,16 @@ using UnityEngine;
 
 public abstract class PlayerSkillAbstract : PISMonoBehaviour
 {
-    [SerializeField] protected PlayerSkillsCtrl _playerSkillCtr;
+    [SerializeField] protected PlayerSkillsCtrl _playerSkillCtrl;
     [SerializeField] protected int _levelSkill;
     [SerializeField] protected int _maxLevel;
 
     public int LevelSkill { get => _levelSkill; }
+
+    private void OnEnable()
+    {
+        Init();
+    }
 
     public virtual void Upgrade()
     {
@@ -18,25 +23,20 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
         // For Override
     }
 
+    private void Init()
+    {
+        _levelSkill = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.LevelSkill;
+        _maxLevel = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MaxLevel;
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillMultiShot.MultiShotCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MultiShotCount;
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillMultiDirection.MultiDirCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MultiDirCount;
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.AoeBullet;
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeLightning;
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.SpinBallCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.SpinBallCount;
+    }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillCtr != null) return;
-        _playerSkillCtr = GetComponentInParent<PlayerSkillsCtrl>();
-    }
-
-    private void OnEnable()
-    {
-        Init();
-    }
-
-    private void Init()
-    {
-        _levelSkill = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.LevelSkill;
-        _maxLevel = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MaxLevel;
-        _playerSkillCtr.PlayerSkillList.PlayerSkillMultiShot.MultiShotCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MultiShotCount;
-        _playerSkillCtr.PlayerSkillList.PlayerSkillMultiDirection.MultiDirCount = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.MultiDirCount;
-        _playerSkillCtr.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.AoeBullet;
-        _playerSkillCtr.PlayerSkillList.PlayerSkillLightning.TimeLightning = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.TimeLightning;
+        if (_playerSkillCtrl != null) return;
+        _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
     }
 }

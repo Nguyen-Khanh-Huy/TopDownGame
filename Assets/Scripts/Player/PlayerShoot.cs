@@ -19,7 +19,8 @@ public class PlayerShoot : PISMonoBehaviour
 
     private void Start()
     {
-        Invoke(nameof(FireBullet), _shootSpeed);
+        //Invoke(nameof(FireBullet), _shootSpeed);
+        FireBullet();
     }
 
     private void FireBullet()

@@ -5,16 +5,12 @@ using UnityEngine;
 public class PlayerSkillMain : PISMonoBehaviour
 {
     [SerializeField] private PlayerSkillsCtrl _playerSkillCtrl;
-    [SerializeField] private HitLightning _hitLightning;
+    
     private int _shotCount = 0;
-
-    private void Start()
-    {
-        Invoke(nameof(CheckLvSkillLightning), _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning);
-    }
 
     public void SkillBulletMain()
     {
+        CancelInvoke(nameof(StartShooting));
         _shotCount = 0;
         StartShooting();
     }
@@ -27,12 +23,6 @@ public class PlayerSkillMain : PISMonoBehaviour
 
         _shotCount++;
         Invoke(nameof(StartShooting), 0.2f);
-    }
-
-    private void ShootBullet(float angle)
-    {
-        Quaternion bulletRotation = Quaternion.Euler(0, angle, 0) * _playerSkillCtrl.transform.rotation;
-        PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerSkillCtrl.PlayerSkillList.GetBullet(), _playerSkillCtrl.PlayerCtrl.FirePoint.position, bulletRotation);
     }
 
     private void CheckLvSkillMultiDirection()
@@ -57,24 +47,16 @@ public class PlayerSkillMain : PISMonoBehaviour
                 break;
         }
     }
-
-    private void CheckLvSkillLightning()
+    private void ShootBullet(float angle)
     {
-        Invoke(nameof(CheckLvSkillLightning), _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning);
-        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
-        if (_playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.LevelSkill <= 1) return;
-        if (_playerSkillCtrl.PlayerCtrl.PlayerTarget.Target == null) return;
-        foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
-        {
-            Observer.Notify(ObserverID.EnemyTakeDmg, enemy);
-            PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitLightning, enemy.transform.position, Quaternion.identity);
-        }
+        Quaternion bulletRotation = Quaternion.Euler(0, angle, 0) * _playerSkillCtrl.transform.rotation;
+        PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerSkillCtrl.PlayerSkillList.GetBullet(), _playerSkillCtrl.PlayerCtrl.FirePoint.position, bulletRotation);
     }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillCtrl != null && _hitLightning != null) return;
+        if (_playerSkillCtrl != null) return;
         _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
-        _hitLightning = Resources.Load<HitLightning>("Hits/HitLightning");
+        
     }
 }

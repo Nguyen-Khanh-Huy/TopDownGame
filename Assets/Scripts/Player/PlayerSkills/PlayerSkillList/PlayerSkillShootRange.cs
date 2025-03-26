@@ -13,23 +13,24 @@ public class PlayerSkillShootRange : PlayerSkillAbstract
     public void CheckLevelShootRange()
     {
         if (_levelSkill < 2 || _levelSkill > 3) return;
-        float SO = _playerSkillCtr.PlayerCtrl.PlayerSkillSO.ShootRange;
+        float SO = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.ShootRange;
         if (_levelSkill == 2)
         {
-            _playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius = SO + (SO * 0.10f);
+            _playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius = SO + (SO * 0.10f);
             ChangePlayerSpriteAttackRange();
         }
         else if (_levelSkill == 3)
         {
-            _playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius = SO + (SO * 0.20f);
+            _playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius = SO + (SO * 0.20f);
             ChangePlayerSpriteAttackRange();
         }
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.UpdateBallPos();
     }
 
     private void ChangePlayerSpriteAttackRange()
     {
-        _playerSkillCtr.PlayerCtrl.PlayerSpriteAttackRange.transform.localScale =
-                new Vector3(_playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f,
-                            _playerSkillCtr.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f, 1);
+        _playerSkillCtrl.PlayerCtrl.PlayerSpriteAttackRange.transform.localScale =
+                new Vector3(_playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f,
+                            _playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f, 1);
     }
 }

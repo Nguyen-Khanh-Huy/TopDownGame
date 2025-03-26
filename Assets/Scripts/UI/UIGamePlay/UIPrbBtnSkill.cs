@@ -108,5 +108,16 @@ public class UIPrbBtnSkill : PISMonoBehaviour
                 txtSkill.text = "Every 3 seconds: Lightning strikes all enemies within attack range";
             }
         }
+        else if (playerSkill is PlayerSkillSpinBall)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "+3 Fireballs: Spin around you and damage Enemies";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "+5 Fireballs: Spin around you and damage Enemies";
+            }
+        }
     }
 }
