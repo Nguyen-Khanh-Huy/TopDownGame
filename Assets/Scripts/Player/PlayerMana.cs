@@ -21,7 +21,7 @@ public class PlayerMana : PISMonoBehaviour
 
     public void AddMana()
     {
-        if (_curLevel < 1 || _curLevel >= 10) return;
+        if (_curLevel < 1 || _curLevel >= 12) return;
         _curMana++;
         if (_curMana >= _manaNextLevel)
         {

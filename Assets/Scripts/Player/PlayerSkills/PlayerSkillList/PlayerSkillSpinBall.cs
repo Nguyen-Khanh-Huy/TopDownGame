@@ -8,15 +8,16 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
     [SerializeField] private float _speed = 120f;
     [SerializeField] private Transform _spinBallRotation;
     [SerializeField] private List<SpinBall> _listBallSpin = new();
+
     private void Update()
     {
-        if (_levelSkill < 2 || _levelSkill > 3) return;
         _spinBallRotation.position = _playerSkillCtrl.PlayerCtrl.transform.position;
-        foreach (SpinBall ball in _listBallSpin)
-        {
-            if (ball.gameObject.activeSelf)
-                ball.transform.RotateAround(_spinBallRotation.position, Vector3.up, _speed * Time.deltaTime);
-        }
+        //if (_levelSkill != 2 && _levelSkill != 3) return;
+        //foreach (SpinBall ball in _listBallSpin)
+        //{
+        //    if (ball.gameObject.activeSelf)
+        //        ball.transform.RotateAround(_spinBallRotation.position, Vector3.up, _speed * Time.deltaTime);
+        //}
     }
 
     public override void Upgrade()
@@ -29,7 +30,7 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
 
     public void UpdateBallPos()
     {
-        float angleStep = (SpinBallCount == 3) ? 120f : 72f;
+        float angleStep = 360f / SpinBallCount;
         float radius = _playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius / 2.5f;
         for (int i = 0; i < _listBallSpin.Count; i++)
         {
@@ -39,6 +40,7 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
                 float angle = Mathf.Deg2Rad * (angleStep * i);
                 Vector3 offset = new Vector3(Mathf.Cos(angle), 0.2f, Mathf.Sin(angle)) * radius;
                 _listBallSpin[i].transform.position = _playerSkillCtrl.PlayerCtrl.transform.position + offset;
+                _listBallSpin[i].Spin(_spinBallRotation, _speed);
             }
         }
     }
@@ -49,6 +51,7 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
         if (_spinBallRotation != null && _listBallSpin.Count > 0) return;
         _spinBallRotation = GameObject.Find("SpinBalls").GetComponent<Transform>();
 
+        _listBallSpin.Clear();
         foreach (Transform child in _spinBallRotation)
         {
             SpinBall ball = child.GetComponent<SpinBall>();

@@ -24,7 +24,7 @@ public class PlayerSkillShootRange : PlayerSkillAbstract
             _playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius = SO + (SO * 0.20f);
             ChangePlayerSpriteAttackRange();
         }
-        _playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.UpdateBallPos();
+        CheckLvSkillSpinBall();
     }
 
     private void ChangePlayerSpriteAttackRange()
@@ -32,5 +32,11 @@ public class PlayerSkillShootRange : PlayerSkillAbstract
         _playerSkillCtrl.PlayerCtrl.PlayerSpriteAttackRange.transform.localScale =
                 new Vector3(_playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f,
                             _playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius * 1.5f, 1);
+    }
+
+    private void CheckLvSkillSpinBall()
+    {
+        if (_playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.LevelSkill > 1)
+            _playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.UpdateBallPos();
     }
 }
