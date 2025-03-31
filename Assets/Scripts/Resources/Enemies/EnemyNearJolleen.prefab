@@ -563,6 +563,7 @@ MonoBehaviour:
   _enemyFlashingEffect: {fileID: 2206924418056577851}
   _enemySO: {fileID: 11400000, guid: d62987b9915ceb540afb987351306f27, type: 2}
   _anim: {fileID: 610710989345930290}
+  _col: {fileID: 0}
   _agent: {fileID: 7268034290586557352}
   _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 2852349640754489970}
@@ -1359,8 +1360,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCtrl: {fileID: 8778607339776674792}
-  _renderer: {fileID: 4565380434356524840}
-  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _renderer:
+  - {fileID: 4565380434356524840}
   _timeFlashing: 0.5
   _timeInterval: 0.1
 --- !u!1 &4444687699850189391

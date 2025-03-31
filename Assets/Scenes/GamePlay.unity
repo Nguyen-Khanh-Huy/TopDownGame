@@ -34560,8 +34560,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCtrl: {fileID: 7716110805310749577}
-  _renderer: {fileID: 3303253365060205492}
-  _defaultColor: {r: 1, g: 1, b: 1, a: 1}
+  _renderer:
+  - {fileID: 3303253365060205492}
+  - {fileID: 6263856997490768863}
+  - {fileID: 7306300900511166415}
+  - {fileID: 775742958377907632}
+  - {fileID: 2934414441993593214}
+  - {fileID: 3530039567801282206}
+  - {fileID: 5981462717376612132}
+  - {fileID: 3590037057612815597}
   _timeFlashing: 0.5
   _timeInterval: 0.1
 --- !u!1 &1750748000
@@ -42964,7 +42971,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &741080674756649620
 Transform:
   m_ObjectHideFlags: 0

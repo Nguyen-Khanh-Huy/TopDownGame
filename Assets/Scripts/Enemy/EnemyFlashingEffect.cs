@@ -1,11 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class EnemyFlashingEffect : PISMonoBehaviour
 {
     [SerializeField] private EnemyCtrlAbstract _enemyCtrl;
-    [SerializeField] private Renderer _renderer;
-    [SerializeField] private Color _defaultColor;
+    [SerializeField] private Renderer[] _renderer;
+    [SerializeField] private MaterialPropertyBlock _propertyBlock;
 
     [SerializeField] private float _timeFlashing = 0.5f;
     [SerializeField] private float _timeInterval = 0.1f;
@@ -25,6 +26,8 @@ public class EnemyFlashingEffect : PISMonoBehaviour
     private IEnumerator Flashing()
     {
         float timeCount = 0f;
+        bool toggle = true;
+
         while (timeCount < _timeFlashing)
         {
             if (_enemyCtrl.Hp <= 0)
@@ -33,32 +36,39 @@ public class EnemyFlashingEffect : PISMonoBehaviour
                 yield break;
             }
 
-            SetColor(Color.red);
-            yield return new WaitForSeconds(_timeInterval);
+            SetColor(toggle ? Color.red : Color.white);
+            toggle = !toggle;
 
-            SetColor(Color.white);
             yield return new WaitForSeconds(_timeInterval);
-
-            timeCount += _timeInterval * 2;
+            timeCount += _timeInterval;
         }
+
         ResetColor();
     }
 
-    private void SetColor(Color color)
+    private void ApplyColor(Color color)
     {
-        _renderer.material.color = color;
+        _propertyBlock ??= new MaterialPropertyBlock();
+
+        foreach (var renderer in _renderer)
+        {
+            if (renderer == null) continue;
+
+            renderer.GetPropertyBlock(_propertyBlock);
+            _propertyBlock.SetColor("_Color", color);
+            renderer.SetPropertyBlock(_propertyBlock);
+        }
     }
 
-    private void ResetColor()
-    {
-        _renderer.material.color = _defaultColor;
-    }
+    private void SetColor(Color color) => ApplyColor(color);
+    private void ResetColor() => ApplyColor(Color.white);
 
     protected override void LoadComponents()
     {
-        if (_enemyCtrl != null && _renderer != null && _defaultColor != null) return;
+        if (_enemyCtrl != null && _renderer.Length > 0) return;
         _enemyCtrl = GetComponentInParent<EnemyCtrlAbstract>();
-        _renderer = transform.parent.GetComponentInChildren<Renderer>();
-        _defaultColor = _renderer.sharedMaterial.color;
+        //_renderer = transform.parent.GetComponentInChildren<Renderer>();
+        //_defaultColor = _renderer.sharedMaterial.color;
+        _renderer = transform.parent.Find("Model").GetComponentsInChildren<Renderer>();
     }
 }
