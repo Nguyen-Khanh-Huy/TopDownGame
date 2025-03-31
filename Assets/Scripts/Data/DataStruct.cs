@@ -16,13 +16,19 @@ public enum EnemyState
     Dying
 }
 
+public enum EnemyBossState
+{
+
+    Idle,
+    Walk,
+    AttackDash,
+    AttackRain,
+    AttackLaser,
+    Dying
+}
+
 public enum ObserverID
 {
     PlayerTakeDmg,
-    EnemyTakeDmg,
-    PlayerSkill1,
-    PlayerSkill2,
-    PlayerSkill3,
-    PlayerSkill4,
-    PlayerSkill5
+    EnemyTakeDmg
 }

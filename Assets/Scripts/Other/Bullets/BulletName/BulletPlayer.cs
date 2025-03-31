@@ -7,8 +7,9 @@ public class BulletPlayer : BulletCtrlAbstract
     [SerializeField] private float _speedBullet = 10f;
     [SerializeField] private float _despawnByTime = 2f;
 
-    private void Update()
+    protected override void Update()
     {
+        base.Update();
         BulletMoving();
         BulletRayCast();
     }

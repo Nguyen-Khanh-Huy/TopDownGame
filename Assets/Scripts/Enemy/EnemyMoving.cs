@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class EnemyMoving : PISMonoBehaviour
 {
-    [SerializeField] private EnemyCtrlAbstract _enemyCtrl;
-    [SerializeField] private float _distance;
-    [SerializeField] private bool _isMoving;
+    [SerializeField] protected EnemyCtrlAbstract _enemyCtrl;
+    [SerializeField] protected float _distance;
+    [SerializeField] protected bool _isMoving;
 
     public bool IsMoving { get => _isMoving; }
 
     private void Start()
     {
-        CheckEnemy();
+        CheckEnemyType();
     }
 
     private void Update()
@@ -21,34 +21,32 @@ public class EnemyMoving : PISMonoBehaviour
         LookAtTarget();
     }
 
-    private void LookAtTarget()
+    protected virtual void LookAtTarget()
     {
-        if (_enemyCtrl.EnemyAttack.CurState == EnemyState.Dying) return;
+        if (_enemyCtrl.Hp <= 0) return;
         Vector3 targetPosition = _enemyCtrl.PlayerCtrl.transform.position;
         targetPosition.y = _enemyCtrl.transform.position.y;
         _enemyCtrl.transform.LookAt(targetPosition);
     }
 
-    private void EnemyMove()
+    protected virtual void EnemyMove()
     {
         _enemyCtrl.Agent.SetDestination(_enemyCtrl.PlayerCtrl.transform.position);
         float checkDistance = Vector3.Distance(_enemyCtrl.PlayerCtrl.transform.position, _enemyCtrl.transform.position);
         _isMoving = checkDistance > _distance;
 
-        bool shouldStop = (_enemyCtrl.EnemyAttack.CurState == EnemyState.Idle
+        bool shouldStop = (_enemyCtrl.Anim.speed == 0
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying);
 
         _enemyCtrl.Agent.isStopped = shouldStop || !_isMoving;
     }
 
-    private void CheckEnemy()
+    private void CheckEnemyType()
     {
-        if (GetComponentInParent<EnemyNearCtrlAbstract>() != null)
-            _distance = 1f;
-        else
-            _distance = 6f;
+        _distance = GetComponentInParent<EnemyNearCtrlAbstract>() != null ? 1f : 6f;
     }
+
     protected override void LoadComponents()
     {
         if (_enemyCtrl != null) return;

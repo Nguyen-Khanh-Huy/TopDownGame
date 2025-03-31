@@ -23,7 +23,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void Start()
     {
-        Invoke(nameof(SpawnEnemy), _spawnSpeed);
+        SpawnEnemy();
     }
 
     private void SpawnEnemy()

@@ -13,7 +13,6 @@ public class EnemyDespawn : PISMonoBehaviour
     {
         if (_enemyAbstract != null) return;
         _enemyAbstract = GetComponentInParent<EnemyCtrlAbstract>();
-        Debug.Log("Load: " + transform.name);
     }
 
     private void FixedUpdate()

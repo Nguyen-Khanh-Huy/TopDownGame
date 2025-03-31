@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnemyAttack : PISMonoBehaviour
 {
-    [SerializeField] private EnemyCtrlAbstract _enemyCtrl;
-    [SerializeField] private EnemyState _curState;
+    [SerializeField] protected EnemyCtrlAbstract _enemyCtrl;
+    [SerializeField] protected EnemyState _curState;
     [SerializeField] protected float _timeAttack;
     protected float _timeCount;
 
@@ -14,30 +14,24 @@ public class EnemyAttack : PISMonoBehaviour
 
     private void Update()
     {
+        _enemyCtrl.Anim.speed = UIGamePlayManager.Ins.CheckPlayTime ? 1 : 0;
+        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         Attack();
     }
 
-    public void ChangeState(EnemyState newState)
+    private void ChangeState(EnemyState newState)
     {
-        if (_curState != newState)
-        {
-            _curState = newState;
-            _enemyCtrl.Anim.SetInteger("State", (int)newState);
-        }
+        if (_curState == newState) return;
+        _curState = newState;
+        _enemyCtrl.Anim.SetInteger("State", (int)newState);
     }
 
-    private void Attack()
+    protected virtual void Attack()
     {
         AnimatorStateInfo stateInfo = _enemyCtrl.Anim.GetCurrentAnimatorStateInfo(0);
         if (_enemyCtrl.Hp <= 0)
         {
             ChangeState(EnemyState.Dying);
-            return;
-        }
-
-        if (!UIGamePlayManager.Ins.CheckPlayTime)
-        {
-            ChangeState(EnemyState.Idle);
             return;
         }
 

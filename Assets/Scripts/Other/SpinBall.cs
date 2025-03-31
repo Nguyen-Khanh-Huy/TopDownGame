@@ -36,7 +36,8 @@ public class SpinBall : MonoBehaviour
     {
         while (gameObject.activeSelf)
         {
-            transform.RotateAround(spinBallRotation.position, Vector3.up, speed * Time.deltaTime);
+            if (UIGamePlayManager.Ins.CheckPlayTime)
+                transform.RotateAround(spinBallRotation.position, Vector3.up, speed * Time.deltaTime);
             yield return null;
         }
         _spinCoroutine = null;
