@@ -6,11 +6,11 @@ using UnityEngine;
 public class EnemyAttack : PISMonoBehaviour
 {
     [SerializeField] protected EnemyCtrlAbstract _enemyCtrl;
-    [SerializeField] protected EnemyState _curState;
+    [SerializeField] protected EnemyState _curEnemyState;
     [SerializeField] protected float _timeAttack;
     protected float _timeCount;
 
-    public EnemyState CurState { get => _curState; }
+    public EnemyState CurState { get => _curEnemyState; }
 
     private void Update()
     {
@@ -21,8 +21,8 @@ public class EnemyAttack : PISMonoBehaviour
 
     private void ChangeState(EnemyState newState)
     {
-        if (_curState == newState) return;
-        _curState = newState;
+        if (_curEnemyState == newState) return;
+        _curEnemyState = newState;
         _enemyCtrl.Anim.SetInteger("State", (int)newState);
     }
 
@@ -35,9 +35,9 @@ public class EnemyAttack : PISMonoBehaviour
             return;
         }
 
-        if (_curState == EnemyState.Attack)
+        if (_curEnemyState == EnemyState.Attack)
         {
-            if (stateInfo.IsName(_curState.ToString()) && stateInfo.normalizedTime >= 1f)
+            if (stateInfo.IsName(_curEnemyState.ToString()) && stateInfo.normalizedTime >= 1f)
                 ChangeState(_enemyCtrl.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
             return;
         }

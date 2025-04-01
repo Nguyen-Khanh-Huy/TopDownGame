@@ -19,8 +19,26 @@ public abstract class EnemyBossCtrlAbstract : EnemyCtrlAbstract
         base.OnEnable();
     }
 
-    public void EventAttackDash()
+    public void EventOnAttackDash()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsDash = true;
+        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackDash = true;
+        _enemyAttack.GetComponent<EnemyBossAttack>().IsSpawnVfxDash = false;
+    }
+    public void EventOffAttackDash()
+    {
+        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackDash = false;
+        _enemyAttack.GetComponent<EnemyBossAttack>().StopAttackDash();
+    }
+
+    //------------------------------------------------------------------------
+
+    public void EventOnAttackRain()
+    {
+        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackRain = true;
+    }
+    public void EventOFFAttackRain()
+    {
+        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackRain = false;
+        _enemyAttack.GetComponent<EnemyBossAttack>().ResetInforAttackRain();
     }
 }

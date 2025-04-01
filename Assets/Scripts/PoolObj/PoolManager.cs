@@ -45,9 +45,23 @@ public abstract class PoolManager<T> : Singleton<PoolManager<T>> where T : PoolO
 
     public virtual void Despawn(T prefab)
     {
-        if (_listPool.Contains(prefab) && prefab == null) return;
+        if (_listPool.Contains(prefab) || prefab == null) return;
         prefab.gameObject.SetActive(false);
         AddObjToPool(prefab);
+    }
+
+    public virtual void DespawnAll(T prefab, string parentName)
+    {
+        T[] allObjects = GameObject.Find(parentName).GetComponentsInChildren<T>();
+        if (allObjects == null) return;
+        foreach (T obj in allObjects)
+        {
+            if (obj.gameObject.activeSelf && !_listPool.Contains(obj))
+            {
+                obj.gameObject.SetActive(false);
+                AddObjToPool(obj);
+            }
+        }
     }
 
     public virtual void UpdateName(T prefab, T newObject)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public abstract class EffectCtrlAbstract : PoolObj<EffectCtrlAbstract>
 {
-    private void OnEnable()
+    protected virtual void OnEnable()
     {
         Invoke(nameof(DespawnEffect), 0.5f);
     }
@@ -14,7 +14,7 @@ public abstract class EffectCtrlAbstract : PoolObj<EffectCtrlAbstract>
         CancelInvoke(nameof(DespawnEffect));
     }
 
-    private void DespawnEffect()
+    protected void DespawnEffect()
     {
         PoolManager<EffectCtrlAbstract>.Ins.Despawn(this);
     }
