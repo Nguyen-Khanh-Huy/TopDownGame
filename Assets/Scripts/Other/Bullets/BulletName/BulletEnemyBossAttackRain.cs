@@ -13,6 +13,15 @@ public class BulletEnemyBossAttackRain : BulletCtrlAbstract
         PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            Observer.Notify(ObserverID.PlayerTakeDmg);
+        }
+    }
+
     public override string GetName()
     {
         return "BulletEnemyBossAttackRain";

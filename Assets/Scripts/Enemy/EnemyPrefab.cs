@@ -7,6 +7,7 @@ public class EnemyPrefab : PISMonoBehaviour
     [SerializeField] private List<EnemyCtrlAbstract> _listEnemyPrefabs = new();
     [SerializeField] private List<EnemyNearCtrlAbstract> _listEnemyNear = new();
     [SerializeField] private List<EnemyLongCtrlAbstract> _listEnemyLong = new();
+    [SerializeField] private List<EnemyBossCtrlAbstract> _listEnemyBoss = new();
 
     protected override void LoadComponents()
     {
@@ -16,23 +17,20 @@ public class EnemyPrefab : PISMonoBehaviour
         foreach (EnemyCtrlAbstract enemyPrefab in enemyPrefabs)
         {
             if (enemyPrefab != null)
-            {
                 _listEnemyPrefabs.Add(enemyPrefab);
-            }
         }
 
         _listEnemyNear.Clear();
         _listEnemyLong.Clear();
+        _listEnemyBoss.Clear();
         foreach (EnemyCtrlAbstract enemyPrefab in _listEnemyPrefabs)
         {
             if (enemyPrefab is EnemyNearCtrlAbstract enemyNear)
-            {
                 _listEnemyNear.Add(enemyNear);
-            }
             else if (enemyPrefab is EnemyLongCtrlAbstract enemyLong)
-            {
                 _listEnemyLong.Add(enemyLong);
-            }
+            else if (enemyPrefab is EnemyBossCtrlAbstract enemyBoss)
+                _listEnemyBoss.Add(enemyBoss);
         }
     }
 
@@ -46,5 +44,10 @@ public class EnemyPrefab : PISMonoBehaviour
     {
         int rd = Random.Range(0, _listEnemyLong.Count);
         return _listEnemyLong[rd];
+    }
+
+    public EnemyBossCtrlAbstract GetEnemyBoss()
+    {
+        return _listEnemyBoss[0];
     }
 }

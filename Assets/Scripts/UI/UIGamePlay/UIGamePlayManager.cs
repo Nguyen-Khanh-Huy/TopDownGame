@@ -21,6 +21,8 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
     public bool CheckPlayTime;
     private float _gamePlayTime = 0f;
 
+    public float GamePlayTime { get => _gamePlayTime; }
+
     private void OnEnable()
     {
         Init();

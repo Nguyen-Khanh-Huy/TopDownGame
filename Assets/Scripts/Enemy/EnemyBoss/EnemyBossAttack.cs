@@ -2,8 +2,10 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.EventSystems.EventTrigger;
 
 public class EnemyBossAttack : EnemyAttack
 {
@@ -81,9 +83,10 @@ public class EnemyBossAttack : EnemyAttack
         else if (_timeCount >= _timeAttack)
         {
             _timeCount = 0;
-            //GetRandomAttack();
+
+            GetRandomAttack();
             //ChangeState(EnemyBossState.AttackDash);
-            ChangeState(EnemyBossState.AttackRain);
+            //ChangeState(EnemyBossState.AttackRain);
             //ChangeState(EnemyBossState.AttackLaser);
         }
         else
@@ -96,13 +99,13 @@ public class EnemyBossAttack : EnemyAttack
     private void ResetInforAttackDash()
     {
         _isSpawnVfxDash = false;
-        _enemyCtrl.Col.radius = 0.3f;
+        _enemyCtrl.Col.radius = 0.4f;
     }
 
     public void StopAttackDash()
     {
         _isSpawnVfxDash = false;
-        _enemyCtrl.Col.radius = 0.3f;
+        _enemyCtrl.Col.radius = 0.4f;
         PoolManager<EffectCtrlAbstract>.Ins.Despawn(transform.GetComponentInChildren<EffectCtrlAbstract>());
         PoolManager<EffectCtrlAbstract>.Ins.Spawn(_vfxSmokeAttackDash, _enemyCtrl.transform.position + new Vector3(0f, 0.1f, 0f), Quaternion.Euler(90f, 0f, 0f));
     }
@@ -123,10 +126,10 @@ public class EnemyBossAttack : EnemyAttack
                 _isSpawnVfxDash = true;
             }
             _enemyCtrl.transform.Translate(8f * Time.deltaTime * Vector3.forward);
-            if (Physics.Raycast(_enemyCtrl.transform.position + Vector3.up + _enemyCtrl.transform.forward, _enemyCtrl.transform.forward, 0.5f, LayerMask.GetMask("BG")))
+            if (Physics.Raycast(_enemyCtrl.transform.position + Vector3.up + _enemyCtrl.transform.forward, _enemyCtrl.transform.forward, 0.2f, LayerMask.GetMask("BG")))
             {
-                StopAttackDash();
                 ChangeState(_enemyCtrl.EnemyMoving.IsMoving ? EnemyBossState.Walk : EnemyBossState.Idle);
+                StopAttackDash();
                 _isAttackDash = false;
             }
         }
@@ -172,12 +175,15 @@ public class EnemyBossAttack : EnemyAttack
 
     private void GetRandomAttack()
     {
-        List<EnemyBossState> attackStates = new() { EnemyBossState.AttackDash, EnemyBossState.AttackRain, EnemyBossState.AttackLaser };
-        if (attackStates.Contains(_prevBossState))
-        {
-            attackStates.Remove(_prevBossState);
-        }
-        EnemyBossState newAttack = attackStates[UnityEngine.Random.Range(0, attackStates.Count)];
+        List<EnemyBossState> listAttack = new() { EnemyBossState.AttackDash, EnemyBossState.AttackRain, EnemyBossState.AttackLaser };
+        if (listAttack.Contains(_prevBossState))
+            listAttack.Remove(_prevBossState);
+
+        float distance = Vector3.Distance(_enemyCtrl.PlayerCtrl.transform.position, _enemyCtrl.transform.position);
+        if (Physics.Raycast(_enemyCtrl.transform.position + Vector3.up + _enemyCtrl.transform.forward, _enemyCtrl.transform.forward, distance, LayerMask.GetMask("BG")))
+            listAttack.Remove(EnemyBossState.AttackDash);
+
+        EnemyBossState newAttack = listAttack[UnityEngine.Random.Range(0, listAttack.Count)];
         ChangeState(newAttack);
         _prevBossState = _curBossState;
     }

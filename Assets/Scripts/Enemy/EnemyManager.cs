@@ -6,12 +6,15 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private EnemyPrefab _enemyPrefab;
-    [SerializeField] private int _maxEnemyNear;
-    [SerializeField] private int _maxEnemyLong;
+    [SerializeField] private int _maxEnemyNear = 15;
+    [SerializeField] private int _maxEnemyLong = 5;
     [SerializeField] private float _spawnSpeed = 2f;
     [SerializeField] private List<EnemyNearCtrlAbstract> _listEnemyNearSpawn = new();
     [SerializeField] private List<EnemyLongCtrlAbstract> _listEnemyLongSpawn = new();
     [SerializeField] private List<Vector3> _listPosSpawn = new();
+
+    private int _lastUpdateTime = 0;
+    private bool _isSpawnBoss;
 
     public List<EnemyNearCtrlAbstract> ListEnemyNearSpawn { get => _listEnemyNearSpawn; set => _listEnemyNearSpawn = value; }
     public List<EnemyLongCtrlAbstract> ListEnemyLongSpawn { get => _listEnemyLongSpawn; set => _listEnemyLongSpawn = value; }
@@ -23,14 +26,15 @@ public class EnemyManager : Singleton<EnemyManager>
 
     private void Start()
     {
+        InvokeRepeating(nameof(QuantityOverTime), 1f, 1f);
         SpawnEnemy();
     }
 
     private void SpawnEnemy()
     {
         Invoke(nameof(SpawnEnemy), _spawnSpeed);
-
         if (!UIGamePlayManager.Ins.CheckPlayTime) return;
+        if (_isSpawnBoss) return;
 
         if (_listEnemyNearSpawn.Count < _maxEnemyNear)
         {
@@ -42,6 +46,42 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             EnemyCtrlAbstract newEnemyLong = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyLong(), GetVector3ForSpawn(), Quaternion.identity);
             _listEnemyLongSpawn.Add((EnemyLongCtrlAbstract)newEnemyLong);
+        }
+
+        if (UIGamePlayManager.Ins.GamePlayTime >= 300f && !_isSpawnBoss)
+        {
+            _isSpawnBoss = true;
+            EnemyCtrlAbstract newEnemyBoss = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyBoss(), GetVector3ForSpawn(), Quaternion.identity);
+        }
+    }
+
+    private void QuantityOverTime()
+    {
+        float time = UIGamePlayManager.Ins.GamePlayTime;
+
+        if (time >= 240 && _lastUpdateTime < 240)
+        {
+            _maxEnemyNear++;
+            _maxEnemyLong++;
+            _lastUpdateTime = 240;
+        }
+        else if (time >= 180 && _lastUpdateTime < 180)
+        {
+            _maxEnemyNear++;
+            _maxEnemyLong++;
+            _lastUpdateTime = 180;
+        }
+        else if (time >= 120 && _lastUpdateTime < 120)
+        {
+            _maxEnemyNear++;
+            _maxEnemyLong++;
+            _lastUpdateTime = 120;
+        }
+        else if (time >= 60 && _lastUpdateTime < 60)
+        {
+            _maxEnemyNear++;
+            _maxEnemyLong++;
+            _lastUpdateTime = 60;
         }
     }
 
