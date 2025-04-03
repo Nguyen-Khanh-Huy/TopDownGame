@@ -50,6 +50,16 @@ public class EnemyBossAttack : EnemyAttack
         ResetInforAttackRain();
         ResetInforAttackLaser();
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        PlayerController player = other.GetComponent<PlayerController>();
+        if (player != null)
+        {
+            Observer.Notify(ObserverID.PlayerTakeDmg);
+        }
+    }
+
     private void ChangeState(EnemyBossState newState)
     {
         if (_curBossState == newState) return;
@@ -223,6 +233,8 @@ public class EnemyBossAttack : EnemyAttack
         ChangeState(newAttack);
         _prevBossState = _curBossState;
     }
+
+    
 
     protected override void LoadComponents()
     {

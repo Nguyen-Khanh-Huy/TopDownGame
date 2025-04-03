@@ -36,6 +36,7 @@ public class EnemyMoving : PISMonoBehaviour
         _isMoving = checkDistance > _distance;
 
         bool shouldStop = (_enemyCtrl.Anim.speed == 0
+                        || _enemyCtrl.EnemyAttack.CurState == EnemyState.Idle
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying);
 

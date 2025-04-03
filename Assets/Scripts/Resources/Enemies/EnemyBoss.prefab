@@ -9038,8 +9038,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651875098428318246}
-  - component: {fileID: 2313377010395847741}
   - component: {fileID: 1866428612385085969}
+  - component: {fileID: 2313377010395847741}
   m_Layer: 0
   m_Name: EnemyBossAttack
   m_TagString: Untagged
@@ -9064,6 +9064,29 @@ Transform:
   - {fileID: 835284150073538061}
   m_Father: {fileID: 2129348814022617520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &1866428612385085969
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8780799883041637777}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.48
+  m_Height: 8.2
+  m_Direction: 2
+  m_Center: {x: 0, y: 1.23, z: 4.6}
 --- !u!114 &2313377010395847741
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9094,32 +9117,10 @@ MonoBehaviour:
   _bulletAttackRain: {fileID: 3303553291880654200, guid: 2005c6611a4a1a042832d4613f9bc049, type: 3}
   _vfxWarningRain: {fileID: 2701845206840169199, guid: 6934fed9310d466409806f5f99cf0552, type: 3}
   _isAttackLaser: 0
+  _isSpawnVfxLaser: 0
   _vfxLaser: {fileID: 8503474875730172768, guid: f8228eb54e3295b4db765359c6d84d52, type: 3}
   _colAttackLaser: {fileID: 1866428612385085969}
   _pointAttackLaser: {fileID: 835284150073538061}
---- !u!136 &1866428612385085969
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8780799883041637777}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.48
-  m_Height: 8.2
-  m_Direction: 2
-  m_Center: {x: 0, y: 1.23, z: 4.6}
 --- !u!1 &8815213719293093446
 GameObject:
   m_ObjectHideFlags: 0
