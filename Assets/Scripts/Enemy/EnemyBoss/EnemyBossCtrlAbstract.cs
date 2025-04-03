@@ -22,7 +22,6 @@ public abstract class EnemyBossCtrlAbstract : EnemyCtrlAbstract
     public void EventOnAttackDash()
     {
         _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackDash = true;
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsSpawnVfxDash = false;
     }
     public void EventOffAttackDash()
     {
@@ -40,5 +39,17 @@ public abstract class EnemyBossCtrlAbstract : EnemyCtrlAbstract
     {
         _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackRain = false;
         _enemyAttack.GetComponent<EnemyBossAttack>().ResetInforAttackRain();
+    }
+
+    //------------------------------------------------------------------------
+
+    public void EventOnAttackLaser()
+    {
+        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackLaser = true;
+    }
+    public void EventOFFAttackLaser()
+    {
+        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackLaser = false;
+        _enemyAttack.GetComponent<EnemyBossAttack>().StopAttackLaser();
     }
 }
