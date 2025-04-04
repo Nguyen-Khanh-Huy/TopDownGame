@@ -14,7 +14,7 @@ public class EnemyBossAttack : EnemyAttack
     [SerializeField] private VFXDashEnemyBossAttackDash _vfxDash;
     [SerializeField] private VFXSmokeEnemyBossAttackDash _vfxSmokeAttackDash;
     [SerializeField] private Transform _pointAttackDash;
-    private Dictionary<EnemyBossState, Action<AnimatorStateInfo>> _attackHandlers;
+    [SerializeField] private Dictionary<EnemyBossState, Action<AnimatorStateInfo>> _attackHandlers;
 
     [Header("Attack Rain:")]
     [SerializeField] private bool _isAttackRain;
@@ -32,16 +32,23 @@ public class EnemyBossAttack : EnemyAttack
     [SerializeField] private CapsuleCollider _colAttackLaser;
     [SerializeField] private Transform _pointAttackLaser;
 
+    [Header("Attack Fire:")]
+    [SerializeField] private bool _isAttackFire;
+    [SerializeField] private BulletEnemyBossAttackFire _bulletAttackFire;
+    [SerializeField] private Transform _pointAttackFire;
+
     public bool IsAttackDash { get => _isAttackDash; set => _isAttackDash = value; }
     public bool IsAttackRain { get => _isAttackRain; set => _isAttackRain = value; }
     public bool IsAttackLaser { get => _isAttackLaser; set => _isAttackLaser = value; }
+    public bool IsAttackFire { get => _isAttackFire; set => _isAttackFire = value; }
 
     private void Start()
     {
         _timeAttack = 2f;
         _attackHandlers = new(){{ EnemyBossState.AttackDash, HandleAttackDash },
                                 { EnemyBossState.AttackRain, HandleAttackRain },
-                                { EnemyBossState.AttackLaser, HandleAttackLaser }};
+                                { EnemyBossState.AttackLaser, HandleAttackLaser },
+                                { EnemyBossState.AttackFire, HandleAttackFire }};
     }
 
     private void OnEnable()
@@ -49,6 +56,7 @@ public class EnemyBossAttack : EnemyAttack
         ResetInforAttackDash();
         ResetInforAttackRain();
         ResetInforAttackLaser();
+        ResetInforAttackFire();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -76,6 +84,7 @@ public class EnemyBossAttack : EnemyAttack
             StopAttackDash();
             StopAttackRain();
             StopAttackLaser();
+            StopAttackFire();
             return;
         }
 
@@ -101,6 +110,7 @@ public class EnemyBossAttack : EnemyAttack
             //ChangeState(EnemyBossState.AttackDash);
             //ChangeState(EnemyBossState.AttackRain);
             //ChangeState(EnemyBossState.AttackLaser);
+            //ChangeState(EnemyBossState.AttackFire);
         }
         else
         {
@@ -219,9 +229,28 @@ public class EnemyBossAttack : EnemyAttack
 
     //-----------------------------------------------------------------------
 
+    private void ResetInforAttackFire()
+    {
+        _isAttackFire = false;
+    }
+
+    private void StopAttackFire()
+    {
+        _isAttackFire = false;
+        PoolManager<BulletCtrlAbstract>.Ins.DespawnAll(_bulletAttackFire, "BulletPool");
+    }
+
+    private void HandleAttackFire(AnimatorStateInfo stateInfo)
+    {
+        if (_isAttackFire)
+        {
+            _isAttackFire = false;
+            PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletAttackFire, _pointAttackFire.position, _pointAttackFire.rotation);
+        }
+    }
     private void GetRandomAttack()
     {
-        List<EnemyBossState> listAttack = new() { EnemyBossState.AttackDash, EnemyBossState.AttackRain, EnemyBossState.AttackLaser };
+        List<EnemyBossState> listAttack = new() { EnemyBossState.AttackDash, EnemyBossState.AttackRain, EnemyBossState.AttackLaser, EnemyBossState.AttackFire };
         if (listAttack.Contains(_prevBossState))
             listAttack.Remove(_prevBossState);
 
@@ -239,7 +268,7 @@ public class EnemyBossAttack : EnemyAttack
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        if (_vfxDash != null && _vfxSmokeAttackDash != null && _pointAttackDash != null && _bulletAttackRain != null && _vfxWarningRain != null && _vfxLaser != null && _colAttackLaser != null && _pointAttackLaser != null) return;
+        if (_vfxDash != null && _vfxSmokeAttackDash != null && _pointAttackDash != null && _bulletAttackRain != null && _vfxWarningRain != null && _vfxLaser != null && _colAttackLaser != null && _pointAttackLaser != null && _bulletAttackFire != null && _pointAttackFire != null) return;
         _vfxDash = Resources.Load<VFXDashEnemyBossAttackDash>("VFX/VFXDashEnemyBossAttackDash");
         _vfxSmokeAttackDash = Resources.Load<VFXSmokeEnemyBossAttackDash>("VFX/VFXSmokeEnemyBossAttackDash");
         _pointAttackDash = transform.GetChild(0);
@@ -250,5 +279,8 @@ public class EnemyBossAttack : EnemyAttack
         _vfxLaser = Resources.Load<VFXLaserEnemyBossAttackLaser>("VFX/VFXLaserEnemyBossAttackLaser");
         _colAttackLaser = GetComponent<CapsuleCollider>();
         _pointAttackLaser = transform.GetChild(1);
+
+        _bulletAttackFire = Resources.Load<BulletEnemyBossAttackFire>("Bullets/BulletEnemyBossAttackFire");
+        _pointAttackFire = transform.GetChild(2);
     }
 }

@@ -9,7 +9,8 @@ public class EnemyBossMoving : EnemyMoving
         AnimatorStateInfo stateInfo = _enemyCtrl.Anim.GetCurrentAnimatorStateInfo(0);
         if (stateInfo.IsName(EnemyBossState.AttackDash.ToString())
          || stateInfo.IsName(EnemyBossState.AttackRain.ToString())
-         || stateInfo.IsName(EnemyBossState.AttackLaser.ToString())) return;
+         || stateInfo.IsName(EnemyBossState.AttackLaser.ToString())
+         || stateInfo.IsName(EnemyBossState.AttackFire.ToString())) return;
         base.LookAtTarget();
     }
 
@@ -25,6 +26,7 @@ public class EnemyBossMoving : EnemyMoving
                         || stateInfo.IsName(EnemyBossState.AttackDash.ToString())
                         || stateInfo.IsName(EnemyBossState.AttackRain.ToString())
                         || stateInfo.IsName(EnemyBossState.AttackLaser.ToString())
+                        || stateInfo.IsName(EnemyBossState.AttackFire.ToString())
                         || stateInfo.IsName(EnemyBossState.Dying.ToString()));
 
         _enemyCtrl.Agent.isStopped = shouldStop || !_isMoving;

@@ -8123,6 +8123,37 @@ Transform:
   - {fileID: 1956054338572699850}
   m_Father: {fileID: 2127599416877310840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &6524524943274093066
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7365240943410902768}
+  m_Layer: 0
+  m_Name: EnemyPointAttackFire
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7365240943410902768
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6524524943274093066}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.15, y: 1.2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5651875098428318246}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6698393815869173286
 GameObject:
   m_ObjectHideFlags: 0
@@ -9062,6 +9093,7 @@ Transform:
   m_Children:
   - {fileID: 1072157961644877545}
   - {fileID: 835284150073538061}
+  - {fileID: 7365240943410902768}
   m_Father: {fileID: 2129348814022617520}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1866428612385085969
@@ -9121,6 +9153,9 @@ MonoBehaviour:
   _vfxLaser: {fileID: 8503474875730172768, guid: f8228eb54e3295b4db765359c6d84d52, type: 3}
   _colAttackLaser: {fileID: 1866428612385085969}
   _pointAttackLaser: {fileID: 835284150073538061}
+  _isAttackFire: 0
+  _bulletAttackFire: {fileID: 6444681584495134193, guid: c03f3be0085c59a4983218e88a3df0fd, type: 3}
+  _pointAttackFire: {fileID: 7365240943410902768}
 --- !u!1 &8815213719293093446
 GameObject:
   m_ObjectHideFlags: 0

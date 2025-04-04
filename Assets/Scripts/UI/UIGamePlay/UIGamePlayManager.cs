@@ -10,6 +10,7 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
 {
     public List<GameObject> ListPanelPlayerHp = new();
 
+    public ShaderWarningUI ShaderWarningUI;
     public GameObject PanelSkillsDialog;
     [SerializeField] private GameObject PanelPlayerHp;
 
@@ -23,6 +24,7 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
 
     public float GamePlayTime { get => _gamePlayTime; }
 
+    private bool _isWarning;
     private void OnEnable()
     {
         Init();
@@ -31,16 +33,21 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
     private void Update()
     {
         if (CheckPlayTime)
-        {
             _gamePlayTime += Time.deltaTime;
-        }
         TxtCountPlayTime.text = TimeConvert(_gamePlayTime);
+
+        if (_gamePlayTime >= 300f && !_isWarning)
+        {
+            _isWarning = true;
+            ShaderWarningUI.IsWarning = true;
+        }
     }
 
     protected override void LoadComponents()
     {
         DontDestroy(false);
-        if (ListPanelPlayerHp.Count <= 0 && PanelPlayerHp != null && PlayerCtrl != null && Slider != null && TxtCountEnemyDead != null && TxtCountPlayTime != null) return;
+        if (ListPanelPlayerHp.Count <= 0 && ShaderWarningUI != null && PanelPlayerHp != null && PlayerCtrl != null && Slider != null && TxtCountEnemyDead != null && TxtCountPlayTime != null) return;
+        ShaderWarningUI = GameObject.Find("PanelWarning").GetComponentInChildren<ShaderWarningUI>();
         PanelPlayerHp = GameObject.Find("PanelPlayerHp");
         PlayerCtrl = FindObjectOfType<PlayerController>();
         Slider = GameObject.Find("PanelMana").GetComponentInChildren<Slider>();

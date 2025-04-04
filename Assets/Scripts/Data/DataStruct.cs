@@ -24,6 +24,7 @@ public enum EnemyBossState
     AttackDash,
     AttackRain,
     AttackLaser,
+    AttackFire,
     Dying
 }
 
