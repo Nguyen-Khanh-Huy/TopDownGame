@@ -18,7 +18,7 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
 
     public virtual void Upgrade()
     {
-        if (_levelSkill >= _maxLevel) return;
+        if (_levelSkill <= 0 || _levelSkill >= _maxLevel) return;
         _levelSkill++;
         // For Override
     }
@@ -27,11 +27,13 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
     {
         _levelSkill = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.LevelSkill;
         _maxLevel = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MaxLevel;
+
         _playerSkillCtrl.PlayerSkillList.PlayerSkillMultiShot.MultiShotCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MultiShotCount;
         _playerSkillCtrl.PlayerSkillList.PlayerSkillMultiDirection.MultiDirCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MultiDirCount;
-        _playerSkillCtrl.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.AoeBullet;
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillAoeDamage.AoeRange = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.AoeRange;
         _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeLightning;
         _playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.SpinBallCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.SpinBallCount;
+        _playerSkillCtrl.PlayerSkillList.PlayerSkillFreeze.TimeFreeze = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeFreeze;
     }
 
     protected override void LoadComponents()

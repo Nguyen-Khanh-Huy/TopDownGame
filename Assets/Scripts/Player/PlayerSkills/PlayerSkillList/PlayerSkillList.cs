@@ -11,9 +11,10 @@ public class PlayerSkillList : PISMonoBehaviour
     [SerializeField] private PlayerSkillShootSpeed _playerSkillShootSpeed;
     [SerializeField] private PlayerSkillMultiShot _playerSkillMultiShot;
     [SerializeField] private PlayerSkillMultiDirection _playerSkillMultiDirection;
-    [SerializeField] private PlayerSkillAoeBullet _playerSkillAoeBullet;
+    [SerializeField] private PlayerSkillAoeDamage _playerSkillAoeDamage;
     [SerializeField] private PlayerSkillLightning _playerSkillLightning;
     [SerializeField] private PlayerSkillSpinBall _playerSkillSpinBall;
+    [SerializeField] private PlayerSkillFreeze _playerSkillFreeze;
 
     [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
 
@@ -22,24 +23,27 @@ public class PlayerSkillList : PISMonoBehaviour
     public PlayerSkillShootSpeed PlayerSkillShootSpeed { get => _playerSkillShootSpeed; }
     public PlayerSkillMultiShot PlayerSkillMultiShot { get => _playerSkillMultiShot; }
     public PlayerSkillMultiDirection PlayerSkillMultiDirection { get => _playerSkillMultiDirection; }
-    public PlayerSkillAoeBullet PlayerSkillAoeBullet { get => _playerSkillAoeBullet; }
+    public PlayerSkillAoeDamage PlayerSkillAoeDamage { get => _playerSkillAoeDamage; }
     public PlayerSkillLightning PlayerSkillLightning { get => _playerSkillLightning; }
     public PlayerSkillSpinBall PlayerSkillSpinBall { get => _playerSkillSpinBall; }
+    public PlayerSkillFreeze PlayerSkillFreeze { get => _playerSkillFreeze; }
 
     protected override void LoadComponents()
     {
-        if (_playerSkillCtrl != null  && _playerSkillMoveSpeed != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillAoeBullet != null && _playerSkillLightning != null && _playerSkillSpinBall != null) return;
+        if (_playerSkillCtrl != null  && _playerSkillMoveSpeed != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillAoeDamage != null && _playerSkillLightning != null && _playerSkillSpinBall != null && _playerSkillFreeze != null) return;
         _playerSkillCtrl = GetComponentInParent<PlayerSkillsCtrl>();
         _playerSkillMoveSpeed = GetComponentInChildren<PlayerSkillMoveSpeed>();
         _playerSkillShootRange = GetComponentInChildren<PlayerSkillShootRange>();
         _playerSkillShootSpeed = GetComponentInChildren<PlayerSkillShootSpeed>();
         _playerSkillMultiShot = GetComponentInChildren<PlayerSkillMultiShot>();
         _playerSkillMultiDirection = GetComponentInChildren<PlayerSkillMultiDirection>();
-        _playerSkillAoeBullet = GetComponentInChildren<PlayerSkillAoeBullet>();
+        _playerSkillAoeDamage = GetComponentInChildren<PlayerSkillAoeDamage>();
         _playerSkillLightning = GetComponentInChildren<PlayerSkillLightning>();
         _playerSkillSpinBall = GetComponentInChildren<PlayerSkillSpinBall>();
+        _playerSkillFreeze = GetComponentInChildren<PlayerSkillFreeze>();
 
         if (_listAllPbSkills.Count == transform.childCount) return;
+        _listAllPbSkills.Clear();
         foreach (Transform child in transform)
         {
             PlayerSkillAbstract skill = child.GetComponent<PlayerSkillAbstract>();

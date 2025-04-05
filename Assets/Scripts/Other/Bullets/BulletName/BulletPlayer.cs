@@ -5,28 +5,29 @@ using UnityEngine;
 public class BulletPlayer : BulletCtrlAbstract
 {
     [SerializeField] private float _speedBullet = 10f;
-    [SerializeField] private float _despawnByTime = 2f;
 
-    protected override void Update()
-    {
-        base.Update();
-        BulletMoving();
-        BulletRayCast();
-    }
+    [SerializeField] private float _maxDistance = 10f;
+    [SerializeField] private Vector3 _startPos;
 
     private void OnEnable()
     {
-        Invoke(nameof(DespawnBullet), _despawnByTime);
+        _startPos = transform.position;
     }
 
-    private void OnDisable()
+    protected override void OnUpdate()
     {
-        CancelInvoke(nameof(DespawnBullet));
+        BulletMoving();
+        BulletRayCast();
     }
 
     private void BulletMoving()
     {
         transform.Translate(_speedBullet * Time.deltaTime * Vector3.forward);
+        float sqrDistance = (transform.position - _startPos).sqrMagnitude;
+        if (sqrDistance >= _maxDistance * _maxDistance)
+        {
+            DespawnBullet();
+        }
     }
 
     private void BulletRayCast()

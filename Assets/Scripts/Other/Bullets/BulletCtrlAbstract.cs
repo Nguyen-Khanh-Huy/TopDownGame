@@ -4,9 +4,11 @@ using UnityEngine;
 
 public abstract class BulletCtrlAbstract : PoolObj<BulletCtrlAbstract>
 {
-    protected virtual void Update()
+    private void Update()
     {
-        if (!UIGamePlayManager.Ins.CheckPlayTime)
-            PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
+        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
+        OnUpdate();
+            //PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
     }
+    protected virtual void OnUpdate() { }
 }

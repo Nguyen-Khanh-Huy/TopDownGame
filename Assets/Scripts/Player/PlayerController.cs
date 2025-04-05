@@ -55,6 +55,11 @@ public class PlayerController : PISMonoBehaviour
         Observer.AddObserver(ObserverID.PlayerTakeDmg, PlayerTakeDamage);
     }
 
+    private void OnDisable()
+    {
+        Observer.RemoveObserver(ObserverID.PlayerTakeDmg, PlayerTakeDamage);
+    }
+
     public void PlayerTakeDamage()
     {
         if (_hp <= 0) return;
@@ -65,8 +70,8 @@ public class PlayerController : PISMonoBehaviour
     private void Init()
     {
         _hp = _playerSO.Hp;
-        _playerMana.CurMana = _playerSO.CurMana;
         _playerMana.CurLevel = _playerSO.CurLevel;
+        _playerMana.CurMana = _playerSO.CurMana;
         _playerMana.ManaNextLevel = _playerSO.ManaNextLevel;
         _playerShoot.CountEnemyDead = _playerSO.CountEnemyDead;
 

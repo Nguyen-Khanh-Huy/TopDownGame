@@ -9,12 +9,6 @@ public class EnemyDespawn : PISMonoBehaviour
     [SerializeField] private bool _isSpawnedItemDrop;
     [SerializeField] private bool _isDead;
 
-    protected override void LoadComponents()
-    {
-        if (_enemyAbstract != null) return;
-        _enemyAbstract = GetComponentInParent<EnemyCtrlAbstract>();
-    }
-
     private void FixedUpdate()
     {
         if (!UIGamePlayManager.Ins.CheckPlayTime) return;
@@ -27,6 +21,7 @@ public class EnemyDespawn : PISMonoBehaviour
         SetActiveEnemyHpBar();
         CountEnemyDead();
         SpawnItemDropMana();
+        RemoveEnemyInPlayerTarget();
         StartCoroutine(DelayDespawnEnemy());
     }
 
@@ -38,14 +33,10 @@ public class EnemyDespawn : PISMonoBehaviour
         PoolManager<EnemyCtrlAbstract>.Ins.Despawn(_enemyAbstract);
     }
 
-    private void SpawnItemDropMana()
+    private void SetActiveEnemyHpBar()
     {
-        if (!_isSpawnedItemDrop)
-        {
-            _isSpawnedItemDrop = true;
-            Vector3 changeDropPos = _enemyAbstract.transform.position + new Vector3(0, 1f, 0);
-            PoolManager<ItemDropCtrlAbstract>.Ins.Spawn(_enemyAbstract.ItemDropMana, changeDropPos, Quaternion.identity);
-        }
+        if (_enemyAbstract.HpBar.gameObject.activeSelf)
+            _enemyAbstract.HpBar.gameObject.SetActive(false);
     }
 
     private void CountEnemyDead()
@@ -57,12 +48,24 @@ public class EnemyDespawn : PISMonoBehaviour
             UIGamePlayManager.Ins.TxtCountEnemyDead.text = _enemyAbstract.PlayerCtrl.PlayerShoot.CountEnemyDead.ToString();
         }
     }
-
-    private void SetActiveEnemyHpBar()
+    private void SpawnItemDropMana()
     {
-        if (_enemyAbstract.HpBar.gameObject.activeSelf)
+        if (!_isSpawnedItemDrop)
         {
-            _enemyAbstract.HpBar.gameObject.SetActive(false);
+            _isSpawnedItemDrop = true;
+            Vector3 changeDropPos = _enemyAbstract.transform.position + new Vector3(0, 1f, 0);
+            PoolManager<ItemDropCtrlAbstract>.Ins.Spawn(_enemyAbstract.ItemDropMana, changeDropPos, Quaternion.identity);
         }
+    }
+
+    private void RemoveEnemyInPlayerTarget()
+    {
+        _enemyAbstract.PlayerCtrl.PlayerTarget.ListEnemyTarget.Remove(_enemyAbstract);
+    }
+
+    protected override void LoadComponents()
+    {
+        if (_enemyAbstract != null) return;
+        _enemyAbstract = GetComponentInParent<EnemyCtrlAbstract>();
     }
 }

@@ -117,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 2.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1047,56 +1047,29 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 0
-          inSlope: 2
-          outSlope: 2
-          tangentMode: 0
+          inSlope: 3.433578
+          outSlope: 3.433578
+          tangentMode: 34
           weightedMode: 0
           inWeight: 0
-          outWeight: 0
-        - serializedVersion: 3
-          time: 0.0792651
-          value: 1
-          inSlope: 0.061809734
-          outSlope: 0.061809734
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.9840452
-        - serializedVersion: 3
-          time: 0.19035137
-          value: 1
-          inSlope: 0.10339249
-          outSlope: 0.10339249
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.33333334
-          outWeight: 0.31318066
-        - serializedVersion: 3
-          time: 0.42924064
-          value: 1
-          inSlope: 0.07462274
-          outSlope: 0.07462274
-          tangentMode: 0
-          weightedMode: 0
-          inWeight: 0.14985599
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 0.77099824
+          time: 0.29124138
           value: 1
-          inSlope: 0.02074783
-          outSlope: 0.02074783
+          inSlope: 0.021095451
+          outSlope: 0.021095451
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
-          outWeight: 0.33333334
+          outWeight: 0.29334342
         - serializedVersion: 3
           time: 1
           value: 1
           inSlope: 0
           outSlope: 0
-          tangentMode: 0
+          tangentMode: 34
           weightedMode: 0
-          inWeight: 0
+          inWeight: 0.33333334
           outWeight: 0
         m_PreInfinity: 2
         m_PostInfinity: 2
@@ -4937,3 +4910,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 745361b5df25376489d82fd9c3042bb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particle: {fileID: 2555816714201745685}

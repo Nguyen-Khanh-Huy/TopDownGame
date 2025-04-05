@@ -12,12 +12,6 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
     private void Update()
     {
         _spinBallRotation.position = _playerSkillCtrl.PlayerCtrl.transform.position;
-        //if (_levelSkill != 2 && _levelSkill != 3) return;
-        //foreach (SpinBall ball in _listBallSpin)
-        //{
-        //    if (ball.gameObject.activeSelf)
-        //        ball.transform.RotateAround(_spinBallRotation.position, Vector3.up, _speed * Time.deltaTime);
-        //}
     }
 
     public override void Upgrade()

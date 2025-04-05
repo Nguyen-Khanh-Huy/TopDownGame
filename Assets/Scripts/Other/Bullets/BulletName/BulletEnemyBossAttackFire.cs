@@ -5,22 +5,13 @@ using UnityEngine;
 public class BulletEnemyBossAttackFire : BulletCtrlAbstract
 {
     [SerializeField] private float _speedBullet = 6f;
-    [SerializeField] private float _despawnByTime = 2f;
+
+    [SerializeField] private float _maxDistance = 10f;
+    [SerializeField] private Vector3 _startPos;
 
     private void OnEnable()
     {
-        Invoke(nameof(DespawnBullet), _despawnByTime);
-    }
-
-    private void OnDisable()
-    {
-        CancelInvoke(nameof(DespawnBullet));
-    }
-
-    protected override void Update()
-    {
-        base.Update();
-        transform.Translate(_speedBullet * Time.deltaTime * Vector3.forward);
+        _startPos = transform.position;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -29,6 +20,16 @@ public class BulletEnemyBossAttackFire : BulletCtrlAbstract
         if (player != null)
         {
             Observer.Notify(ObserverID.PlayerTakeDmg);
+            DespawnBullet();
+        }
+    }
+
+    protected override void OnUpdate()
+    {
+        transform.Translate(_speedBullet * Time.deltaTime * Vector3.forward);
+        float sqrDistance = (transform.position - _startPos).sqrMagnitude;
+        if (sqrDistance >= _maxDistance * _maxDistance)
+        {
             DespawnBullet();
         }
     }

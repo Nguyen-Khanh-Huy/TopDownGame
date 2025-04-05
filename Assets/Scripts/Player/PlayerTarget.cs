@@ -11,18 +11,18 @@ public class PlayerTarget : PISMonoBehaviour
 
     public SphereCollider PlayerCollider { get => _playerCollider; set => _playerCollider = value; }
     public EnemyCtrlAbstract Target { get => _target; }
-    public List<EnemyCtrlAbstract> ListEnemyTarget { get => _listEnemyTarget; }
+    public List<EnemyCtrlAbstract> ListEnemyTarget { get => _listEnemyTarget; set => _listEnemyTarget = value; }
 
-    private void Update()
-    {
-        RemoveEnemyDeadInList();
-    }
+    //private void Update()
+    //{
+    //    RemoveEnemyDeadInList();
+    //}
 
-    private void RemoveEnemyDeadInList()
-    {
-        if (_target == null) return;
-        _listEnemyTarget.RemoveAll(enemy => enemy.Hp <= 0);
-    }
+    //private void RemoveEnemyDeadInList()
+    //{
+    //    if (_target == null) return;
+    //    _listEnemyTarget.RemoveAll(enemy => enemy.Hp <= 0);
+    //}
 
     private void OnTriggerStay(Collider other)
     {
@@ -43,10 +43,7 @@ public class PlayerTarget : PISMonoBehaviour
                     }
                 }
             }
-            else
-            {
-                _target = null;
-            }
+            else _target = null;
         }
     }
 
@@ -54,14 +51,10 @@ public class PlayerTarget : PISMonoBehaviour
     {
         EnemyCtrlAbstract enemy = other.GetComponent<EnemyCtrlAbstract>();
         if (enemy != null)
-        {
             _listEnemyTarget.Remove(enemy);
-        }
 
         if (_listEnemyTarget.Count == 0)
-        {
             _target = null;
-        }
     }
     private void AddAndRemoveEnemy(EnemyCtrlAbstract enemy)
     {
@@ -75,16 +68,12 @@ public class PlayerTarget : PISMonoBehaviour
             if (hitInfo.collider.gameObject.layer != LayerMask.NameToLayer("BG"))
             {
                 if (enemy.Hp > 0 && !_listEnemyTarget.Contains(enemy))
-                {
                     _listEnemyTarget.Add(enemy);
-                }
             }
             else
             {
                 if (_listEnemyTarget.Contains(enemy))
-                {
                     _listEnemyTarget.Remove(enemy);
-                }
             }
         }
     }

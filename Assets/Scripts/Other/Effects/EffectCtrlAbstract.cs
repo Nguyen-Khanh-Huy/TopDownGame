@@ -9,7 +9,7 @@ public abstract class EffectCtrlAbstract : PoolObj<EffectCtrlAbstract>
         Invoke(nameof(DespawnEffect), 0.5f);
     }
 
-    private void OnDisable()
+    protected virtual void OnDisable()
     {
         CancelInvoke(nameof(DespawnEffect));
     }

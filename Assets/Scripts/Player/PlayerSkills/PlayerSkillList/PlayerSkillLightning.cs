@@ -9,7 +9,6 @@ public class PlayerSkillLightning : PlayerSkillAbstract
 
     private void Start()
     {
-        //Invoke(nameof(CheckLvSkillLightning), _playerSkillCtrl.PlayerSkillList.PlayerSkillLightning.TimeLightning);
         CheckLvSkillLightning();
     }
 
@@ -23,13 +22,13 @@ public class PlayerSkillLightning : PlayerSkillAbstract
     private void CheckLvSkillLightning()
     {
         Invoke(nameof(CheckLvSkillLightning), TimeLightning);
-        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         if (_levelSkill <= 1) return;
+        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         if (_playerSkillCtrl.PlayerCtrl.PlayerTarget.Target == null) return;
 
         foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
         {
-            Observer.Notify(ObserverID.EnemyTakeDmg, enemy);
+            Observer.Notify(ObserverID.EnemyTakeDmgSingle, enemy);
             PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitLightning, enemy.transform.position, Quaternion.identity);
         }
     }

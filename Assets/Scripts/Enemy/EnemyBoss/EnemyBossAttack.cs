@@ -44,7 +44,7 @@ public class EnemyBossAttack : EnemyAttack
 
     private void Start()
     {
-        _timeAttack = 2f;
+        _timeAttack = 1.5f;
         _attackHandlers = new(){{ EnemyBossState.AttackDash, HandleAttackDash },
                                 { EnemyBossState.AttackRain, HandleAttackRain },
                                 { EnemyBossState.AttackLaser, HandleAttackLaser },
@@ -81,6 +81,16 @@ public class EnemyBossAttack : EnemyAttack
         if (_enemyCtrl.Hp <= 0)
         {
             ChangeState(EnemyBossState.Dying);
+            StopAttackDash();
+            StopAttackRain();
+            StopAttackLaser();
+            StopAttackFire();
+            return;
+        }
+
+        if (_enemyCtrl.EnemyMoving.IsFrozen)
+        {
+            ChangeState(EnemyBossState.Idle);
             StopAttackDash();
             StopAttackRain();
             StopAttackLaser();

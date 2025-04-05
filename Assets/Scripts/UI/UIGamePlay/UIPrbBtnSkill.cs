@@ -75,15 +75,15 @@ public class UIPrbBtnSkill : PISMonoBehaviour
                 txtSkill.text = "Attack Speed: +25%";
             }
         }
-        else if (playerSkill is PlayerSkillAoeBullet)
+        else if (playerSkill is PlayerSkillAoeDamage)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "AoE Bullet: +1";
+                txtSkill.text = "+1 AoE Range: All damage will be in the form of AoE damage.";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "AoE Bullet: +2";
+                txtSkill.text = "+2 AoE Range: All damage will be in the form of AoE damage.";
             }
         }
         else if (playerSkill is PlayerSkillMoveSpeed)
@@ -101,11 +101,11 @@ public class UIPrbBtnSkill : PISMonoBehaviour
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "Every 5 seconds: Lightning strikes all enemies within attack range";
+                txtSkill.text = "Lightning strikes all enemies within attack range(5s Cooldown).";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "Every 3 seconds: Lightning strikes all enemies within attack range";
+                txtSkill.text = "Lightning strikes all enemies within attack range(2s Cooldown).";
             }
         }
         else if (playerSkill is PlayerSkillSpinBall)
@@ -119,5 +119,27 @@ public class UIPrbBtnSkill : PISMonoBehaviour
                 txtSkill.text = "+5 Fireballs: Spin around you and damage Enemies";
             }
         }
+        else if (playerSkill is PlayerSkillFreeze)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "+1s Freeze Time: Freezes all enemies within attack range(5s Cooldown).";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "+2s Freeze Time: Freezes all enemies within attack range(5s Cooldown).";
+            }
+        }
+        //else if (playerSkill is PlayerSkillFreeze)
+        //{
+        //    if (playerSkill.LevelSkill == 1)
+        //    {
+        //        txtSkill.text = "Fire 3 missiles: To random enemies within attack range(3s Cooldown).";
+        //    }
+        //    else if (playerSkill.LevelSkill == 2)
+        //    {
+        //        txtSkill.text = "Fire 5 missiles: To random enemies within attack range(3s Cooldown).";
+        //    }
+        //}
     }
 }

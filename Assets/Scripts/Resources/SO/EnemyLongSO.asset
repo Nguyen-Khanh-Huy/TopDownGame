@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: EnemyLongSO
   m_EditorClassIdentifier: 
   Hp: 3
+  MoveSpeed: 2

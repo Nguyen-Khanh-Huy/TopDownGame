@@ -6756,7 +6756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2770812068f1314697db0259b449126, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSkillCtrl: {fileID: 0}
+  _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
 --- !u!1 &221970712
@@ -8440,7 +8440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bef11dcac41f47945a532755132cd195, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSkillCtrl: {fileID: 0}
+  _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
 --- !u!1 &392567380
@@ -11525,7 +11525,7 @@ GameObject:
   - component: {fileID: 567558820}
   - component: {fileID: 567558821}
   m_Layer: 0
-  m_Name: PlayerSkillAoeBullet
+  m_Name: PlayerSkillAoeDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11558,10 +11558,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f3448c1106ad854096068b8c155d65a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSkillCtrl: {fileID: 0}
+  _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
-  AoeBullet: 0
+  AoeRange: 0
 --- !u!1 &567609173
 GameObject:
   m_ObjectHideFlags: 0
@@ -25384,6 +25384,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 525589285}
+--- !u!1 &964844221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 964844222}
+  - component: {fileID: 964844223}
+  m_Layer: 0
+  m_Name: PlayerSkillFreeze
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &964844222
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964844221}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1633824328}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &964844223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 964844221}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 20394e2b8cac7b245b3bd66e20a2469d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerSkillCtrl: {fileID: 524961273}
+  _levelSkill: 0
+  _maxLevel: 0
+  TimeFreeze: 5
 --- !u!1 &1021182149
 GameObject:
   m_ObjectHideFlags: 0
@@ -32807,7 +32855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7bbe52dad8820b41a15f6668dc7de8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSkillCtrl: {fileID: 0}
+  _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
   MultiDirCount: 0
@@ -35924,7 +35972,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4cbc213d219fa841a101971e4de46af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSkillCtrl: {fileID: 0}
+  _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
   MultiShotCount: 1
@@ -35972,7 +36020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30de311a24391ee48a69cb72eef5c7ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSkillCtrl: {fileID: 0}
+  _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
 --- !u!1 &1444611987
@@ -37954,9 +38002,10 @@ MonoBehaviour:
   _playerSkillShootSpeed: {fileID: 1444436889}
   _playerSkillMultiShot: {fileID: 1442426922}
   _playerSkillMultiDirection: {fileID: 1219896842}
-  _playerSkillAoeBullet: {fileID: 567558821}
+  _playerSkillAoeDamage: {fileID: 567558821}
   _playerSkillLightning: {fileID: 342313831}
   _playerSkillSpinBall: {fileID: 502003125}
+  _playerSkillFreeze: {fileID: 964844223}
   _listAllPbSkills:
   - {fileID: 386437850}
   - {fileID: 205558072}
@@ -37966,6 +38015,7 @@ MonoBehaviour:
   - {fileID: 567558821}
   - {fileID: 342313831}
   - {fileID: 502003125}
+  - {fileID: 964844223}
 --- !u!4 &1633824328
 Transform:
   m_ObjectHideFlags: 0
@@ -37987,6 +38037,7 @@ Transform:
   - {fileID: 567558820}
   - {fileID: 342313830}
   - {fileID: 502003124}
+  - {fileID: 964844222}
   m_Father: {fileID: 524961272}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1635987979

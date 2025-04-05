@@ -7,8 +7,11 @@ public class EnemyMoving : PISMonoBehaviour
     [SerializeField] protected EnemyCtrlAbstract _enemyCtrl;
     [SerializeField] protected float _distance;
     [SerializeField] protected bool _isMoving;
+    [SerializeField] protected bool _isFrozen;
+    private float _coolDownFrozen;
 
     public bool IsMoving { get => _isMoving; }
+    public bool IsFrozen { get => _isFrozen; set => _isFrozen = value; }
 
     private void Start()
     {
@@ -17,6 +20,7 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void Update()
     {
+        EnemyFrozen();
         EnemyMove();
         LookAtTarget();
     }
@@ -36,6 +40,7 @@ public class EnemyMoving : PISMonoBehaviour
         _isMoving = checkDistance > _distance;
 
         bool shouldStop = (_enemyCtrl.Anim.speed == 0
+                        || _isFrozen
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Idle
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying);
@@ -43,6 +48,21 @@ public class EnemyMoving : PISMonoBehaviour
         _enemyCtrl.Agent.isStopped = shouldStop || !_isMoving;
     }
 
+    private void EnemyFrozen()
+    {
+        if (!_isFrozen) return;
+        _coolDownFrozen += Time.deltaTime;
+        if (_coolDownFrozen >= _enemyCtrl.PlayerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillFreeze.TimeFreeze)
+        {
+            _coolDownFrozen = 0;
+            _isFrozen = false;
+        }
+    }
+
+    private void ResetMoving()
+    {
+        _isFrozen = false;
+    }
     private void CheckEnemyType()
     {
         _distance = GetComponentInParent<EnemyNearCtrlAbstract>() != null ? 1f : 6f;

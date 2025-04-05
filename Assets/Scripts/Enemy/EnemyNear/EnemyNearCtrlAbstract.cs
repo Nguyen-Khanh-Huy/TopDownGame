@@ -19,6 +19,8 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
         _hpBar.gameObject.SetActive(true);
         _hp = _enemySO.Hp;
         _hpBar.value = _hp / _enemySO.Hp;
+
+        _agent.speed = _enemySO.MoveSpeed;
         base.OnEnable();
     }
 

@@ -21,9 +21,7 @@ public class SpinBall : MonoBehaviour
         if (enemy != null)
         {
             if (enemy != null && enemy.Hp > 0)
-            {
-                Observer.Notify(ObserverID.EnemyTakeDmg, enemy);
-            }
+                Observer.Notify(ObserverID.EnemyTakeDmgSingle, enemy);
         }
     }
 

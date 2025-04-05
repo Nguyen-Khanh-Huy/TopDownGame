@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3681cf34eda046d45bb856d52757c70f, type: 3}
   m_Name: EnemyBossSO
   m_EditorClassIdentifier: 
-  Hp: 80
+  Hp: 100
+  MoveSpeed: 2

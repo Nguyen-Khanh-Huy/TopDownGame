@@ -19,6 +19,7 @@ MonoBehaviour:
   ShootSpeed: 1.2
   MultiShotCount: 1
   MultiDirCount: 0
-  AoeBullet: 0
+  AoeRange: 0
   TimeLightning: 7
   SpinBallCount: 1
+  TimeFreeze: 0

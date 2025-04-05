@@ -46,11 +46,13 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     protected virtual void OnEnable()
     {
         Observer.AddObserver<EnemyCtrlAbstract>(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
+        Observer.AddObserver<EnemyCtrlAbstract>(ObserverID.EnemyTakeDmgSingle, EnemyTakeDamageSingle);
     }
 
     protected virtual void OnDisable()
     {
         Observer.RemoveObserver<EnemyCtrlAbstract>(ObserverID.EnemyTakeDmg, EnemyTakeDamage);
+        Observer.RemoveObserver<EnemyCtrlAbstract>(ObserverID.EnemyTakeDmgSingle, EnemyTakeDamageSingle);
     }
 
     private void EnemyTakeDamage(EnemyCtrlAbstract enemy)
@@ -64,8 +66,19 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
         }
     }
 
+    private void EnemyTakeDamageSingle(EnemyCtrlAbstract enemy)
+    {
+        if (_hp <= 0) return;
+        if (enemy == this)
+        {
+            _hp--;
+            _hpBar.value = (float)_hp / EnemySO.Hp;
+            _enemyFlashingEffect.StartFlash();
+        }
+    }
+
     private bool EnemyTakeDmgSkillAoeBullet(EnemyCtrlAbstract enemy)
     {
-        return Vector3.Distance(transform.position, enemy.transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillAoeBullet.AoeBullet;
+        return Vector3.Distance(transform.position, enemy.transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillAoeDamage.AoeRange;
     }
 }

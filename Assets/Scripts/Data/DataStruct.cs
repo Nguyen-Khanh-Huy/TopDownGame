@@ -31,5 +31,6 @@ public enum EnemyBossState
 public enum ObserverID
 {
     PlayerTakeDmg,
-    EnemyTakeDmg
+    EnemyTakeDmg,
+    EnemyTakeDmgSingle
 }

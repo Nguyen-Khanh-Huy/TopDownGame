@@ -9,12 +9,14 @@ public class PlayerSkillSO : ScriptableObject
     public int LevelSkill;
     public int MaxLevel;
 
+    [Header("Infor Skills:")]
     public float MoveSpeed;
     public float ShootRange;
     public float ShootSpeed;
     public int MultiShotCount;
     public int MultiDirCount;
-    public int AoeBullet;
+    public int AoeRange;
     public int TimeLightning;
     public int SpinBallCount;
+    public int TimeFreeze;
 }

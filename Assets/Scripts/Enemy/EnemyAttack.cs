@@ -35,6 +35,12 @@ public class EnemyAttack : PISMonoBehaviour
             return;
         }
 
+        if (_enemyCtrl.EnemyMoving.IsFrozen)
+        {
+            ChangeState(EnemyState.Idle);
+            return;
+        }
+
         if (_curEnemyState == EnemyState.Attack)
         {
             if (stateInfo.IsName(_curEnemyState.ToString()) && stateInfo.normalizedTime >= 1f)

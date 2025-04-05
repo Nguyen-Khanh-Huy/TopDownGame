@@ -8,21 +8,6 @@ public class BulletEnemyBossAttackRain : BulletCtrlAbstract
     [SerializeField] private bool _isSpawnHit;
     [SerializeField] private float _speedBullet = 5f;
 
-    protected override void Update()
-    {
-        base.Update();
-        transform.Translate(_speedBullet * Time.deltaTime * Vector3.down);
-
-        if (transform.position.y <= 0.3f && !_isSpawnHit)
-        {
-            _isSpawnHit = true;
-            SpawnHitParabol();
-        }
-
-        if (transform.position.y >= 0f) return;
-        PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
-    }
-
     private void OnEnable()
     {
         _isSpawnHit = false;
@@ -35,6 +20,19 @@ public class BulletEnemyBossAttackRain : BulletCtrlAbstract
         {
             Observer.Notify(ObserverID.PlayerTakeDmg);
         }
+    }
+
+    protected override void OnUpdate()
+    {
+        transform.Translate(_speedBullet * Time.deltaTime * Vector3.down);
+        if (transform.position.y <= 0.3f && !_isSpawnHit)
+        {
+            _isSpawnHit = true;
+            SpawnHitParabol();
+        }
+
+        if (transform.position.y >= 0f) return;
+        PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
     }
 
     private void SpawnHitParabol()
