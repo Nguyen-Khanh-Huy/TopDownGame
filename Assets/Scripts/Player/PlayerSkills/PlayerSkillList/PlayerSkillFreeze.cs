@@ -28,6 +28,7 @@ public class PlayerSkillFreeze : PlayerSkillAbstract
         foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
         {
             enemy.EnemyMoving.IsFreeze = true;
+            enemy.EnemyFlashingEffect.StartFreeze();
         }
     }
 }

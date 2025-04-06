@@ -513,8 +513,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76871fe7b2303874d83454c259701bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCtrl: {fileID: 0}
-  _curState: 0
+  _enemyCtrl: {fileID: 317858282575269831}
+  _curEnemyState: 0
   _timeAttack: 0
 --- !u!1 &1514151944228978768
 GameObject:
@@ -1263,6 +1263,9 @@ MonoBehaviour:
   _enemyCtrl: {fileID: 317858282575269831}
   _renderer:
   - {fileID: 9054256535826859871}
+  _defaultMaterial:
+  - {fileID: 2100000, guid: 5a1b31a4c2752bc4db7e14dc52e3d1eb, type: 2}
+  _freezeMaterial: {fileID: 2100000, guid: 7b9920cb2a6f5f042a13a67f593a61b8, type: 2}
   _timeFlashing: 0.5
   _timeInterval: 0.1
 --- !u!1 &3389829036097566012
@@ -1507,8 +1510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAbstract: {fileID: 317858282575269831}
   _despawnByTime: 3
-  _isSpawnedItemDrop: 0
-  _isDead: 0
+  _isDespawn: 0
 --- !u!1 &4110232706516209946
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,7 +2435,7 @@ MonoBehaviour:
   _enemyFlashingEffect: {fileID: 270757595607227814}
   _enemySO: {fileID: 11400000, guid: d62987b9915ceb540afb987351306f27, type: 2}
   _anim: {fileID: 4457943895203761269}
-  _col: {fileID: 0}
+  _col: {fileID: 864623994665856467}
   _agent: {fileID: 7006133032343367401}
   _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 6239869349142551904}
@@ -3129,3 +3131,4 @@ MonoBehaviour:
   _enemyCtrl: {fileID: 317858282575269831}
   _distance: 0
   _isMoving: 0
+  _isFreeze: 0

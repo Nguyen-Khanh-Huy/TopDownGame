@@ -8089,6 +8089,16 @@ MonoBehaviour:
   - {fileID: 3899281641227879345}
   - {fileID: 8535814377298148252}
   - {fileID: 8164129434660904940}
+  _defaultMaterial:
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
+  _freezeMaterial: {fileID: 2100000, guid: 7b9920cb2a6f5f042a13a67f593a61b8, type: 2}
   _timeFlashing: 0.5
   _timeInterval: 0.1
 --- !u!1 &6406060149083376620
@@ -8263,8 +8273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAbstract: {fileID: 1721334475101710534}
   _despawnByTime: 3
-  _isSpawnedItemDrop: 0
-  _isDead: 0
+  _isDespawn: 0
 --- !u!1 &6907068441985578945
 GameObject:
   m_ObjectHideFlags: 0
@@ -8993,6 +9002,7 @@ MonoBehaviour:
   _enemyCtrl: {fileID: 1721334475101710534}
   _distance: 0
   _isMoving: 0
+  _isFreeze: 0
 --- !u!1 &8460875664838382823
 GameObject:
   m_ObjectHideFlags: 0

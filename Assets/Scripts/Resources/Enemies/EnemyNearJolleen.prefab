@@ -276,8 +276,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyAbstract: {fileID: 8778607339776674792}
   _despawnByTime: 3
-  _isSpawnedItemDrop: 0
-  _isDead: 0
+  _isDespawn: 0
 --- !u!1 &226141264503506537
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +562,7 @@ MonoBehaviour:
   _enemyFlashingEffect: {fileID: 2206924418056577851}
   _enemySO: {fileID: 11400000, guid: d62987b9915ceb540afb987351306f27, type: 2}
   _anim: {fileID: 610710989345930290}
-  _col: {fileID: 0}
+  _col: {fileID: 1748252896368188953}
   _agent: {fileID: 7268034290586557352}
   _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 2852349640754489970}
@@ -836,9 +835,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f77c8a8c0b691c84490d2e6649b3ee9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCtrl: {fileID: 0}
+  _enemyCtrl: {fileID: 8778607339776674792}
   _distance: 0
   _isMoving: 0
+  _isFreeze: 0
 --- !u!1 &2689064987153172097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1340,9 +1340,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4429439433717569942}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 37.5, y: 0, z: 0}
-  m_LocalScale: {x: 0.875, y: 0.875, z: 0.875}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1249391158507124625}
@@ -1362,6 +1362,9 @@ MonoBehaviour:
   _enemyCtrl: {fileID: 8778607339776674792}
   _renderer:
   - {fileID: 4565380434356524840}
+  _defaultMaterial:
+  - {fileID: 2100000, guid: 1d849124bec4d9646992e650fb25004d, type: 2}
+  _freezeMaterial: {fileID: 2100000, guid: 7b9920cb2a6f5f042a13a67f593a61b8, type: 2}
   _timeFlashing: 0.5
   _timeInterval: 0.1
 --- !u!1 &4444687699850189391
@@ -2399,8 +2402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76871fe7b2303874d83454c259701bc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyCtrl: {fileID: 0}
-  _curState: 0
+  _enemyCtrl: {fileID: 8778607339776674792}
+  _curEnemyState: 0
   _timeAttack: 0
 --- !u!1 &7401344758995190603
 GameObject:

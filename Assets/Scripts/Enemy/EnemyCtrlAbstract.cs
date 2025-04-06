@@ -22,6 +22,7 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     public PlayerController PlayerCtrl { get => _playerCtrl; }
     public EnemyMoving EnemyMoving { get => _enemyMoving; }
     public EnemyAttack EnemyAttack { get => _enemyAttack; }
+    public EnemyFlashingEffect EnemyFlashingEffect { get => _enemyFlashingEffect; }
     public Animator Anim { get => _anim; }
     public NavMeshAgent Agent { get => _agent; set => _agent = value; }
     public ItemDropMana ItemDropMana { get => _itemDropMana; }
