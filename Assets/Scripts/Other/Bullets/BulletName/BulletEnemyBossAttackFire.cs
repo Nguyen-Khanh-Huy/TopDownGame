@@ -29,9 +29,7 @@ public class BulletEnemyBossAttackFire : BulletCtrlAbstract
         transform.Translate(_speedBullet * Time.deltaTime * Vector3.forward);
         float sqrDistance = (transform.position - _startPos).sqrMagnitude;
         if (sqrDistance >= _maxDistance * _maxDistance)
-        {
             DespawnBullet();
-        }
     }
 
     private void DespawnBullet()

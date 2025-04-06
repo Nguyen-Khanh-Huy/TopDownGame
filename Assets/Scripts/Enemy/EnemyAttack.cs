@@ -14,8 +14,12 @@ public class EnemyAttack : PISMonoBehaviour
 
     private void Update()
     {
-        _enemyCtrl.Anim.speed = UIGamePlayManager.Ins.CheckPlayTime ? 1 : 0;
-        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
+        if (!UIGamePlayManager.Ins.CheckPlayTime || _enemyCtrl.EnemyMoving.IsFreeze)
+        {
+            _enemyCtrl.Anim.speed = 0;
+            return;
+        }
+        if (_enemyCtrl.Anim.speed != 1) _enemyCtrl.Anim.speed = 1;
         Attack();
     }
 
@@ -32,12 +36,6 @@ public class EnemyAttack : PISMonoBehaviour
         if (_enemyCtrl.Hp <= 0)
         {
             ChangeState(EnemyState.Dying);
-            return;
-        }
-
-        if (_enemyCtrl.EnemyMoving.IsFrozen)
-        {
-            ChangeState(EnemyState.Idle);
             return;
         }
 

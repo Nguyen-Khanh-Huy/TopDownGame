@@ -88,16 +88,6 @@ public class EnemyBossAttack : EnemyAttack
             return;
         }
 
-        if (_enemyCtrl.EnemyMoving.IsFrozen)
-        {
-            ChangeState(EnemyBossState.Idle);
-            StopAttackDash();
-            StopAttackRain();
-            StopAttackLaser();
-            StopAttackFire();
-            return;
-        }
-
         if (_attackHandlers.TryGetValue(_curBossState, out Action<AnimatorStateInfo> handler))
         {
             if (stateInfo.IsName(_curBossState.ToString()))
@@ -139,6 +129,8 @@ public class EnemyBossAttack : EnemyAttack
 
     public void StopAttackDash()
     {
+        if (!_isSpawnVfxDash) return;
+        _isAttackDash = false;
         _isSpawnVfxDash = false;
         _enemyCtrl.Col.radius = 0.4f;
         PoolManager<EffectCtrlAbstract>.Ins.Despawn(transform.GetComponentInChildren<VFXDashEnemyBossAttackDash>());
@@ -151,17 +143,17 @@ public class EnemyBossAttack : EnemyAttack
         {
             if (!_isSpawnVfxDash)
             {
+                _isSpawnVfxDash = true;
                 _enemyCtrl.Col.radius = 1f;
                 EffectCtrlAbstract newVfxDash = PoolManager<EffectCtrlAbstract>.Ins.Spawn(_vfxDash, _pointAttackDash.transform.position, Quaternion.identity);
+                newVfxDash.Attacker = _enemyCtrl;
                 newVfxDash.transform.SetParent(transform);
-                _isSpawnVfxDash = true;
             }
             _enemyCtrl.transform.Translate(8f * Time.deltaTime * Vector3.forward);
             if (Physics.Raycast(_enemyCtrl.transform.position + Vector3.up + _enemyCtrl.transform.forward, _enemyCtrl.transform.forward, 0.2f, LayerMask.GetMask("BG")))
             {
                 ChangeState(_enemyCtrl.EnemyMoving.IsMoving ? EnemyBossState.Walk : EnemyBossState.Idle);
                 StopAttackDash();
-                _isAttackDash = false;
             }
         }
     }
@@ -199,8 +191,12 @@ public class EnemyBossAttack : EnemyAttack
             _timeRainCount += Time.deltaTime;
             if (_timeRainCount >= 0.5f)
             {
-                PoolManager<EffectCtrlAbstract>.Ins.Spawn(_vfxWarningRain, GetPosPlayer() + new Vector3(0f, 0.1f, 0f), Quaternion.identity);
-                PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletAttackRain, GetPosPlayer() + new Vector3(0f, 10f, 0f), Quaternion.identity);
+                EffectCtrlAbstract newVfx = PoolManager<EffectCtrlAbstract>.Ins.Spawn(_vfxWarningRain, GetPosPlayer() + new Vector3(0f, 0.1f, 0f), Quaternion.identity);
+                newVfx.Attacker = _enemyCtrl;
+
+                BulletCtrlAbstract newBullet = PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletAttackRain, GetPosPlayer() + new Vector3(0f, 10f, 0f), Quaternion.identity);
+                newBullet.Attacker = _enemyCtrl;
+
                 _timeRainCount = 0;
                 _isGetPosPlayer = false;
                 _rainCount++;
@@ -229,10 +225,10 @@ public class EnemyBossAttack : EnemyAttack
         {
             if (!_isSpawnVfxLaser)
             {
+                _isSpawnVfxLaser = true;
                 _colAttackLaser.enabled = true;
                 EffectCtrlAbstract newVfxLaser = PoolManager<EffectCtrlAbstract>.Ins.Spawn(_vfxLaser, _pointAttackLaser.transform.position, _pointAttackLaser.transform.rotation);
                 newVfxLaser.transform.SetParent(transform);
-                _isSpawnVfxLaser = true;
             }
         }
     }
@@ -255,9 +251,13 @@ public class EnemyBossAttack : EnemyAttack
         if (_isAttackFire)
         {
             _isAttackFire = false;
-            PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletAttackFire, _pointAttackFire.position, _pointAttackFire.rotation);
+            BulletCtrlAbstract newBullet = PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletAttackFire, _pointAttackFire.position, _pointAttackFire.rotation);
+            newBullet.Attacker = _enemyCtrl;
         }
     }
+
+    //-----------------------------------------------------------------------
+
     private void GetRandomAttack()
     {
         List<EnemyBossState> listAttack = new() { EnemyBossState.AttackDash, EnemyBossState.AttackRain, EnemyBossState.AttackLaser, EnemyBossState.AttackFire };
@@ -272,8 +272,6 @@ public class EnemyBossAttack : EnemyAttack
         ChangeState(newAttack);
         _prevBossState = _curBossState;
     }
-
-    
 
     protected override void LoadComponents()
     {

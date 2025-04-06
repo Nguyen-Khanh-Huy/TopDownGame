@@ -123,11 +123,11 @@ public class UIPrbBtnSkill : PISMonoBehaviour
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "+1s Freeze Time: Freezes all enemies within attack range(5s Cooldown).";
+                txtSkill.text = "+1s Freeze Time: Freezes all enemies within attack range(6s Cooldown).";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "+2s Freeze Time: Freezes all enemies within attack range(5s Cooldown).";
+                txtSkill.text = "+2s Freeze Time: Freezes all enemies within attack range(6s Cooldown).";
             }
         }
         //else if (playerSkill is PlayerSkillFreeze)

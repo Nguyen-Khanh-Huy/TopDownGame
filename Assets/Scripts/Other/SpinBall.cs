@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-public class SpinBall : MonoBehaviour
+public class SpinBall : PISMonoBehaviour
 {
+    [SerializeField] private ParticleSystem _particle;
     private Coroutine _spinCoroutine;
 
     private void OnDisable()
@@ -13,6 +15,14 @@ public class SpinBall : MonoBehaviour
             StopCoroutine(_spinCoroutine);
             _spinCoroutine = null;
         }
+    }
+
+    private void Update()
+    {
+        if (!UIGamePlayManager.Ins.CheckPlayTime && _particle.isPlaying)
+            _particle.Pause();
+        else if (UIGamePlayManager.Ins.CheckPlayTime && _particle.isPaused)
+            _particle.Play();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -41,4 +51,9 @@ public class SpinBall : MonoBehaviour
         _spinCoroutine = null;
     }
 
+    protected override void LoadComponents()
+    {
+        if (_particle != null) return;
+        _particle = GetComponent<ParticleSystem>();
+    }
 }

@@ -1763,6 +1763,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbc6cdb7c2673645991b007eab20c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particle: {fileID: 192603582}
 --- !u!135 &192603580
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -13011,6 +13012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbc6cdb7c2673645991b007eab20c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particle: {fileID: 763443665}
 --- !u!198 &763443665
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -18182,6 +18184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbc6cdb7c2673645991b007eab20c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particle: {fileID: 793195150}
 --- !u!198 &793195150
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -25431,7 +25434,7 @@ MonoBehaviour:
   _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
-  TimeFreeze: 5
+  TimeFreeze: 0
 --- !u!1 &1021182149
 GameObject:
   m_ObjectHideFlags: 0
@@ -26531,6 +26534,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbc6cdb7c2673645991b007eab20c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particle: {fileID: 1132135579}
 --- !u!198 &1132135579
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -39278,6 +39282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bbc6cdb7c2673645991b007eab20c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _particle: {fileID: 1735782521}
 --- !u!198 &1735782521
 ParticleSystem:
   m_ObjectHideFlags: 0

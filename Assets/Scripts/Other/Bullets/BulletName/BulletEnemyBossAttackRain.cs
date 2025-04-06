@@ -8,11 +8,6 @@ public class BulletEnemyBossAttackRain : BulletCtrlAbstract
     [SerializeField] private bool _isSpawnHit;
     [SerializeField] private float _speedBullet = 5f;
 
-    private void OnEnable()
-    {
-        _isSpawnHit = false;
-    }
-
     private void OnTriggerEnter(Collider other)
     {
         PlayerController player = other.GetComponent<PlayerController>();
@@ -32,6 +27,7 @@ public class BulletEnemyBossAttackRain : BulletCtrlAbstract
         }
 
         if (transform.position.y >= 0f) return;
+        _isSpawnHit = false;
         PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
     }
 

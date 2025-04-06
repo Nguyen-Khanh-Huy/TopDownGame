@@ -7,11 +7,11 @@ public class EnemyMoving : PISMonoBehaviour
     [SerializeField] protected EnemyCtrlAbstract _enemyCtrl;
     [SerializeField] protected float _distance;
     [SerializeField] protected bool _isMoving;
-    [SerializeField] protected bool _isFrozen;
+    [SerializeField] protected bool _isFreeze;
     private float _coolDownFrozen;
 
     public bool IsMoving { get => _isMoving; }
-    public bool IsFrozen { get => _isFrozen; set => _isFrozen = value; }
+    public bool IsFreeze { get => _isFreeze; set => _isFreeze = value; }
 
     private void Start()
     {
@@ -27,7 +27,11 @@ public class EnemyMoving : PISMonoBehaviour
 
     protected virtual void LookAtTarget()
     {
-        if (_enemyCtrl.Hp <= 0) return;
+        if (!UIGamePlayManager.Ins.CheckPlayTime
+         || _isFreeze
+         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
+         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying) return;
+
         Vector3 targetPosition = _enemyCtrl.PlayerCtrl.transform.position;
         targetPosition.y = _enemyCtrl.transform.position.y;
         _enemyCtrl.transform.LookAt(targetPosition);
@@ -36,11 +40,14 @@ public class EnemyMoving : PISMonoBehaviour
     protected virtual void EnemyMove()
     {
         _enemyCtrl.Agent.SetDestination(_enemyCtrl.PlayerCtrl.transform.position);
-        float checkDistance = Vector3.Distance(_enemyCtrl.PlayerCtrl.transform.position, _enemyCtrl.transform.position);
-        _isMoving = checkDistance > _distance;
+        //float checkDistance = Vector3.Distance(_enemyCtrl.PlayerCtrl.transform.position, _enemyCtrl.transform.position);
+        //_isMoving = checkDistance > _distance;
 
-        bool shouldStop = (_enemyCtrl.Anim.speed == 0
-                        || _isFrozen
+        float sqrDistance = (_enemyCtrl.PlayerCtrl.transform.position - _enemyCtrl.transform.position).sqrMagnitude;
+        _isMoving = sqrDistance > (_distance * _distance);
+
+        bool shouldStop = (!UIGamePlayManager.Ins.CheckPlayTime
+                        || _isFreeze
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Idle
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
                         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying);
@@ -50,18 +57,18 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void EnemyFrozen()
     {
-        if (!_isFrozen) return;
+        if (!_isFreeze) return;
         _coolDownFrozen += Time.deltaTime;
         if (_coolDownFrozen >= _enemyCtrl.PlayerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillFreeze.TimeFreeze)
         {
             _coolDownFrozen = 0;
-            _isFrozen = false;
+            _isFreeze = false;
         }
     }
 
     private void ResetMoving()
     {
-        _isFrozen = false;
+        _isFreeze = false;
     }
     private void CheckEnemyType()
     {

@@ -6,16 +6,17 @@ public class VFXWarningEnemyBossAttackRain : EffectCtrlAbstract
 {
     [SerializeField] private ParticleSystem _particle;
 
-    protected override void OnEnable() { }
-
-    protected override void OnDisable() { }
+    protected override void OnEnable() {}
+    protected override void OnDisable() {}
 
     private void Update()
     {
-        if (!UIGamePlayManager.Ins.CheckPlayTime && _particle.isPlaying)
-            _particle.Pause();
+        bool isGamePaused = !UIGamePlayManager.Ins.CheckPlayTime;
+        bool isAttackerFrozen = _attacker != null && _attacker.EnemyMoving.IsFreeze;
 
-        else if (UIGamePlayManager.Ins.CheckPlayTime && _particle.isPaused)
+        if ((isGamePaused || isAttackerFrozen) && _particle.isPlaying)
+            _particle.Pause();
+        else if (!isGamePaused && !isAttackerFrozen && _particle.isPaused)
             _particle.Play();
 
         if (!_particle.IsAlive())

@@ -29,7 +29,6 @@ public class BulletParabol : BulletCtrlAbstract
 
     protected override void OnUpdate()
     {
-        base.OnUpdate();
         _timer += Time.deltaTime;
         float t = Mathf.Clamp01(_timer / _timeToTarget);
         Vector3 horizontalPos = Vector3.Lerp(_startPosition, _targetPosition, t);

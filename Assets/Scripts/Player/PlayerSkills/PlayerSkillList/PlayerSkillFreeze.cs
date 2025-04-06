@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerSkillFreeze : PlayerSkillAbstract
 {
     public int TimeFreeze = 0;
-    private float _coolDown = 5f;
+    private float _coolDown = 6f;
 
     private void Start()
     {
@@ -27,7 +27,7 @@ public class PlayerSkillFreeze : PlayerSkillAbstract
 
         foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
         {
-            enemy.EnemyMoving.IsFrozen = true;
+            enemy.EnemyMoving.IsFreeze = true;
         }
     }
 }
