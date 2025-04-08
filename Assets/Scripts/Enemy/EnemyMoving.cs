@@ -57,19 +57,21 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void EnemyFrozen()
     {
+        if (_enemyCtrl.Hp <= 0)
+        {
+            _coolDownFrozen = 0;
+            _isFreeze = false;
+            return;
+        }
         if (!_isFreeze) return;
         _coolDownFrozen += Time.deltaTime;
-        if (_coolDownFrozen >= _enemyCtrl.PlayerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillFreeze.TimeFreeze)
+        if (_coolDownFrozen >= _enemyCtrl.PlayerCtrl.PlayerSkillsCtrl.PlayerSkillFreeze.TimeFreeze)
         {
             _coolDownFrozen = 0;
             _isFreeze = false;
         }
     }
 
-    private void ResetMoving()
-    {
-        _isFreeze = false;
-    }
     private void CheckEnemyType()
     {
         _distance = GetComponentInParent<EnemyNearCtrlAbstract>() != null ? 1f : 6f;

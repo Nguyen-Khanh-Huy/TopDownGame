@@ -35,111 +35,111 @@ public class UIPrbBtnSkill : PISMonoBehaviour
         {
             if(playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "Double Shot";
+                txtSkill.text = "Level 1: Double Shot.";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "Triple Shot";
+                txtSkill.text = "Level Max: Triple Shot.";
             }
         }
         else if(playerSkill is PlayerSkillMultiDirection)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "Three-Way Bullet";
+                txtSkill.text = "Level 1: Three-Way Bullet.";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "Five-Way Bullet";
+                txtSkill.text = "Level Max: Five-Way Bullet.";
             }
         }
         else if (playerSkill is PlayerSkillShootRange)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "Attack Range: +10%";
+                txtSkill.text = "Level 1: +10% Attack Range.";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "Attack Range: +20%";
+                txtSkill.text = "Level Max: +20% Attack Range.";
             }
         }
         else if (playerSkill is PlayerSkillShootSpeed)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "Attack Speed: +15%";
+                txtSkill.text = "Level 1: +15% Attack Speed.";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "Attack Speed: +25%";
+                txtSkill.text = "Level Max: +15% Attack Speed.";
             }
         }
         else if (playerSkill is PlayerSkillAoeDamage)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "+1 AoE Range: All damage will be in the form of AoE damage.";
+                txtSkill.text = "Level 1: +1 AoE Range. All damage will be in the form of AoE damage.";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "+2 AoE Range: All damage will be in the form of AoE damage.";
+                txtSkill.text = "Level Max: +2 AoE Range. All damage will be in the form of AoE damage.";
             }
         }
         else if (playerSkill is PlayerSkillMoveSpeed)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "Move Speed: +15%";
+                txtSkill.text = "Level 1: +15% Move Speed.";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "Move Speed: +25%";
+                txtSkill.text = "Level Max: +25% Move Speed.";
             }
         }
         else if (playerSkill is PlayerSkillLightning)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "Lightning strikes all enemies within attack range(5s Cooldown).";
+                txtSkill.text = "Level 1: Lightning strikes all enemies within attack range(5s Cooldown).";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "Lightning strikes all enemies within attack range(2s Cooldown).";
+                txtSkill.text = "Level Max: Lightning strikes all enemies within attack range(2s Cooldown).";
             }
         }
         else if (playerSkill is PlayerSkillSpinBall)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "+3 Fireballs: Spin around you and damage Enemies";
+                txtSkill.text = "Level 1: +3 Fireballs. Spin around you and damage Enemies";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "+5 Fireballs: Spin around you and damage Enemies";
+                txtSkill.text = "Level Max: +5 Fireballs. Spin around you and damage Enemies";
             }
         }
         else if (playerSkill is PlayerSkillFreeze)
         {
             if (playerSkill.LevelSkill == 1)
             {
-                txtSkill.text = "+1s Freeze Time: Freezes all enemies within attack range(6s Cooldown).";
+                txtSkill.text = "Level 1: +1s Freeze Time. Freezes all enemies within attack range(6s Cooldown).";
             }
             else if (playerSkill.LevelSkill == 2)
             {
-                txtSkill.text = "+2s Freeze Time: Freezes all enemies within attack range(6s Cooldown).";
+                txtSkill.text = "Level Max: +2s Freeze Time. Freezes all enemies within attack range(6s Cooldown).";
             }
         }
-        //else if (playerSkill is PlayerSkillFreeze)
-        //{
-        //    if (playerSkill.LevelSkill == 1)
-        //    {
-        //        txtSkill.text = "Fire 3 missiles: To random enemies within attack range(3s Cooldown).";
-        //    }
-        //    else if (playerSkill.LevelSkill == 2)
-        //    {
-        //        txtSkill.text = "Fire 5 missiles: To random enemies within attack range(3s Cooldown).";
-        //    }
-        //}
+        else if (playerSkill is PlayerSkillRocket)
+        {
+            if (playerSkill.LevelSkill == 1)
+            {
+                txtSkill.text = "Level 1: ";
+            }
+            else if (playerSkill.LevelSkill == 2)
+            {
+                txtSkill.text = "Level Max: ";
+            }
+        }
     }
 }

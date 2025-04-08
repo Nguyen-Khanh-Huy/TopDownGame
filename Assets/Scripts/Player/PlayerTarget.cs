@@ -35,7 +35,8 @@ public class PlayerTarget : PISMonoBehaviour
                 float minDistance = Mathf.Infinity;
                 foreach (EnemyCtrlAbstract enemyInList in _listEnemyTarget)
                 {
-                    float distance = Vector3.Distance(_playerCtrl.transform.position, enemyInList.transform.position);
+                    //float distance = Vector3.Distance(_playerCtrl.transform.position, enemyInList.transform.position);
+                    float distance = (_playerCtrl.transform.position - enemyInList.transform.position).sqrMagnitude;
                     if (minDistance > distance)
                     {
                         minDistance = distance;

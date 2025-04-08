@@ -24,12 +24,6 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
         base.OnEnable();
     }
 
-    protected override void OnDisable()
-    {
-        EnemyManager.Ins.ListEnemyNearSpawn.Remove(this);
-        base.OnDisable();
-    }
-
     public void EventOnColliderAttack()
     {
         _colliderAttack.enabled = true;

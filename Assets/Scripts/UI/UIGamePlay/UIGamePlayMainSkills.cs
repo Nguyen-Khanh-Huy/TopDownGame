@@ -50,7 +50,7 @@ public class UIGamePlayMainSkills : PISMonoBehaviour
 
         for (int i = 0; i < Mathf.Infinity && skillCount < 3; i++)
         {
-            PlayerSkillAbstract playerSkill = _playerCtrl.PlayerSkillsCtrl.PlayerSkillList.GetRandomSkill();
+            PlayerSkillAbstract playerSkill = _playerCtrl.PlayerSkillsCtrl.GetRandomSkill();
             if (playerSkill != null && !_listRandomSkills.Contains(playerSkill))
             {
                 _listRandomSkills.Add(playerSkill);

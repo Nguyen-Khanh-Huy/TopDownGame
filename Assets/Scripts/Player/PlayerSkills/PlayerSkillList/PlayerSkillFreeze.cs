@@ -18,6 +18,7 @@ public class PlayerSkillFreeze : PlayerSkillAbstract
         if (TimeFreeze >= _levelSkill - 1) return;
         TimeFreeze++;
     }
+
     private void CheckLvSkillFreeze()
     {
         Invoke(nameof(CheckLvSkillFreeze), _coolDown);

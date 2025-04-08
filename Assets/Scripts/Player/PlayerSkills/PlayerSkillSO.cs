@@ -19,4 +19,5 @@ public class PlayerSkillSO : ScriptableObject
     public int TimeLightning;
     public int SpinBallCount;
     public int TimeFreeze;
+    public int TimeRoket;
 }

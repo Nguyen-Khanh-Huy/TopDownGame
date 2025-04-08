@@ -24,12 +24,6 @@ public abstract class EnemyLongCtrlAbstract : EnemyCtrlAbstract
         base.OnEnable();
     }
 
-    protected override void OnDisable()
-    {
-        EnemyManager.Ins.ListEnemyLongSpawn.Remove(this);
-        base.OnDisable();
-    }
-
     public void EventFireBulletParabol()
     {
         BulletCtrlAbstract newBullet = PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletParabol, _firePoint.position, Quaternion.identity);

@@ -37,19 +37,19 @@ public class EnemyManager : Singleton<EnemyManager>
         QuantityOverTime();
         if (_listEnemyNearSpawn.Count < _maxEnemyNear)
         {
-            EnemyCtrlAbstract newEnemyNear = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyNear(), GetVector3ForSpawn(), Quaternion.identity);
+            EnemyCtrlAbstract newEnemyNear = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyNear(), GetRandomPos(), Quaternion.identity);
             _listEnemyNearSpawn.Add((EnemyNearCtrlAbstract)newEnemyNear);
         }
 
         if (_listEnemyLongSpawn.Count < _maxEnemyLong)
         {
-            EnemyCtrlAbstract newEnemyLong = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyLong(), GetVector3ForSpawn(), Quaternion.identity);
+            EnemyCtrlAbstract newEnemyLong = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyLong(), GetRandomPos(), Quaternion.identity);
             _listEnemyLongSpawn.Add((EnemyLongCtrlAbstract)newEnemyLong);
         }
 
         if (UIGamePlayManager.Ins.GamePlayTime >= 300f && !_isSpawnBoss)
         {
-            EnemyCtrlAbstract newEnemyBoss = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyBoss(), GetVector3ForSpawn(), Quaternion.identity);
+            EnemyCtrlAbstract newEnemyBoss = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyBoss(), GetRandomPos(), Quaternion.identity);
             _isSpawnBoss = true;
         }
     }
@@ -84,7 +84,7 @@ public class EnemyManager : Singleton<EnemyManager>
         }
     }
 
-    private Vector3 GetVector3ForSpawn()
+    private Vector3 GetRandomPos()
     {
         int rd = Random.Range(0, _listPosSpawn.Count);
         return _listPosSpawn[rd];

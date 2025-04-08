@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyDespawn : PISMonoBehaviour
@@ -21,7 +23,8 @@ public class EnemyDespawn : PISMonoBehaviour
         SetActiveEnemyHpBar();
         CountEnemyDead();
         SpawnItemDropMana();
-        RemoveEnemyInPlayerTarget();
+        RemoveEnemyInListPlayerTarget();
+        RemoveEnemyInListEnemyManager();
         Invoke(nameof(DelayDespawnEnemy), _despawnByTime);
     }
 
@@ -48,10 +51,19 @@ public class EnemyDespawn : PISMonoBehaviour
         PoolManager<ItemDropCtrlAbstract>.Ins.Spawn(_enemyAbstract.ItemDropMana, changeDropPos, Quaternion.identity);
     }
 
-    private void RemoveEnemyInPlayerTarget()
+    private void RemoveEnemyInListPlayerTarget()
     {
         if (_enemyAbstract.PlayerCtrl.PlayerTarget.ListEnemyTarget.Contains(_enemyAbstract))
             _enemyAbstract.PlayerCtrl.PlayerTarget.ListEnemyTarget.Remove(_enemyAbstract);
+    }
+
+    private void RemoveEnemyInListEnemyManager()
+    {
+        if (_enemyAbstract is EnemyLongCtrlAbstract longEnemy && EnemyManager.Ins.ListEnemyLongSpawn.Contains(longEnemy))
+            EnemyManager.Ins.ListEnemyLongSpawn.Remove(longEnemy);
+
+        else if (_enemyAbstract is EnemyNearCtrlAbstract nearEnemy && EnemyManager.Ins.ListEnemyNearSpawn.Contains(nearEnemy))
+            EnemyManager.Ins.ListEnemyNearSpawn.Remove(nearEnemy);
     }
 
     protected override void LoadComponents()

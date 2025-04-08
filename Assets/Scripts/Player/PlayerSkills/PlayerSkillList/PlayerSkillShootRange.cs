@@ -36,7 +36,7 @@ public class PlayerSkillShootRange : PlayerSkillAbstract
 
     private void CheckLvSkillSpinBall()
     {
-        if (_playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.LevelSkill > 1)
-            _playerSkillCtrl.PlayerSkillList.PlayerSkillSpinBall.UpdateBallPos();
+        if (_playerSkillCtrl.PlayerSkillSpinBall.LevelSkill > 1)
+            _playerSkillCtrl.PlayerSkillSpinBall.UpdateBallPos();
     }
 }

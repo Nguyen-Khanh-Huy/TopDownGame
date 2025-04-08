@@ -80,6 +80,6 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
 
     private bool EnemyTakeDmgSkillAoeBullet(EnemyCtrlAbstract enemy)
     {
-        return Vector3.Distance(transform.position, enemy.transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillList.PlayerSkillAoeDamage.AoeRange;
+        return Vector3.Distance(transform.position, enemy.transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillAoeDamage.AoeRange;
     }
 }
