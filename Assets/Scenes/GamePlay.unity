@@ -740,7 +740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &104396646
 Transform:
   m_ObjectHideFlags: 0
@@ -1503,6 +1503,7 @@ MonoBehaviour:
   _levelSkill: 0
   _maxLevel: 0
   TimeRoket: 8
+  _bulletRocket: {fileID: -7883072796520202325, guid: 6f71770ccd4c99044944206ac73de484, type: 3}
 --- !u!1 &181041036
 GameObject:
   m_ObjectHideFlags: 0

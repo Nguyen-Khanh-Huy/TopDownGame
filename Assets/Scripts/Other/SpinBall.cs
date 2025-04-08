@@ -27,10 +27,9 @@ public class SpinBall : PISMonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         EnemyCtrlAbstract enemy = other.GetComponent<EnemyCtrlAbstract>();
-        if (enemy != null)
+        if (enemy != null && enemy.Hp > 0)
         {
-            if (enemy != null && enemy.Hp > 0)
-                Observer.Notify(ObserverID.EnemyTakeDmgSingle, enemy);
+            Observer.Notify(ObserverID.EnemyTakeDmgSingle, enemy);
         }
     }
 

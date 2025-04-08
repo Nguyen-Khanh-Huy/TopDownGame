@@ -14,7 +14,6 @@ public class EnemyManager : Singleton<EnemyManager>
     [SerializeField] private List<Vector3> _listPosSpawn = new();
 
     private int _lastUpdateTime = 0;
-    private bool _isSpawnBoss;
 
     public List<EnemyNearCtrlAbstract> ListEnemyNearSpawn { get => _listEnemyNearSpawn; set => _listEnemyNearSpawn = value; }
     public List<EnemyLongCtrlAbstract> ListEnemyLongSpawn { get => _listEnemyLongSpawn; set => _listEnemyLongSpawn = value; }
@@ -33,7 +32,6 @@ public class EnemyManager : Singleton<EnemyManager>
     {
         Invoke(nameof(SpawnEnemy), _spawnSpeed);
         if (!UIGamePlayManager.Ins.CheckPlayTime) return;
-        if (_isSpawnBoss) return;
         QuantityOverTime();
         if (_listEnemyNearSpawn.Count < _maxEnemyNear)
         {
@@ -47,40 +45,25 @@ public class EnemyManager : Singleton<EnemyManager>
             _listEnemyLongSpawn.Add((EnemyLongCtrlAbstract)newEnemyLong);
         }
 
-        if (UIGamePlayManager.Ins.GamePlayTime >= 300f && !_isSpawnBoss)
+        if (UIGamePlayManager.Ins.GamePlayTime >= 300f)
         {
+            CancelInvoke(nameof(SpawnEnemy));
             EnemyCtrlAbstract newEnemyBoss = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyBoss(), GetRandomPos(), Quaternion.identity);
-            _isSpawnBoss = true;
         }
     }
 
     private void QuantityOverTime()
     {
-        float time = UIGamePlayManager.Ins.GamePlayTime;
-
-        if (time >= 240 && _lastUpdateTime < 240)
+        int[] timeThresholds = { 60, 120, 180, 240 };
+        foreach (int t in timeThresholds)
         {
-            _maxEnemyNear++;
-            _maxEnemyLong++;
-            _lastUpdateTime = 240;
-        }
-        else if (time >= 180 && _lastUpdateTime < 180)
-        {
-            _maxEnemyNear++;
-            _maxEnemyLong++;
-            _lastUpdateTime = 180;
-        }
-        else if (time >= 120 && _lastUpdateTime < 120)
-        {
-            _maxEnemyNear++;
-            _maxEnemyLong++;
-            _lastUpdateTime = 120;
-        }
-        else if (time >= 60 && _lastUpdateTime < 60)
-        {
-            _maxEnemyNear++;
-            _maxEnemyLong++;
-            _lastUpdateTime = 60;
+            if (UIGamePlayManager.Ins.GamePlayTime >= t && _lastUpdateTime < t)
+            {
+                _maxEnemyNear++;
+                _maxEnemyLong++;
+                _lastUpdateTime = t;
+                break;
+            }
         }
     }
 

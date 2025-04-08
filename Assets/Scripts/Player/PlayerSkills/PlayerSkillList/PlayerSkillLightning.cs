@@ -7,16 +7,13 @@ public class PlayerSkillLightning : PlayerSkillAbstract
     public int TimeLightning = 7;
     [SerializeField] private HitLightning _hitLightning;
 
-    private void Start()
-    {
-        CheckLvSkillLightning();
-    }
-
     public override void Upgrade()
     {
         base.Upgrade();
         if (TimeLightning <= _levelSkill) return;
         TimeLightning -= 2;
+        CancelInvoke(nameof(CheckLvSkillLightning));
+        CheckLvSkillLightning();
     }
 
     private void CheckLvSkillLightning()

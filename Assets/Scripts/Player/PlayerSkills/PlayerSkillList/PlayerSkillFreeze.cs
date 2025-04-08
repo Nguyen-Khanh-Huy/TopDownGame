@@ -7,16 +7,13 @@ public class PlayerSkillFreeze : PlayerSkillAbstract
     public int TimeFreeze = 0;
     private float _coolDown = 6f;
 
-    private void Start()
-    {
-        CheckLvSkillFreeze();
-    }
-
     public override void Upgrade()
     {
         base.Upgrade();
         if (TimeFreeze >= _levelSkill - 1) return;
         TimeFreeze++;
+        CancelInvoke(nameof(CheckLvSkillFreeze));
+        CheckLvSkillFreeze();
     }
 
     private void CheckLvSkillFreeze()
