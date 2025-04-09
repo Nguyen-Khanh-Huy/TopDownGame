@@ -21,7 +21,7 @@ public class PlayerMana : PISMonoBehaviour
 
     public void AddMana()
     {
-        if (_curLevel < 1 || _curLevel >= 18) return;
+        if (_curLevel < 1 || _curLevel >= 18) return; // ListPlayerSkill.Count * 2 - 2
         _curMana++;
         if (_curMana >= _manaNextLevel)
             LevelUp();
