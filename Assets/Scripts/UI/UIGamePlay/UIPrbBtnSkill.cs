@@ -26,7 +26,6 @@ public class UIPrbBtnSkill : PISMonoBehaviour
     {
         playerSkill.Upgrade();
         UIGamePlayManager.Ins.Close(UIGamePlayManager.Ins.PanelSkillsDialog);
-        UIGamePlayManager.Ins.CheckPlayTime = true;
     }
 
     private void TextSkill(TMP_Text txtSkill, PlayerSkillAbstract playerSkill)
@@ -82,9 +81,9 @@ public class UIPrbBtnSkill : PISMonoBehaviour
         else if (playerSkill is PlayerSkillLightning)
         {
             if (playerSkill.LevelSkill == 1)
-                txtSkill.text = "Level 1: Lightning strikes all enemies within attack range(5s Cooldown).";
+                txtSkill.text = "Level 1: Lightning strikes all enemies within attack range (7s Cooldown).";
             else if (playerSkill.LevelSkill == 2)
-                txtSkill.text = "Level Max: Lightning strikes all enemies within attack range(2s Cooldown).";
+                txtSkill.text = "Level Max: Lightning strikes all enemies within attack range (5s Cooldown).";
         }
 
         else if (playerSkill is PlayerSkillSpinBall)
@@ -98,17 +97,17 @@ public class UIPrbBtnSkill : PISMonoBehaviour
         else if (playerSkill is PlayerSkillFreeze)
         {
             if (playerSkill.LevelSkill == 1)
-                txtSkill.text = "Level 1: +1s Freeze Time. Freezes all enemies within attack range(6s Cooldown).";
+                txtSkill.text = "Level 1: +1s Freeze Time. Freezes all enemies within attack range (6s Cooldown).";
             else if (playerSkill.LevelSkill == 2)
-                txtSkill.text = "Level Max: +2s Freeze Time. Freezes all enemies within attack range(6s Cooldown).";
+                txtSkill.text = "Level Max: +2s Freeze Time. Freezes all enemies within attack range (6s Cooldown).";
         }
 
         else if (playerSkill is PlayerSkillRocket)
         {
             if (playerSkill.LevelSkill == 1)
-                txtSkill.text = "Level 1: ";
+                txtSkill.text = "Level 1: +1 Rocket. Fire at the most crowded enemy area (6s cooldown)";
             else if (playerSkill.LevelSkill == 2)
-                txtSkill.text = "Level Max: ";
+                txtSkill.text = "Level Max: +1 Rocket. Fire at the most crowded enemy area (4s cooldown)";
         }
     }
 }

@@ -34,6 +34,11 @@ public class UIGamePlayMainSkills : PISMonoBehaviour
         ShowListSkill();
     }
 
+    private void OnDisable()
+    {
+        UIGamePlayManager.Ins.CheckPlayTime = true;
+    }
+
     private void ShowListSkill()
     {
         RandomSkill();

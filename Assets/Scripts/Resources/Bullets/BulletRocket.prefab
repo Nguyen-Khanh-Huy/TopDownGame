@@ -4853,8 +4853,6 @@ GameObject:
   - component: {fileID: 2188294503421518755}
   - component: {fileID: 7536276606997806025}
   - component: {fileID: 4904869440821712862}
-  - component: {fileID: 4529037377040178652}
-  - component: {fileID: 7974824595928619543}
   - component: {fileID: -7883072796520202325}
   m_Layer: 0
   m_Name: BulletRocket
@@ -4929,54 +4927,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &4529037377040178652
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4630435055518603908}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!135 &7974824595928619543
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4630435055518603908}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Radius: 40
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &-7883072796520202325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4990,8 +4940,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attacker: {fileID: 0}
-  _rb: {fileID: 4529037377040178652}
-  _col: {fileID: 7974824595928619543}
+  _playerCtrl: {fileID: 0}
   _hitRocket: {fileID: 9219674757419214987, guid: 1240642007f56564199f43ad17dc9094, type: 3}
-  _timeToTarget: 1.1
-  _target: {x: -3, y: 0.5, z: 5}
+  _range: 1.6
+  _height: 1.5
+  _timeToTarget: 0.6

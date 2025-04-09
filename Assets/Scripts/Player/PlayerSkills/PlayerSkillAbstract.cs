@@ -34,6 +34,7 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
         _playerSkillCtrl.PlayerSkillLightning.TimeLightning = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeLightning;
         _playerSkillCtrl.PlayerSkillSpinBall.SpinBallCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.SpinBallCount;
         _playerSkillCtrl.PlayerSkillFreeze.TimeFreeze = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeFreeze;
+        _playerSkillCtrl.PlayerSkillRocket.TimeRoket = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeRoket;
     }
 
     protected override void LoadComponents()

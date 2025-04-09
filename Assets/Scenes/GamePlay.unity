@@ -740,7 +740,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &104396646
 Transform:
   m_ObjectHideFlags: 0
@@ -8172,8 +8172,9 @@ MonoBehaviour:
   _playerSkillCtrl: {fileID: 524961273}
   _levelSkill: 0
   _maxLevel: 0
-  TimeLightning: 7
+  TimeLightning: 9
   _hitLightning: {fileID: -8685849778566484657, guid: 6674a97431964be4cb553615454d3d2c, type: 3}
+  _timeCount: 0
 --- !u!1 &357241558
 GameObject:
   m_ObjectHideFlags: 0
@@ -9738,7 +9739,7 @@ MonoBehaviour:
   _playerSkillSpinBall: {fileID: 502003125}
   _playerSkillFreeze: {fileID: 964844223}
   _playerSkillRocket: {fileID: 173038517}
-  _listAllPbSkills:
+  _listPlayerSkills:
   - {fileID: 386437850}
   - {fileID: 205558072}
   - {fileID: 1444436889}
@@ -25511,6 +25512,7 @@ MonoBehaviour:
   _levelSkill: 0
   _maxLevel: 0
   TimeFreeze: 0
+  _coolDown: 6
 --- !u!1 &1021182149
 GameObject:
   m_ObjectHideFlags: 0

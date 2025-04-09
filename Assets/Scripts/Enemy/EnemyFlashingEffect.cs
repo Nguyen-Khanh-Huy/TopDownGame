@@ -10,8 +10,8 @@ public class EnemyFlashingEffect : PISMonoBehaviour
     [SerializeField] private Material _freezeMaterial;
 
     [SerializeField] private MaterialPropertyBlock _propertyBlock;
-    [SerializeField] private float _timeFlashing = 0.5f;
-    [SerializeField] private float _timeInterval = 0.1f;
+    [SerializeField] private float _timeFlashing = 0.6f;
+    [SerializeField] private float _timeInterval = 0.2f;
 
     private Coroutine _flashCoroutine;
     private Coroutine _freezeCoroutine;

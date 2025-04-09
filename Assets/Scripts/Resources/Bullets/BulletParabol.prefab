@@ -9838,9 +9838,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2261c18b34d53584da10fc1261ff13e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attacker: {fileID: 0}
   _player: {fileID: 0}
   _hitParabol: {fileID: 2766275728077139827, guid: 5c0e5861d4d4dd148beeec94fbc21142, type: 3}
-  _colliderAttack: {fileID: 4688741624247134031}
+  _range: 0.8
   _height: 1.5
   _timeToTarget: 1.2
   _timer: 0

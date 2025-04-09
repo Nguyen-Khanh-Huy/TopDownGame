@@ -11,6 +11,7 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
 
     private void Update()
     {
+        if (_levelSkill < 2 || _levelSkill > _maxLevel || !UIGamePlayManager.Ins.CheckPlayTime) return;
         _spinBallRotation.position = _playerSkillCtrl.PlayerCtrl.transform.position;
     }
 
@@ -33,7 +34,8 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
             {
                 float angle = Mathf.Deg2Rad * (angleStep * i);
                 Vector3 offset = new Vector3(Mathf.Cos(angle), 0.2f, Mathf.Sin(angle)) * radius;
-                _listBallSpin[i].transform.position = _playerSkillCtrl.PlayerCtrl.transform.position + offset;
+                //_listBallSpin[i].transform.position = _playerSkillCtrl.PlayerCtrl.transform.position + offset;
+                _listBallSpin[i].transform.position = _spinBallRotation.position + offset;
                 _listBallSpin[i].Spin(_spinBallRotation, _speed);
             }
         }

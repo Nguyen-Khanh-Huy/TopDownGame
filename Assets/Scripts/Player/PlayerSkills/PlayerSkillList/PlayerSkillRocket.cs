@@ -7,23 +7,53 @@ public class PlayerSkillRocket : PlayerSkillAbstract
     public int TimeRoket = 8;
 
     [SerializeField] private BulletRocket _bulletRocket;
+    private float _timeCount;
+
+    private void Update()
+    {
+        if (_levelSkill < 2 || _levelSkill > _maxLevel || !UIGamePlayManager.Ins.CheckPlayTime || _playerSkillCtrl.PlayerCtrl.PlayerTarget.Target == null) return;
+        _timeCount += Time.deltaTime;
+        if (_timeCount >= TimeRoket)
+        {
+            _timeCount = 0;
+            PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletRocket, _playerSkillCtrl.PlayerCtrl.transform.position + new Vector3(0f, 1.5f, 0f), Quaternion.identity);
+        }
+    }
 
     public override void Upgrade()
     {
         base.Upgrade();
         if (TimeRoket <= 4) return;
         TimeRoket -= 2;
-        CancelInvoke(nameof(CheckLvSkillRocket));
-        CheckLvSkillRocket();
+
+        //if (_rocketCoroutine != null) 
+        //    StopCoroutine(_rocketCoroutine);
+        //_rocketCoroutine = StartCoroutine(RocketCoroutine());
     }
 
-    private void CheckLvSkillRocket()
-    {
-        Invoke(nameof(CheckLvSkillRocket), TimeRoket);
-        if (_levelSkill <= 1) return;
-        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
-        PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletRocket, _playerSkillCtrl.PlayerCtrl.transform.position + new Vector3(0f, 1.5f, 0f), Quaternion.identity);
-    }
+    //private IEnumerator RocketCoroutine()
+    //{
+    //    float timeElapsed = 0f;
+    //    float startTime = 0f;
+
+    //    while (_levelSkill > 1)
+    //    {
+    //        startTime = Time.time;
+    //        timeElapsed = 0f;
+
+    //        while (timeElapsed < TimeRoket)
+    //        {
+    //            timeElapsed = Time.time - startTime;
+    //            if (!UIGamePlayManager.Ins.CheckPlayTime) startTime -= timeElapsed;
+    //            yield return null;
+    //        }
+
+    //        if (UIGamePlayManager.Ins.CheckPlayTime)
+    //        {
+    //            PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletRocket, _playerSkillCtrl.PlayerCtrl.transform.position + new Vector3(0f, 1.5f, 0f), Quaternion.identity);
+    //        }
+    //    }
+    //}
 
     protected override void LoadComponents()
     {

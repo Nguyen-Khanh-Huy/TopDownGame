@@ -20,6 +20,7 @@ MonoBehaviour:
   MultiShotCount: 1
   MultiDirCount: 0
   AoeRange: 0
-  TimeLightning: 7
+  TimeLightning: 9
   SpinBallCount: 1
   TimeFreeze: 0
+  TimeRoket: 8

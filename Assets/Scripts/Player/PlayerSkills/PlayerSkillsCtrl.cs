@@ -18,7 +18,7 @@ public class PlayerSkillsCtrl : PISMonoBehaviour
     [SerializeField] private PlayerSkillFreeze _playerSkillFreeze;
     [SerializeField] private PlayerSkillRocket _playerSkillRocket;
 
-    [SerializeField] private List<PlayerSkillAbstract> _listAllPbSkills = new();
+    [SerializeField] private List<PlayerSkillAbstract> _listPlayerSkills = new();
 
     public PlayerController PlayerCtrl { get => _playerCtrl; }
     public PlayerSkillMoveSpeed PlayerSkillMoveSpeed { get => _playerSkillMoveSpeed; }
@@ -48,19 +48,18 @@ public class PlayerSkillsCtrl : PISMonoBehaviour
         _playerSkillFreeze = GetComponentInChildren<PlayerSkillFreeze>();
         _playerSkillRocket = GetComponentInChildren<PlayerSkillRocket>();
 
-        if (_listAllPbSkills.Count == transform.childCount) return;
-        _listAllPbSkills.Clear();
+        if (_listPlayerSkills.Count == transform.childCount) return;
+        _listPlayerSkills.Clear();
         foreach (Transform child in transform)
         {
-            PlayerSkillAbstract skill = child.GetComponent<PlayerSkillAbstract>();
-            if (skill != null)
-                _listAllPbSkills.Add(skill);
+            if (child.TryGetComponent<PlayerSkillAbstract>(out var skill))
+                _listPlayerSkills.Add(skill);
         }
     }
 
     public PlayerSkillAbstract GetRandomSkill()
     {
-        List<PlayerSkillAbstract> SelectedSkills = _listAllPbSkills.Where(skill => skill.LevelSkill > 0 && skill.LevelSkill < 3).ToList();
+        List<PlayerSkillAbstract> SelectedSkills = _listPlayerSkills.Where(skill => skill.LevelSkill > 0 && skill.LevelSkill < 3).ToList();
         if (SelectedSkills.Count == 0)
             return null;
 

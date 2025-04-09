@@ -4,55 +4,56 @@ using UnityEngine;
 
 public class BulletParabol : BulletCtrlAbstract
 {
-    [SerializeField] private PlayerController _player;
+    [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private HitParabol _hitParabol;
-    [SerializeField] private SphereCollider _colliderAttack;
 
+    [SerializeField] private float _range = 0.8f;
     [SerializeField] private float _height = 1.5f;
     [SerializeField] private float _timeToTarget = 1.2f;
     [SerializeField] private float _timer = 0f;
 
-    private Vector3 _startPosition;
-    private Vector3 _targetPosition;
+    private Vector3 _startPos;
+    private Vector3 _targetPos;
 
     private void OnEnable()
     {
-        _startPosition = transform.position;
-        _targetPosition = _player.transform.position;
-        _targetPosition.y = 0.2f;
-    }
-
-    private void OnDisable()
-    {
-        _colliderAttack.enabled = false;
+        _startPos = transform.position;
+        _targetPos = _playerCtrl.transform.position;
+        _targetPos.y = 0.2f;
     }
 
     protected override void OnUpdate()
     {
         _timer += Time.deltaTime;
         float t = Mathf.Clamp01(_timer / _timeToTarget);
-        Vector3 horizontalPos = Vector3.Lerp(_startPosition, _targetPosition, t);
-        float y = _startPosition.y + (_targetPosition.y - _startPosition.y) * t + _height * 4 * t * (1 - t);
+        Vector3 horizontalPos = Vector3.Lerp(_startPos, _targetPos, t);
+        float y = _startPos.y + (_targetPos.y - _startPos.y) * t + _height * 4 * t * (1 - t);
         transform.position = new Vector3(horizontalPos.x, y, horizontalPos.z);
-
-        if (!_colliderAttack.enabled && _timer >= _timeToTarget - 0.1f)
-            _colliderAttack.enabled = true;
 
         if (_timer >= _timeToTarget)
         {
             _timer = 0f;
-            DespawnBulletParabol();
+            CheckPlayerTakeDmg();
+            PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitParabol, transform.position, Quaternion.identity);
+            PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void CheckPlayerTakeDmg()
     {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player != null)
+        Collider[] hits = Physics.OverlapSphere(transform.position, _range);
+        foreach (var hit in hits)
         {
-            Observer.Notify(ObserverID.PlayerTakeDmg);
+            if (hit.TryGetComponent<PlayerController>(out var player))
+                Observer.Notify(ObserverID.PlayerTakeDmg);
         }
     }
+
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(transform.position, _range);
+    //}
 
     //private Vector3 MoveParabol()
     //{
@@ -68,12 +69,6 @@ public class BulletParabol : BulletCtrlAbstract
     //    return velocityXZ + Vector3.up * velocityY;
     //}
 
-    private void DespawnBulletParabol()
-    {
-        PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitParabol, transform.position, Quaternion.identity);
-        PoolManager<BulletCtrlAbstract>.Ins.Despawn(this);
-    }
-
     public override string GetName()
     {
         return "BulletParabol";
@@ -81,9 +76,8 @@ public class BulletParabol : BulletCtrlAbstract
 
     protected override void LoadComponents()
     {
-        if (_player != null && _hitParabol != null && _colliderAttack != null) return;
-        _player = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+        if (_playerCtrl != null && _hitParabol != null) return;
+        _playerCtrl = GameObject.Find("PlayerController").GetComponent<PlayerController>();
         _hitParabol = Resources.Load<HitParabol>("Hits/HitParabol");
-        _colliderAttack = GetComponent<SphereCollider>();
     }
 }
