@@ -5,8 +5,8 @@ using UnityEngine;
 
 public abstract class PoolManager<T> : Singleton<PoolManager<T>> where T : PoolObj<T>
 {
-    protected int _spawnCount = 0;
-    [SerializeField] public List<T> _listPool = new();
+    [SerializeField] private List<T> _listPool = new();
+    private int _spawnCount = 0;
 
     protected override void Awake()
     {
@@ -70,12 +70,12 @@ public abstract class PoolManager<T> : Singleton<PoolManager<T>> where T : PoolO
         newObject.name = _spawnCount + "_" + prefab.GetName();
     }
 
-    protected virtual void AddObjToPool(T obj)
+    private void AddObjToPool(T obj)
     {
         _listPool.Add(obj);
     }
 
-    protected virtual void RemoveObjFromPool(T obj)
+    private void RemoveObjFromPool(T obj)
     {
         _listPool.Remove(obj);
     }

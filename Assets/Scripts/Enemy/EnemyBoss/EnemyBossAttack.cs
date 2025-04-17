@@ -14,7 +14,6 @@ public class EnemyBossAttack : EnemyAttack
     [SerializeField] private VFXDashEnemyBossAttackDash _vfxDash;
     [SerializeField] private VFXSmokeEnemyBossAttackDash _vfxSmokeAttackDash;
     [SerializeField] private Transform _pointAttackDash;
-    [SerializeField] private Dictionary<EnemyBossState, Action<AnimatorStateInfo>> _attackHandlers;
 
     [Header("Attack Rain:")]
     [SerializeField] private bool _isAttackRain;
@@ -36,6 +35,8 @@ public class EnemyBossAttack : EnemyAttack
     [SerializeField] private bool _isAttackFire;
     [SerializeField] private BulletEnemyBossAttackFire _bulletAttackFire;
     [SerializeField] private Transform _pointAttackFire;
+
+    private Dictionary<EnemyBossState, Action<AnimatorStateInfo>> _attackHandlers;
 
     public bool IsAttackDash { get => _isAttackDash; set => _isAttackDash = value; }
     public bool IsAttackRain { get => _isAttackRain; set => _isAttackRain = value; }
@@ -105,7 +106,6 @@ public class EnemyBossAttack : EnemyAttack
         else if (_timeCount >= _timeAttack)
         {
             _timeCount = 0;
-
             GetRandomAttack();
             //ChangeState(EnemyBossState.AttackDash);
             //ChangeState(EnemyBossState.AttackRain);

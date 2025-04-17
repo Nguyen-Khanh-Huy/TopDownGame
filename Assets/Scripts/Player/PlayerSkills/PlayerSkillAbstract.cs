@@ -11,7 +11,7 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
 
     public int LevelSkill { get => _levelSkill; }
 
-    private void OnEnable()
+    private void Start()
     {
         Init();
     }

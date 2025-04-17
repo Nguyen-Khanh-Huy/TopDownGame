@@ -20,8 +20,7 @@ public class UIGamePlayMainSkills : PISMonoBehaviour
         
         foreach (Transform child in _panelListSkills)
         {
-            UIPrbBtnSkill skillButton = child.GetComponent<UIPrbBtnSkill>();
-            if (skillButton != null)
+            if (child.TryGetComponent<UIPrbBtnSkill>(out var skillButton))
             {
                 _listDefaultSkills.Add(skillButton);
             }
