@@ -13,7 +13,6 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     [SerializeField] protected EnemyFlashingEffect _enemyFlashingEffect;
     [SerializeField] protected EnemySO _enemySO;
     [SerializeField] protected Animator _anim;
-    //[SerializeField] protected CapsuleCollider _col;
     [SerializeField] protected NavMeshAgent _agent;
     [SerializeField] protected ItemDropMana _itemDropMana;
     [SerializeField] protected Slider _hpBar;
@@ -28,7 +27,6 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     public ItemDropMana ItemDropMana { get => _itemDropMana; }
     public Slider HpBar { get => _hpBar; set => _hpBar = value; }
     public EnemySO EnemySO { get => _enemySO; }
-    //public CapsuleCollider Col { get => _col; set => _col = value; }
 
     protected override void LoadComponents()
     {
@@ -38,7 +36,6 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
         _enemyAttack = GetComponentInChildren<EnemyAttack>();
         _enemyFlashingEffect = GetComponentInChildren<EnemyFlashingEffect>();
         _anim = GetComponent<Animator>();
-        //_col = GetComponent<CapsuleCollider>();
         _agent = GetComponent<NavMeshAgent>();
         _itemDropMana = Resources.Load<ItemDropMana>("ItemsDrop/ItemDropMana");
         _hpBar = GetComponentInChildren<Slider>();

@@ -45,7 +45,7 @@ public class EnemyManager : Singleton<EnemyManager>
             _listEnemyLongSpawn.Add((EnemyLongCtrlAbstract)newEnemyLong);
         }
 
-        if (UIGamePlayManager.Ins.GamePlayTime >= 10f)
+        if (UIGamePlayManager.Ins.GamePlayTime >= 300f)
         {
             CancelInvoke(nameof(SpawnEnemy));
             EnemyCtrlAbstract newEnemyBoss = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyBoss(), GetRandomPos(), Quaternion.identity);

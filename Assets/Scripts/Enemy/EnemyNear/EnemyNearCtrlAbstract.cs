@@ -6,14 +6,6 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
 {
     [SerializeField] private SphereCollider _colliderAttack;
 
-    protected override void LoadComponents()
-    {
-        base.LoadComponents();
-        if (_enemySO != null && _colliderAttack != null) return;
-        _enemySO = Resources.Load<EnemySO>("SO/EnemyNearSO");
-        _colliderAttack = GetComponentInChildren<SphereCollider>();
-    }
-
     protected override void OnEnable()
     {
         _hpBar.gameObject.SetActive(true);
@@ -32,5 +24,13 @@ public abstract class EnemyNearCtrlAbstract : EnemyCtrlAbstract
     public void EventOffColliderAttack()
     {
         _colliderAttack.enabled = false;
+    }
+
+    protected override void LoadComponents()
+    {
+        base.LoadComponents();
+        if (_enemySO != null && _colliderAttack != null) return;
+        _enemySO = Resources.Load<EnemySO>("SO/EnemyNearSO");
+        _colliderAttack = GetComponentInChildren<SphereCollider>();
     }
 }

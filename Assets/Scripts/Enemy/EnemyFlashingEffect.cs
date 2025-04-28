@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 public class EnemyFlashingEffect : PISMonoBehaviour
 {
@@ -15,14 +14,6 @@ public class EnemyFlashingEffect : PISMonoBehaviour
 
     private Coroutine _flashCoroutine;
     private Coroutine _freezeCoroutine;
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartFreeze();
-        }
-    }
 
     public void StartFlash()
     {

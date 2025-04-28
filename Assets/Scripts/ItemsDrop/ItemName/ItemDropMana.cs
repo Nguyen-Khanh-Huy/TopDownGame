@@ -7,20 +7,20 @@ public class ItemDropMana : ItemDropCtrlAbstract
 {
     [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private SphereCollider _col;
-    private Vector3 _fallPosition;
-    private float _fallSpeed = 3f;
+    private Vector3 _targetPos;
+    private float _moveSpeed = 3f;
 
     private void OnEnable()
     {
         float randomX = transform.position.x + Random.Range(-1f, 1f);
         float randomZ = transform.position.z + Random.Range(-1f, 1f);
-        _fallPosition = new Vector3(randomX, 0.2f, randomZ);
+        _targetPos = new Vector3(randomX, 0.2f, randomZ);
     }
 
     private void Update()
     {
         if (transform.position.y <= 0.2f) return;
-        transform.position = Vector3.MoveTowards(transform.position, _fallPosition, _fallSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _targetPos, _moveSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter(Collider other)

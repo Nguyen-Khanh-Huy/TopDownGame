@@ -55,9 +55,11 @@ public class PlayerMoving : PISMonoBehaviour
         //}
     }
 
-    private void ChangeState(PlayerState State)
+    private void ChangeState(PlayerState newState)
     {
-        _playerController.Anim.SetInteger("State", (int)State);
+        //_playerController.Anim.SetInteger("State", (int)State);
+        if (_playerController.Anim.GetInteger("State") != (int)newState)
+            _playerController.Anim.SetInteger("State", (int)newState);
     }
 
     private void Moving()

@@ -10,9 +10,9 @@ public class EnemyDespawn : PISMonoBehaviour
     [SerializeField] private float _despawnByTime = 3f;
     [SerializeField] private bool _isDespawn;
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (!UIGamePlayManager.Ins.CheckPlayTime) return;
+        //if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         DespawnEnemy();
     }
 

@@ -680,7 +680,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hp: 0
   _playerCtrl: {fileID: 0}
-  _enemyMoving: {fileID: 5829898454483108344}
+  _enemyMoving: {fileID: 0}
   _enemyAttack: {fileID: 5684126125375314448}
   _enemyFlashingEffect: {fileID: 2415738246484853206}
   _enemySO: {fileID: 11400000, guid: b4a44e7ff18a52c449a47937516263fe, type: 2}
@@ -2048,9 +2048,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7075973940152471252}
-  - component: {fileID: 5829898454483108344}
+  - component: {fileID: 2731025027961765533}
   m_Layer: 0
-  m_Name: EnemyMoving
+  m_Name: EnemyLongMoving
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2071,7 +2071,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4744928103363491530}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5829898454483108344
+--- !u!114 &2731025027961765533
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2080,7 +2080,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6268449184843850084}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77c8a8c0b691c84490d2e6649b3ee9c, type: 3}
+  m_Script: {fileID: 11500000, guid: 503ef612eead5d04ebc76559e12bfac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyCtrl: {fileID: 1197785041297933665}
