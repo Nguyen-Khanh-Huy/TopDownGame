@@ -47,8 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e6cd6b6140c2194196c025ea789db8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attacker: {fileID: 0}
   _speedBullet: 10
-  _despawnByTime: 2
+  _maxDistance: 10
+  _startPos: {x: 0, y: 0, z: 0}
 --- !u!1 &2256050571139341572
 GameObject:
   m_ObjectHideFlags: 0

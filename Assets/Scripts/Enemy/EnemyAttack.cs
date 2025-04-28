@@ -16,7 +16,7 @@ public class EnemyAttack : PISMonoBehaviour
     {
         if (!UIGamePlayManager.Ins.CheckPlayTime || _enemyCtrl.EnemyMoving.IsFreeze)
         {
-            _enemyCtrl.Anim.speed = 0;
+            if (_enemyCtrl.Anim.speed != 0) _enemyCtrl.Anim.speed = 0;
             return;
         }
         if (_enemyCtrl.Anim.speed != 1) _enemyCtrl.Anim.speed = 1;

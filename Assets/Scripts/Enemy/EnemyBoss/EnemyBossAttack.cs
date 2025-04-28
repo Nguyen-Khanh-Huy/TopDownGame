@@ -124,7 +124,7 @@ public class EnemyBossAttack : EnemyAttack
     private void ResetInforAttackDash()
     {
         _isSpawnVfxDash = false;
-        _enemyCtrl.Col.radius = 0.4f;
+        GetComponentInParent<CapsuleCollider>().radius = 0.4f;
     }
 
     public void StopAttackDash()
@@ -132,7 +132,7 @@ public class EnemyBossAttack : EnemyAttack
         if (!_isSpawnVfxDash) return;
         _isAttackDash = false;
         _isSpawnVfxDash = false;
-        _enemyCtrl.Col.radius = 0.4f;
+        GetComponentInParent<CapsuleCollider>().radius = 0.4f;
         PoolManager<EffectCtrlAbstract>.Ins.Despawn(transform.GetComponentInChildren<VFXDashEnemyBossAttackDash>());
         PoolManager<EffectCtrlAbstract>.Ins.Spawn(_vfxSmokeAttackDash, _enemyCtrl.transform.position + new Vector3(0f, 0.1f, 0f), Quaternion.Euler(90f, 0f, 0f));
     }
@@ -144,7 +144,7 @@ public class EnemyBossAttack : EnemyAttack
             if (!_isSpawnVfxDash)
             {
                 _isSpawnVfxDash = true;
-                _enemyCtrl.Col.radius = 1f;
+                GetComponentInParent<CapsuleCollider>().radius = 1f;
                 EffectCtrlAbstract newVfxDash = PoolManager<EffectCtrlAbstract>.Ins.Spawn(_vfxDash, _pointAttackDash.transform.position, Quaternion.identity);
                 newVfxDash.Attacker = _enemyCtrl;
                 newVfxDash.transform.SetParent(transform);

@@ -6,8 +6,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private EnemyPrefab _enemyPrefab;
-    [SerializeField] private int _maxEnemyNear = 15;
-    [SerializeField] private int _maxEnemyLong = 5;
+    [SerializeField] private int _maxEnemyNear = 17;
+    [SerializeField] private int _maxEnemyLong = 3;
     [SerializeField] private float _spawnSpeed = 1f;
     [SerializeField] private List<EnemyNearCtrlAbstract> _listEnemyNearSpawn = new();
     [SerializeField] private List<EnemyLongCtrlAbstract> _listEnemyLongSpawn = new();
@@ -45,7 +45,7 @@ public class EnemyManager : Singleton<EnemyManager>
             _listEnemyLongSpawn.Add((EnemyLongCtrlAbstract)newEnemyLong);
         }
 
-        if (UIGamePlayManager.Ins.GamePlayTime >= 300f)
+        if (UIGamePlayManager.Ins.GamePlayTime >= 10f)
         {
             CancelInvoke(nameof(SpawnEnemy));
             EnemyCtrlAbstract newEnemyBoss = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyBoss(), GetRandomPos(), Quaternion.identity);

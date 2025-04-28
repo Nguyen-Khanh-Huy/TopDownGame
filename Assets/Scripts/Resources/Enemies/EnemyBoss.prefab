@@ -1069,7 +1069,7 @@ Transform:
   m_GameObject: {fileID: 2413305186303414467}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.68, y: 0.030000448, z: 9.13}
+  m_LocalPosition: {x: -4.68, y: 0.030000448, z: 9.55}
   m_LocalScale: {x: 1.2, y: 1, z: 1.2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1167,7 +1167,6 @@ MonoBehaviour:
   _enemyFlashingEffect: {fileID: 861676532992977080}
   _enemySO: {fileID: 11400000, guid: 7f28afa82f2189041be64ec7db3f48e3, type: 2}
   _anim: {fileID: 2398021465081169970}
-  _col: {fileID: 5702048329107010755}
   _agent: {fileID: 435456567248546011}
   _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 2006109119191682419}
@@ -1741,7 +1740,6 @@ GameObject:
   - component: {fileID: 6203857762073075727}
   - component: {fileID: 6888185136425368801}
   - component: {fileID: 8788450064741610988}
-  - component: {fileID: 2964630539983204213}
   m_Layer: 0
   m_Name: EnemyHpBar
   m_TagString: Untagged
@@ -1756,14 +1754,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3324331089194909879}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3083003179614541733}
   m_Father: {fileID: 2129348814022617520}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2.4}
@@ -1832,19 +1830,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &2964630539983204213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3324331089194909879}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179cfafc6748e4d418b6f13bd8dfaa97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 6203857762073075727}
 --- !u!1 &3436766771298496140
 GameObject:
   m_ObjectHideFlags: 0
@@ -8099,8 +8084,8 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
   - {fileID: 2100000, guid: 802c29bbb81cb024f937b03803c68fbc, type: 2}
   _freezeMaterial: {fileID: 2100000, guid: 7b9920cb2a6f5f042a13a67f593a61b8, type: 2}
-  _timeFlashing: 0.5
-  _timeInterval: 0.1
+  _timeFlashing: 0.6
+  _timeInterval: 0.2
 --- !u!1 &6406060149083376620
 GameObject:
   m_ObjectHideFlags: 0

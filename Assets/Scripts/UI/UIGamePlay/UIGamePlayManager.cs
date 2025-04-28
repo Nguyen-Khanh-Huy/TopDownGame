@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,7 +24,7 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
     public float GamePlayTime { get => _gamePlayTime; }
 
     private bool _isWarning;
-    private void OnEnable()
+    private void OnEnable() 
     {
         Init();
     }

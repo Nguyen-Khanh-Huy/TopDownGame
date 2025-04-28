@@ -6,8 +6,7 @@ public class EnemyBoss : EnemyBossCtrlAbstract
 {
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player != null)
+        if (other.TryGetComponent<PlayerController>(out var player))
         {
             Observer.Notify(ObserverID.PlayerTakeDmg);
         }

@@ -9839,9 +9839,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _attacker: {fileID: 0}
-  _player: {fileID: 0}
+  _playerCtrl: {fileID: 0}
+  _collider: {fileID: 4688741624247134031}
   _hitParabol: {fileID: 2766275728077139827, guid: 5c0e5861d4d4dd148beeec94fbc21142, type: 3}
-  _range: 0.8
   _height: 1.5
   _timeToTarget: 1.2
   _timer: 0

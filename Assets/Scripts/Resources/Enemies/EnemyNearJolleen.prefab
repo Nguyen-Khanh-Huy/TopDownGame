@@ -562,7 +562,6 @@ MonoBehaviour:
   _enemyFlashingEffect: {fileID: 2206924418056577851}
   _enemySO: {fileID: 11400000, guid: d62987b9915ceb540afb987351306f27, type: 2}
   _anim: {fileID: 610710989345930290}
-  _col: {fileID: 1748252896368188953}
   _agent: {fileID: 7268034290586557352}
   _itemDropMana: {fileID: -3705925533566276475, guid: 7cb9eed73193b3344897c488638bf202, type: 3}
   _hpBar: {fileID: 2852349640754489970}
@@ -2417,7 +2416,6 @@ GameObject:
   - component: {fileID: 867138265343425209}
   - component: {fileID: 3507645832608903557}
   - component: {fileID: 2577211884325276414}
-  - component: {fileID: 6898438334816061931}
   m_Layer: 0
   m_Name: EnemyHpBar
   m_TagString: Untagged
@@ -2432,14 +2430,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7401344758995190603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3101722216247832585}
   m_Father: {fileID: 1249391158507124625}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2.2}
@@ -2508,19 +2506,6 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &6898438334816061931
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7401344758995190603}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 179cfafc6748e4d418b6f13bd8dfaa97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _canvas: {fileID: 867138265343425209}
 --- !u!1 &7417660313886629021
 GameObject:
   m_ObjectHideFlags: 0

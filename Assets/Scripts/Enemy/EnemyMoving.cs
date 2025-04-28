@@ -27,6 +27,7 @@ public class EnemyMoving : PISMonoBehaviour
 
     protected virtual void LookAtTarget()
     {
+        if (_enemyCtrl.Hp <= 0) return;
         if (!UIGamePlayManager.Ins.CheckPlayTime
          || _isFreeze
          || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
@@ -39,10 +40,12 @@ public class EnemyMoving : PISMonoBehaviour
 
     protected virtual void EnemyMove()
     {
+        if (_enemyCtrl.Hp <= 0)
+        {
+            _enemyCtrl.Agent.isStopped = true;
+            return; 
+        }
         _enemyCtrl.Agent.SetDestination(_enemyCtrl.PlayerCtrl.transform.position);
-        //float checkDistance = Vector3.Distance(_enemyCtrl.PlayerCtrl.transform.position, _enemyCtrl.transform.position);
-        //_isMoving = checkDistance > _distance;
-
         float sqrDistance = (_enemyCtrl.PlayerCtrl.transform.position - _enemyCtrl.transform.position).sqrMagnitude;
         _isMoving = sqrDistance > (_distance * _distance);
 
