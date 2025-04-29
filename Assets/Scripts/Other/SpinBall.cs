@@ -29,7 +29,7 @@ public class SpinBall : PISMonoBehaviour
         EnemyCtrlAbstract enemy = other.GetComponent<EnemyCtrlAbstract>();
         if (enemy != null && enemy.Hp > 0)
         {
-            Observer.Notify(ObserverID.EnemyTakeDmgSingle, enemy);
+            Observer.NotifyObserver(ObserverID.EnemyTakeDmgSingle, enemy);
         }
     }
 

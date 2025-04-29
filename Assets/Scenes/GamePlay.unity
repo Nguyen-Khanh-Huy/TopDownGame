@@ -822,7 +822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &104396646
 Transform:
   m_ObjectHideFlags: 0
@@ -854,9 +854,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPool: {fileID: 1923659223}
   _enemyPrefab: {fileID: 498986037}
-  _maxEnemyNear: 17
-  _maxEnemyLong: 3
+  _maxEnemyCreep: 20
+  _maxEnemyNear: 5
+  _maxEnemyLong: 2
   _spawnSpeed: 1
+  _listEnemyCreepSpawn: []
   _listEnemyNearSpawn: []
   _listEnemyLongSpawn: []
   _listPosSpawn:
@@ -1902,7 +1904,7 @@ Transform:
   m_GameObject: {fileID: 192603577}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.039}
+  m_LocalPosition: {x: 0.66, y: 0.383, z: -1.91}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2547,7 +2549,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.98
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -3083,7 +3085,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 3
@@ -9851,18 +9853,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42561549b6104654f8f7d5e20fdd82cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _listEnemyPrefabs:
-  - {fileID: 1721334475101710534, guid: eff99da903d10314ea54c3177ad0fd36, type: 3}
-  - {fileID: 1197785041297933665, guid: b8efbc4b2b5247f4490446390d5d96e0, type: 3}
-  - {fileID: 8778607339776674792, guid: 5166fcff471981b47bbcc3adfc189fb9, type: 3}
-  - {fileID: 317858282575269831, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
+  _listEnemyAll:
+  - {fileID: 4768025833539451281, guid: eff99da903d10314ea54c3177ad0fd36, type: 3}
+  - {fileID: 8836297401183228028, guid: 66f6d4f8f535ed946895535625fd1fa8, type: 3}
+  - {fileID: 5540749096671631052, guid: b8efbc4b2b5247f4490446390d5d96e0, type: 3}
+  - {fileID: 623138573372353309, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
+  _listEnemyCreep:
+  - {fileID: 8836297401183228028, guid: 66f6d4f8f535ed946895535625fd1fa8, type: 3}
   _listEnemyNear:
-  - {fileID: 8778607339776674792, guid: 5166fcff471981b47bbcc3adfc189fb9, type: 3}
-  - {fileID: 317858282575269831, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
+  - {fileID: 623138573372353309, guid: 4d18ed379cbdc454ea7ebfa25f4ae260, type: 3}
   _listEnemyLong:
-  - {fileID: 1197785041297933665, guid: b8efbc4b2b5247f4490446390d5d96e0, type: 3}
+  - {fileID: 5540749096671631052, guid: b8efbc4b2b5247f4490446390d5d96e0, type: 3}
   _listEnemyBoss:
-  - {fileID: 1721334475101710534, guid: eff99da903d10314ea54c3177ad0fd36, type: 3}
+  - {fileID: 4768025833539451281, guid: eff99da903d10314ea54c3177ad0fd36, type: 3}
 --- !u!1 &501798313
 GameObject:
   m_ObjectHideFlags: 0
@@ -14318,7 +14321,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.98
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -14854,7 +14857,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 3
@@ -19490,7 +19493,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.98
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -20026,7 +20029,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 3
@@ -27579,7 +27582,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.98
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -28115,7 +28118,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 3
@@ -39512,7 +39515,7 @@ ParticleSystem:
     gravityModifier:
       serializedVersion: 2
       minMaxState: 0
-      scalar: -0.98
+      scalar: -1
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -40048,7 +40051,7 @@ ParticleSystem:
         m_RotationOrder: 4
     separateAxes: 0
   RotationModule:
-    enabled: 1
+    enabled: 0
     x:
       serializedVersion: 2
       minMaxState: 3

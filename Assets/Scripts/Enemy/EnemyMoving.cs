@@ -68,7 +68,7 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void CheckEnemyType()
     {
-        _distance = GetComponentInParent<EnemyNearCtrlAbstract>() != null ? 1f : 6f;
+        _distance = GetComponentInParent<EnemyNearCtrl>() != null ? 1f : 6f;
     }
 
     protected override void LoadComponents()

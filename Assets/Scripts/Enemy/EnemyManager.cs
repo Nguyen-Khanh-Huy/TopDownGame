@@ -6,17 +6,20 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private EnemyPrefab _enemyPrefab;
-    [SerializeField] private int _maxEnemyNear = 17;
-    [SerializeField] private int _maxEnemyLong = 3;
+    [SerializeField] private int _maxEnemyCreep = 20;
+    [SerializeField] private int _maxEnemyNear = 5;
+    [SerializeField] private int _maxEnemyLong = 2;
     [SerializeField] private float _spawnSpeed = 1f;
-    [SerializeField] private List<EnemyNearCtrlAbstract> _listEnemyNearSpawn = new();
-    [SerializeField] private List<EnemyLongCtrlAbstract> _listEnemyLongSpawn = new();
+    [SerializeField] private List<EnemyCreepCtrl> _listEnemyCreepSpawn = new();
+    [SerializeField] private List<EnemyNearCtrl> _listEnemyNearSpawn = new();
+    [SerializeField] private List<EnemyLongCtrl> _listEnemyLongSpawn = new();
     [SerializeField] private List<Vector3> _listPosSpawn = new();
 
     private int _lastUpdateTime = 0;
 
-    public List<EnemyNearCtrlAbstract> ListEnemyNearSpawn { get => _listEnemyNearSpawn; set => _listEnemyNearSpawn = value; }
-    public List<EnemyLongCtrlAbstract> ListEnemyLongSpawn { get => _listEnemyLongSpawn; set => _listEnemyLongSpawn = value; }
+    public List<EnemyCreepCtrl> ListEnemyCreepSpawn { get => _listEnemyCreepSpawn; set => _listEnemyCreepSpawn = value; }
+    public List<EnemyNearCtrl> ListEnemyNearSpawn { get => _listEnemyNearSpawn; set => _listEnemyNearSpawn = value; }
+    public List<EnemyLongCtrl> ListEnemyLongSpawn { get => _listEnemyLongSpawn; set => _listEnemyLongSpawn = value; }
 
     protected override void Awake()
     {
@@ -33,16 +36,22 @@ public class EnemyManager : Singleton<EnemyManager>
         Invoke(nameof(SpawnEnemy), _spawnSpeed);
         if (!UIGamePlayManager.Ins.CheckPlayTime) return;
         QuantityOverTime();
+        if (_listEnemyCreepSpawn.Count < _maxEnemyCreep)
+        {
+            EnemyCtrlAbstract newEnemyCreep = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyCreep(), GetRandomPos(), Quaternion.identity);
+            _listEnemyCreepSpawn.Add((EnemyCreepCtrl)newEnemyCreep);
+        }
+
         if (_listEnemyNearSpawn.Count < _maxEnemyNear)
         {
             EnemyCtrlAbstract newEnemyNear = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyNear(), GetRandomPos(), Quaternion.identity);
-            _listEnemyNearSpawn.Add((EnemyNearCtrlAbstract)newEnemyNear);
+            _listEnemyNearSpawn.Add((EnemyNearCtrl)newEnemyNear);
         }
 
         if (_listEnemyLongSpawn.Count < _maxEnemyLong)
         {
             EnemyCtrlAbstract newEnemyLong = PoolManager<EnemyCtrlAbstract>.Ins.Spawn(_enemyPrefab.GetEnemyLong(), GetRandomPos(), Quaternion.identity);
-            _listEnemyLongSpawn.Add((EnemyLongCtrlAbstract)newEnemyLong);
+            _listEnemyLongSpawn.Add((EnemyLongCtrl)newEnemyLong);
         }
 
         if (UIGamePlayManager.Ins.GamePlayTime >= 300f)

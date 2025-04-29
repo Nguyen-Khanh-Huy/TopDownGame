@@ -46,7 +46,7 @@ public class BulletParabol : BulletCtrlAbstract
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent<PlayerController>(out var player))
-            Observer.Notify(ObserverID.PlayerTakeDmg);
+            Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
     }
 
     public override string GetName()

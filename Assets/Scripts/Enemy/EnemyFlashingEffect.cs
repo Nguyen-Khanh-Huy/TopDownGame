@@ -4,9 +4,9 @@ using UnityEngine;
 public class EnemyFlashingEffect : PISMonoBehaviour
 {
     [SerializeField] private EnemyCtrlAbstract _enemyCtrl;
+    [SerializeField] private Material _freezeMaterial;
     [SerializeField] private Renderer[] _renderer;
     [SerializeField] private Material[] _defaultMaterial;
-    [SerializeField] private Material _freezeMaterial;
 
     [SerializeField] private MaterialPropertyBlock _propertyBlock;
     [SerializeField] private float _timeFlashing = 0.6f;
@@ -115,19 +115,23 @@ public class EnemyFlashingEffect : PISMonoBehaviour
 
     protected override void LoadComponents()
     {
-        if (_enemyCtrl != null && _renderer.Length > 0 && _defaultMaterial.Length > 0 && _freezeMaterial != null) return;
+        if (_enemyCtrl != null && _freezeMaterial != null && _renderer.Length > 0 && _defaultMaterial.Length > 0) return;
         _enemyCtrl = GetComponentInParent<EnemyCtrlAbstract>();
         //_renderer = transform.parent.GetComponentInChildren<Renderer>();
         //_defaultColor = _renderer.sharedMaterial.color;
 
-        _renderer = transform.parent.Find("Model").GetComponentsInChildren<Renderer>();
+        _freezeMaterial = Resources.Load<Material>("Shader/FreezeMaterial");
+        StartCoroutine(DelayOneFrame());
+    }
 
+    private IEnumerator DelayOneFrame()
+    {
+        yield return null;
+        _renderer = transform.parent.GetComponentsInChildren<Renderer>(false);
         _defaultMaterial = new Material[_renderer.Length];
         for (int i = 0; i < _renderer.Length; i++)
         {
             _defaultMaterial[i] = _renderer[i].sharedMaterial;
         }
-
-        _freezeMaterial = Resources.Load<Material>("Shader/FreezeMaterial");
     }
 }

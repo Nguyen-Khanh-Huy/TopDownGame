@@ -1,12 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyDespawn : PISMonoBehaviour
 {
-    [SerializeField] private EnemyCtrlAbstract _enemyAbstract;
+    [SerializeField] private EnemyCtrlAbstract _enemyCtrl;
     [SerializeField] private float _despawnByTime = 3f;
     [SerializeField] private bool _isDespawn;
 
@@ -18,7 +16,7 @@ public class EnemyDespawn : PISMonoBehaviour
 
     private void DespawnEnemy()
     {
-        if (_enemyAbstract.Hp > 0 || _isDespawn) return;
+        if (_enemyCtrl.Hp > 0 || _isDespawn) return;
         _isDespawn = true;
         SetActiveEnemyHpBar();
         CountEnemyDead();
@@ -31,44 +29,47 @@ public class EnemyDespawn : PISMonoBehaviour
     private void DelayDespawnEnemy()
     {
         _isDespawn = false;
-        PoolManager<EnemyCtrlAbstract>.Ins.Despawn(_enemyAbstract);
+        PoolManager<EnemyCtrlAbstract>.Ins.Despawn(_enemyCtrl);
     }
 
     private void SetActiveEnemyHpBar()
     {
-        if (_enemyAbstract.HpBar.gameObject.activeSelf)
-            _enemyAbstract.HpBar.gameObject.SetActive(false);
+        if (_enemyCtrl.HpBar.gameObject.activeSelf)
+            _enemyCtrl.HpBar.gameObject.SetActive(false);
     }
 
     private void CountEnemyDead()
     {
-        _enemyAbstract.PlayerCtrl.PlayerShoot.CountEnemyDead++;
-        UIGamePlayManager.Ins.TxtCountEnemyDead.text = _enemyAbstract.PlayerCtrl.PlayerShoot.CountEnemyDead.ToString();
+        _enemyCtrl.PlayerCtrl.PlayerShoot.CountEnemyDead++;
+        UIGamePlayManager.Ins.TxtCountEnemyDead.text = _enemyCtrl.PlayerCtrl.PlayerShoot.CountEnemyDead.ToString();
     }
     private void SpawnItemDropMana()
     {
-        Vector3 changeDropPos = _enemyAbstract.transform.position + new Vector3(0, 1f, 0);
-        PoolManager<ItemDropCtrlAbstract>.Ins.Spawn(_enemyAbstract.ItemDropMana, changeDropPos, Quaternion.identity);
+        Vector3 changeDropPos = _enemyCtrl.transform.position + Vector3.up;
+        PoolManager<ItemDropCtrlAbstract>.Ins.Spawn(_enemyCtrl.ItemDropMana, changeDropPos, Quaternion.identity);
     }
 
     private void RemoveEnemyInListPlayerTarget()
     {
-        if (_enemyAbstract.PlayerCtrl.PlayerTarget.ListEnemyTarget.Contains(_enemyAbstract))
-            _enemyAbstract.PlayerCtrl.PlayerTarget.ListEnemyTarget.Remove(_enemyAbstract);
+        if (_enemyCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget.Contains(_enemyCtrl))
+            _enemyCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget.Remove(_enemyCtrl);
     }
 
     private void RemoveEnemyInListEnemyManager()
     {
-        if (_enemyAbstract is EnemyLongCtrlAbstract longEnemy && EnemyManager.Ins.ListEnemyLongSpawn.Contains(longEnemy))
-            EnemyManager.Ins.ListEnemyLongSpawn.Remove(longEnemy);
+        if (_enemyCtrl is EnemyCreepCtrl enemyCreep && EnemyManager.Ins.ListEnemyCreepSpawn.Contains(enemyCreep))
+            EnemyManager.Ins.ListEnemyCreepSpawn.Remove(enemyCreep);
 
-        else if (_enemyAbstract is EnemyNearCtrlAbstract nearEnemy && EnemyManager.Ins.ListEnemyNearSpawn.Contains(nearEnemy))
-            EnemyManager.Ins.ListEnemyNearSpawn.Remove(nearEnemy);
+        else if (_enemyCtrl is EnemyNearCtrl enemyNear && EnemyManager.Ins.ListEnemyNearSpawn.Contains(enemyNear))
+            EnemyManager.Ins.ListEnemyNearSpawn.Remove(enemyNear);
+        
+        else if (_enemyCtrl is EnemyLongCtrl enemyLong && EnemyManager.Ins.ListEnemyLongSpawn.Contains(enemyLong))
+            EnemyManager.Ins.ListEnemyLongSpawn.Remove(enemyLong);
     }
 
     protected override void LoadComponents()
     {
-        if (_enemyAbstract != null) return;
-        _enemyAbstract = GetComponentInParent<EnemyCtrlAbstract>();
+        if (_enemyCtrl != null) return;
+        _enemyCtrl = GetComponentInParent<EnemyCtrlAbstract>();
     }
 }

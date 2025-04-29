@@ -62,10 +62,9 @@ public class EnemyBossAttack : EnemyAttack
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player != null)
+        if (other.TryGetComponent<PlayerController>(out var player))
         {
-            Observer.Notify(ObserverID.PlayerTakeDmg);
+            Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
         }
     }
 
@@ -150,7 +149,7 @@ public class EnemyBossAttack : EnemyAttack
                 newVfxDash.transform.SetParent(transform);
             }
             _enemyCtrl.transform.Translate(8f * Time.deltaTime * Vector3.forward);
-            if (Physics.Raycast(_enemyCtrl.transform.position + Vector3.up + _enemyCtrl.transform.forward, _enemyCtrl.transform.forward, 0.2f, LayerMask.GetMask("BG")))
+            if (Physics.Raycast(_enemyCtrl.transform.position + _enemyCtrl.transform.forward, _enemyCtrl.transform.forward, 0.2f, LayerMask.GetMask("BG")))
             {
                 ChangeState(_enemyCtrl.EnemyMoving.IsMoving ? EnemyBossState.Walk : EnemyBossState.Idle);
                 StopAttackDash();
@@ -265,7 +264,7 @@ public class EnemyBossAttack : EnemyAttack
             listAttack.Remove(_prevBossState);
 
         float distance = Vector3.Distance(_enemyCtrl.transform.position, _enemyCtrl.PlayerCtrl.transform.position);
-        if (Physics.Raycast(_enemyCtrl.transform.position + Vector3.up, _enemyCtrl.transform.forward, distance, LayerMask.GetMask("BG")))
+        if (Physics.Raycast(_enemyCtrl.transform.position, _enemyCtrl.transform.forward, distance, LayerMask.GetMask("BG")))
             listAttack.Remove(EnemyBossState.AttackDash);
 
         EnemyBossState newAttack = listAttack[UnityEngine.Random.Range(0, listAttack.Count)];

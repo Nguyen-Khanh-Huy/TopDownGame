@@ -18,7 +18,7 @@ public class PlayerSkillLightning : PlayerSkillAbstract
             _timeCount = 0;
             foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
             {
-                Observer.Notify(ObserverID.EnemyTakeDmgSingle, enemy);
+                Observer.NotifyObserver(ObserverID.EnemyTakeDmgSingle, enemy);
                 PoolManager<EffectCtrlAbstract>.Ins.Spawn(_hitLightning, enemy.transform.position, Quaternion.identity);
             }
         }

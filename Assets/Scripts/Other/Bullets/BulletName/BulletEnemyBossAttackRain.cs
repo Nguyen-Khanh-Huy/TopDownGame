@@ -13,7 +13,7 @@ public class BulletEnemyBossAttackRain : BulletCtrlAbstract
         PlayerController player = other.GetComponent<PlayerController>();
         if (player != null)
         {
-            Observer.Notify(ObserverID.PlayerTakeDmg);
+            Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
         }
     }
 

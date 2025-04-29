@@ -79,7 +79,7 @@ public class BulletRocket : BulletCtrlAbstract
         foreach (var hit in hits)
         {
             if (hit.TryGetComponent<EnemyCtrlAbstract>(out var enemy))
-                Observer.Notify(ObserverID.EnemyTakeDmgSingle, enemy);
+                Observer.NotifyObserver(ObserverID.EnemyTakeDmgSingle, enemy);
         }
     }
 

@@ -25,9 +25,7 @@ public class BulletPlayer : BulletCtrlAbstract
         transform.Translate(_speedBullet * Time.deltaTime * Vector3.forward);
         float sqrDistance = (transform.position - _startPos).sqrMagnitude;
         if (sqrDistance >= _maxDistance * _maxDistance)
-        {
             DespawnBullet();
-        }
     }
 
     private void BulletRayCast()
@@ -37,7 +35,7 @@ public class BulletPlayer : BulletCtrlAbstract
             EnemyCtrlAbstract enemy = hitInfo.collider.GetComponent<EnemyCtrlAbstract>();
             if (enemy != null && enemy.Hp > 0)
             {
-                Observer.Notify(ObserverID.EnemyTakeDmg, enemy);
+                Observer.NotifyObserver(ObserverID.EnemyTakeDmg, enemy);
                 DespawnBullet();
             }
         }
