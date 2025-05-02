@@ -20,7 +20,7 @@ public class EnemyNearCtrl : EnemyCtrlAbstract
 
     private void Start()
     {
-        SetModel(_near01Avatar);
+        SetModel(_near02Avatar);
     }
 
     private void SetModel(Avatar avatar)

@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class EnemyLongMoving : EnemyMoving
 {
+    protected override void Start()
+    {
+        _distance = 6f;
+    }
+
     protected override void LookAtTarget()
     {
         if (_enemyCtrl.Hp <= 0) return;
         if (!UIGamePlayManager.Ins.CheckPlayTime
          || _isFreeze
-         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Walk
-         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
-         || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying) return;
+         || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Walk
+         || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Attack
+         || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Dying) return;
 
         Vector3 targetPosition = _enemyCtrl.PlayerCtrl.transform.position;
         targetPosition.y = _enemyCtrl.transform.position.y;

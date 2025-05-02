@@ -13,7 +13,7 @@ public class EnemyMoving : PISMonoBehaviour
     public bool IsMoving { get => _isMoving; }
     public bool IsFreeze { get => _isFreeze; set => _isFreeze = value; }
 
-    private void Start()
+    protected virtual void Start()
     {
         CheckEnemyType();
     }
@@ -42,9 +42,9 @@ public class EnemyMoving : PISMonoBehaviour
 
         bool shouldStop = (!UIGamePlayManager.Ins.CheckPlayTime
                         || _isFreeze
-                        || _enemyCtrl.EnemyAttack.CurState == EnemyState.Idle
-                        || _enemyCtrl.EnemyAttack.CurState == EnemyState.Attack
-                        || _enemyCtrl.EnemyAttack.CurState == EnemyState.Dying);
+                        || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Idle
+                        || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Attack
+                        || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Dying);
 
         _enemyCtrl.Agent.isStopped = shouldStop || !_isMoving;
     }
@@ -68,7 +68,7 @@ public class EnemyMoving : PISMonoBehaviour
 
     private void CheckEnemyType()
     {
-        _distance = GetComponentInParent<EnemyNearCtrl>() != null ? 1f : 6f;
+        _distance = GetComponentInParent<EnemyNearCtrl>() != null ? 1.2f : _distance;
     }
 
     protected override void LoadComponents()

@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class EnemyBossMoving : EnemyMoving
 {
+    protected override void Start()
+    {
+        _distance = 6f;
+    }
+
     protected override void LookAtTarget()
     {
         AnimatorStateInfo stateInfo = _enemyCtrl.Anim.GetCurrentAnimatorStateInfo(0);

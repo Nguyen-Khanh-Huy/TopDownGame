@@ -6,9 +6,9 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     [SerializeField] private EnemyPool _enemyPool;
     [SerializeField] private EnemyPrefab _enemyPrefab;
-    [SerializeField] private int _maxEnemyCreep = 20;
-    [SerializeField] private int _maxEnemyNear = 5;
-    [SerializeField] private int _maxEnemyLong = 2;
+    [SerializeField] private int _maxEnemyCreep = 15;
+    [SerializeField] private int _maxEnemyNear = 2;
+    [SerializeField] private int _maxEnemyLong = 1;
     [SerializeField] private float _spawnSpeed = 1f;
     [SerializeField] private List<EnemyCreepCtrl> _listEnemyCreepSpawn = new();
     [SerializeField] private List<EnemyNearCtrl> _listEnemyNearSpawn = new();
@@ -68,6 +68,7 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             if (UIGamePlayManager.Ins.GamePlayTime >= t && _lastUpdateTime < t)
             {
+                _maxEnemyCreep++;
                 _maxEnemyNear++;
                 _maxEnemyLong++;
                 _lastUpdateTime = t;

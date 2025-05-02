@@ -8,7 +8,14 @@ public enum PlayerState
     Walk
 }
 
-public enum EnemyState
+public enum EnemyCreepState
+{
+    Walk,
+    Hit,
+    Dying
+}
+
+public enum EnemyNearLongState
 {
     Idle,
     Walk,

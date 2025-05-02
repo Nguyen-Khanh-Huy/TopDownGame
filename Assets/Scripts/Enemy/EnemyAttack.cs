@@ -6,11 +6,11 @@ using UnityEngine;
 public class EnemyAttack : PISMonoBehaviour
 {
     [SerializeField] protected EnemyCtrlAbstract _enemyCtrl;
-    [SerializeField] protected EnemyState _curEnemyState;
+    [SerializeField] protected EnemyNearLongState _curEnemyState;
     [SerializeField] protected float _timeAttack;
     protected float _timeCount;
 
-    public EnemyState CurState { get => _curEnemyState; }
+    public EnemyNearLongState CurState { get => _curEnemyState; }
 
     private void Update()
     {
@@ -23,7 +23,7 @@ public class EnemyAttack : PISMonoBehaviour
         Attack();
     }
 
-    private void ChangeState(EnemyState newState)
+    private void ChangeState(EnemyNearLongState newState)
     {
         if (_curEnemyState == newState) return;
         _curEnemyState = newState;
@@ -35,30 +35,30 @@ public class EnemyAttack : PISMonoBehaviour
         AnimatorStateInfo stateInfo = _enemyCtrl.Anim.GetCurrentAnimatorStateInfo(0);
         if (_enemyCtrl.Hp <= 0)
         {
-            ChangeState(EnemyState.Dying);
+            ChangeState(EnemyNearLongState.Dying);
             return;
         }
 
-        if (_curEnemyState == EnemyState.Attack)
+        if (_curEnemyState == EnemyNearLongState.Attack)
         {
             if (stateInfo.IsName(_curEnemyState.ToString()) && stateInfo.normalizedTime >= 1f)
-                ChangeState(_enemyCtrl.EnemyMoving.IsMoving ? EnemyState.Walk : EnemyState.Idle);
+                ChangeState(_enemyCtrl.EnemyMoving.IsMoving ? EnemyNearLongState.Walk : EnemyNearLongState.Idle);
             return;
         }
 
         if (_enemyCtrl.EnemyMoving.IsMoving)
         {
-            ChangeState(EnemyState.Walk);
+            ChangeState(EnemyNearLongState.Walk);
         }
         else if (_timeCount >= _timeAttack)
         {
             _timeCount = 0;
-            ChangeState(EnemyState.Attack);
+            ChangeState(EnemyNearLongState.Attack);
         }
         else
         {
             _timeCount += Time.deltaTime;
-            ChangeState(EnemyState.Idle);
+            ChangeState(EnemyNearLongState.Idle);
         }
     }
 

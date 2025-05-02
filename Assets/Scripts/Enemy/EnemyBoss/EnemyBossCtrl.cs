@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class EnemyBossCtrl : EnemyCtrlAbstract
 {
+    private EnemyBossAttack EnemyBossAttack => _enemyAttack as EnemyBossAttack;
     protected override void LoadComponents()
     {
         base.LoadComponents();
-        if (_enemySO != null) return;
-        _enemySO = Resources.Load<EnemySO>("SO/EnemyBossSO");
+        if (_enemySO == null)
+            _enemySO = Resources.Load<EnemySO>("SO/EnemyBossSO");
     }
 
     protected override void OnEnable()
@@ -31,43 +32,43 @@ public class EnemyBossCtrl : EnemyCtrlAbstract
 
     public void EventOnAttackDash()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackDash = true;
+        EnemyBossAttack.IsAttackDash = true;
     }
     public void EventOffAttackDash()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackDash = false;
-        _enemyAttack.GetComponent<EnemyBossAttack>().StopAttackDash();
+        EnemyBossAttack.IsAttackDash = false;
+        EnemyBossAttack.StopAttackDash();
     }
 
     //------------------------------------------------------------------------
 
     public void EventOnAttackRain()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackRain = true;
+        EnemyBossAttack.IsAttackRain = true;
     }
     public void EventOffAttackRain()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackRain = false;
-        _enemyAttack.GetComponent<EnemyBossAttack>().ResetInforAttackRain();
+        EnemyBossAttack.IsAttackRain = false;
+        EnemyBossAttack.ResetInforAttackRain();
     }
 
     //------------------------------------------------------------------------
 
     public void EventOnAttackLaser()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackLaser = true;
+        EnemyBossAttack.IsAttackLaser = true;
     }
     public void EventOffAttackLaser()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackLaser = false;
-        _enemyAttack.GetComponent<EnemyBossAttack>().StopAttackLaser();
+        EnemyBossAttack.IsAttackLaser = false;
+        EnemyBossAttack.StopAttackLaser();
     }
 
     //------------------------------------------------------------------------
 
     public void EventOnAttackFire()
     {
-        _enemyAttack.GetComponent<EnemyBossAttack>().IsAttackFire = true;
+        EnemyBossAttack.IsAttackFire = true;
     }
 
     //------------------------------------------------------------------------

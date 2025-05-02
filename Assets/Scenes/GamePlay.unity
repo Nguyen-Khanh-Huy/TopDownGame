@@ -822,7 +822,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &104396646
 Transform:
   m_ObjectHideFlags: 0
@@ -854,9 +854,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyPool: {fileID: 1923659223}
   _enemyPrefab: {fileID: 498986037}
-  _maxEnemyCreep: 20
-  _maxEnemyNear: 5
-  _maxEnemyLong: 2
+  _maxEnemyCreep: 15
+  _maxEnemyNear: 2
+  _maxEnemyLong: 1
   _spawnSpeed: 1
   _listEnemyCreepSpawn: []
   _listEnemyNearSpawn: []
