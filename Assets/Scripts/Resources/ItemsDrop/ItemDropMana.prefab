@@ -1451,7 +1451,7 @@ ParticleSystem:
     serializedVersion: 2
     enabled: 1
     mode: 0
-    timeMode: 0
+    timeMode: 2
     fps: 30
     frameOverTime:
       serializedVersion: 2
@@ -4923,4 +4923,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9db575d85d0bf4458b445acdd00c907, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _playerCtrl: {fileID: 0}
   _col: {fileID: 7123099679827684272}
