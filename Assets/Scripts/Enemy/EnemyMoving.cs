@@ -35,9 +35,9 @@ public class EnemyMoving : PISMonoBehaviour
             return; 
         }
         if(!_enemyCtrl.Agent.isStopped)
-            _enemyCtrl.Agent.SetDestination(_enemyCtrl.PlayerCtrl.transform.position);
+            _enemyCtrl.Agent.SetDestination(PlayerCtrl.Ins.transform.position);
 
-        float sqrDistance = (_enemyCtrl.PlayerCtrl.transform.position - _enemyCtrl.transform.position).sqrMagnitude;
+        float sqrDistance = (PlayerCtrl.Ins.transform.position - _enemyCtrl.transform.position).sqrMagnitude;
         _isMoving = sqrDistance > (_distance * _distance);
 
         bool shouldStop = (!UIGamePlayManager.Ins.CheckPlayTime
@@ -59,7 +59,7 @@ public class EnemyMoving : PISMonoBehaviour
         }
         if (!_isFreeze) return;
         _coolDownFrozen += Time.deltaTime;
-        if (_coolDownFrozen >= _enemyCtrl.PlayerCtrl.PlayerSkillsCtrl.PlayerSkillFreeze.TimeFreeze)
+        if (_coolDownFrozen >= PlayerCtrl.Ins.PlayerSkillsCtrl.PlayerSkillFreeze.TimeFreeze)
         {
             _coolDownFrozen = 0;
             _isFreeze = false;

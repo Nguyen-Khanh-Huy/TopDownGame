@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class PlayerSkillAbstract : PISMonoBehaviour
@@ -25,16 +24,16 @@ public abstract class PlayerSkillAbstract : PISMonoBehaviour
 
     private void Init()
     {
-        _levelSkill = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.LevelSkill;
-        _maxLevel = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MaxLevel;
+        _levelSkill = PlayerCtrl.Ins.PlayerSkillSO.LevelSkill;
+        _maxLevel = PlayerCtrl.Ins.PlayerSkillSO.MaxLevel;
 
-        _playerSkillCtrl.PlayerSkillMultiShot.MultiShotCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MultiShotCount;
-        _playerSkillCtrl.PlayerSkillMultiDirection.MultiDirCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MultiDirCount;
-        _playerSkillCtrl.PlayerSkillAoeDamage.AoeRange = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.AoeRange;
-        _playerSkillCtrl.PlayerSkillLightning.TimeLightning = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeLightning;
-        _playerSkillCtrl.PlayerSkillSpinBall.SpinBallCount = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.SpinBallCount;
-        _playerSkillCtrl.PlayerSkillFreeze.TimeFreeze = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeFreeze;
-        _playerSkillCtrl.PlayerSkillRocket.TimeRoket = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.TimeRoket;
+        _playerSkillCtrl.PlayerSkillMultiShot.MultiShotCount = PlayerCtrl.Ins.PlayerSkillSO.MultiShotCount;
+        _playerSkillCtrl.PlayerSkillMultiDirection.MultiDirCount = PlayerCtrl.Ins.PlayerSkillSO.MultiDirCount;
+        _playerSkillCtrl.PlayerSkillAoeDamage.AoeRange = PlayerCtrl.Ins.PlayerSkillSO.AoeRange;
+        _playerSkillCtrl.PlayerSkillLightning.TimeLightning = PlayerCtrl.Ins.PlayerSkillSO.TimeLightning;
+        _playerSkillCtrl.PlayerSkillSpinBall.SpinBallCount = PlayerCtrl.Ins.PlayerSkillSO.SpinBallCount;
+        _playerSkillCtrl.PlayerSkillFreeze.TimeFreeze = PlayerCtrl.Ins.PlayerSkillSO.TimeFreeze;
+        _playerSkillCtrl.PlayerSkillRocket.TimeRoket = PlayerCtrl.Ins.PlayerSkillSO.TimeRoket;
     }
 
     protected override void LoadComponents()

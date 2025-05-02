@@ -22,7 +22,7 @@ public class EnemyBossCtrl : EnemyCtrlAbstract
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerController>(out var player))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
         }

@@ -489,7 +489,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _hp: 0
-  _playerCtrl: {fileID: 0}
   _enemyMoving: {fileID: 3796575644304758203}
   _enemyAttack: {fileID: 0}
   _enemyFlashingEffect: {fileID: 2206924418056577851}

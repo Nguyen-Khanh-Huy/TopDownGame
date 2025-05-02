@@ -65,7 +65,7 @@ public class EnemyCreepMoving : EnemyMoving
         if (_destinationTimer >= 0.5f)
         {
             _destinationTimer = 0f;
-            _enemyCtrl.Agent.SetDestination(_enemyCtrl.PlayerCtrl.transform.position);
+            _enemyCtrl.Agent.SetDestination(PlayerCtrl.Ins.transform.position);
         }
     }
 

@@ -32,8 +32,7 @@ public class BulletPlayer : BulletCtrlAbstract
     {
         if (Physics.Raycast(transform.position - transform.forward * 0.7f, transform.forward, out RaycastHit hitInfo, 0.7f + _speedBullet * Time.deltaTime))
         {
-            EnemyCtrlAbstract enemy = hitInfo.collider.GetComponent<EnemyCtrlAbstract>();
-            if (enemy != null && enemy.Hp > 0)
+            if (hitInfo.collider.TryGetComponent<EnemyCtrlAbstract>(out var enemy) && enemy.Hp > 0)
             {
                 Observer.NotifyObserver(ObserverID.EnemyTakeDmg, enemy);
                 DespawnBullet();

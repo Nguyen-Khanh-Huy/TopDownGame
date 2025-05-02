@@ -40,8 +40,8 @@ public class EnemyDespawn : PISMonoBehaviour
 
     private void CountEnemyDead()
     {
-        _enemyCtrl.PlayerCtrl.PlayerShoot.CountEnemyDead++;
-        UIGamePlayManager.Ins.TxtCountEnemyDead.text = _enemyCtrl.PlayerCtrl.PlayerShoot.CountEnemyDead.ToString();
+        PlayerCtrl.Ins.PlayerShoot.CountEnemyDead++;
+        UIGamePlayManager.Ins.TxtCountEnemyDead.text = PlayerCtrl.Ins.PlayerShoot.CountEnemyDead.ToString();
     }
     private void SpawnItemDropMana()
     {
@@ -51,8 +51,8 @@ public class EnemyDespawn : PISMonoBehaviour
 
     private void RemoveEnemyInListPlayerTarget()
     {
-        if (_enemyCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget.Contains(_enemyCtrl))
-            _enemyCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget.Remove(_enemyCtrl);
+        if (PlayerCtrl.Ins.PlayerTarget.ListEnemyTarget.Contains(_enemyCtrl))
+            PlayerCtrl.Ins.PlayerTarget.ListEnemyTarget.Remove(_enemyCtrl);
     }
 
     private void RemoveEnemyInListEnemyManager()

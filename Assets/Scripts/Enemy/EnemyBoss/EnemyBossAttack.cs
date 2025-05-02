@@ -62,7 +62,7 @@ public class EnemyBossAttack : EnemyAttack
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerController>(out var player))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
         }
@@ -177,7 +177,7 @@ public class EnemyBossAttack : EnemyAttack
         if (!_isGetPosPlayer)
         {
             _isGetPosPlayer = true;
-            _targetPos = _enemyCtrl.PlayerCtrl.transform.position;
+            _targetPos = PlayerCtrl.Ins.transform.position;
         }
         return _targetPos;
     }
@@ -263,7 +263,7 @@ public class EnemyBossAttack : EnemyAttack
         if (listAttack.Contains(_prevBossState))
             listAttack.Remove(_prevBossState);
 
-        float distance = Vector3.Distance(_enemyCtrl.transform.position, _enemyCtrl.PlayerCtrl.transform.position);
+        float distance = Vector3.Distance(_enemyCtrl.transform.position, PlayerCtrl.Ins.transform.position);
         if (Physics.Raycast(_enemyCtrl.transform.position, _enemyCtrl.transform.forward, distance, LayerMask.GetMask("BG")))
             listAttack.Remove(EnemyBossState.AttackDash);
 

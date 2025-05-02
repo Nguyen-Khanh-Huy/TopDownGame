@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BulletParabol : BulletCtrlAbstract
 {
-    [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private SphereCollider _collider;
     [SerializeField] private HitParabol _hitParabol;
 
@@ -18,7 +17,7 @@ public class BulletParabol : BulletCtrlAbstract
     private void OnEnable()
     {
         _startPos = transform.position;
-        _targetPos = _playerCtrl.transform.position;
+        _targetPos = PlayerCtrl.Ins.transform.position;
         _targetPos.y = 0.2f;
     }
 
@@ -45,7 +44,7 @@ public class BulletParabol : BulletCtrlAbstract
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerController>(out var player))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
     }
 
@@ -56,8 +55,7 @@ public class BulletParabol : BulletCtrlAbstract
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null && _hitParabol != null) return;
-        _playerCtrl = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+        if (_hitParabol != null) return;
         _collider = GetComponent<SphereCollider>();
         _hitParabol = Resources.Load<HitParabol>("Hits/HitParabol");
     }

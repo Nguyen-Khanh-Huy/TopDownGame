@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
 {
     [SerializeField] protected int _hp;
-    [SerializeField] protected PlayerController _playerCtrl;
     [SerializeField] protected EnemyMoving _enemyMoving;
     [SerializeField] protected EnemyAttack _enemyAttack;
     [SerializeField] protected EnemyFlashingEffect _enemyFlashingEffect;
@@ -18,7 +17,6 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
     [SerializeField] protected Slider _hpBar;
 
     public int Hp { get => _hp; set => _hp = value; }
-    public PlayerController PlayerCtrl { get => _playerCtrl; }
     public EnemyMoving EnemyMoving { get => _enemyMoving; }
     public EnemyAttack EnemyAttack { get => _enemyAttack; }
     public EnemyFlashingEffect EnemyFlashingEffect { get => _enemyFlashingEffect; }
@@ -30,8 +28,7 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null && _enemyMoving != null && _enemyAttack && _enemyFlashingEffect != null && _anim != null && _agent != null && _itemDropMana != null && _hpBar != null) return;
-        _playerCtrl = GameObject.Find("PlayerController").GetComponent<PlayerController>();
+        if (_enemyMoving != null && _enemyAttack && _enemyFlashingEffect != null && _anim != null && _agent != null && _itemDropMana != null && _hpBar != null) return;
         _enemyMoving = GetComponentInChildren<EnemyMoving>();
         _enemyAttack = GetComponentInChildren<EnemyAttack>();
         _enemyFlashingEffect = GetComponentInChildren<EnemyFlashingEffect>();
@@ -77,6 +74,9 @@ public abstract class EnemyCtrlAbstract : PoolObj<EnemyCtrlAbstract>
 
     private bool EnemyTakeDmgSkillAoeBullet(EnemyCtrlAbstract enemy)
     {
-        return Vector3.Distance(transform.position, enemy.transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillAoeDamage.AoeRange;
+        //return Vector3.Distance(transform.position, enemy.transform.position) <= _playerCtrl.PlayerSkillsCtrl.PlayerSkillAoeDamage.AoeRange;
+        int aoeRange = PlayerCtrl.Ins.PlayerSkillsCtrl.PlayerSkillAoeDamage.AoeRange;
+        return (transform.position - enemy.transform.position).sqrMagnitude <= aoeRange * aoeRange;
+
     }
 }

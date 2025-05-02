@@ -16,10 +16,10 @@ public class EnemyCreepCtrl : EnemyCtrlAbstract
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerController>(out var player))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
-            (EnemyMoving as EnemyCreepMoving)?.StartKnockBack(player.transform);
+            (EnemyMoving as EnemyCreepMoving)?.StartKnockBack(other.transform);
         }
     }
 

@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoving : PISMonoBehaviour
+public class PlayerMoving : MonoBehaviour
 {
     //public Joystick Joystick;
     //public bool IsOnMobile;
-    [SerializeField] private PlayerController _playerController;
     [SerializeField] private float _moveSpeed;
 
     [SerializeField] private bool _canMoveLeft;
@@ -26,11 +25,6 @@ public class PlayerMoving : PISMonoBehaviour
         SetUpIsOnMobile();
         LookAtTarget();
         Moving();
-    }
-    protected override void LoadComponents()
-    {
-        if (_playerController != null) return;
-        _playerController = GetComponentInParent<PlayerController>();
     }
 
     private void SetUpIsOnMobile()
@@ -58,8 +52,8 @@ public class PlayerMoving : PISMonoBehaviour
     private void ChangeState(PlayerState newState)
     {
         //_playerController.Anim.SetInteger("State", (int)State);
-        if (_playerController.Anim.GetInteger("State") != (int)newState)
-            _playerController.Anim.SetInteger("State", (int)newState);
+        if (PlayerCtrl.Ins.Anim.GetInteger("State") != (int)newState)
+            PlayerCtrl.Ins.Anim.SetInteger("State", (int)newState);
     }
 
     private void Moving()
@@ -68,31 +62,31 @@ public class PlayerMoving : PISMonoBehaviour
         if (IsIdle)
         {
             ChangeState(PlayerState.Idle);
-            _playerController.Rb.velocity = new Vector3(0, _playerController.Rb.velocity.y, 0);
+            PlayerCtrl.Ins.Rb.velocity = new Vector3(0, PlayerCtrl.Ins.Rb.velocity.y, 0);
         }
 
         //if (_canMoveLeft || _canMoveRight || _canMoveUp || _canMoveDown)
         else
         {
             ChangeState(PlayerState.Walk);
-            _playerController.Rb.velocity = new Vector3(move.x, _playerController.Rb.velocity.y, move.z);
+            PlayerCtrl.Ins.Rb.velocity = new Vector3(move.x, PlayerCtrl.Ins.Rb.velocity.y, move.z);
         }
 
 
     }
     private void LookAtTarget()
     {
-        if (_playerController.PlayerTarget.Target != null)
+        if (PlayerCtrl.Ins.PlayerTarget.Target != null)
         {
-            Vector3 targetPosition = _playerController.PlayerTarget.Target.transform.position;
-            targetPosition.y = _playerController.transform.position.y;
-            _playerController.transform.LookAt(targetPosition);
+            Vector3 targetPosition = PlayerCtrl.Ins.PlayerTarget.Target.transform.position;
+            targetPosition.y = PlayerCtrl.Ins.transform.position.y;
+            PlayerCtrl.Ins.transform.LookAt(targetPosition);
             return;
         }
 
         if (IsIdle)
         {
-            _playerController.transform.rotation = Quaternion.Euler(0f, _saveRotationY, 0f);
+            PlayerCtrl.Ins.transform.rotation = Quaternion.Euler(0f, _saveRotationY, 0f);
             return;
         }
 
@@ -100,8 +94,8 @@ public class PlayerMoving : PISMonoBehaviour
         if (moveDirection.sqrMagnitude > 0f)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection.normalized);
-            _playerController.transform.rotation = Quaternion.RotateTowards(_playerController.transform.rotation, targetRotation, 540f * Time.deltaTime);
-            _saveRotationY = _playerController.transform.eulerAngles.y;
+            PlayerCtrl.Ins.transform.rotation = Quaternion.RotateTowards(PlayerCtrl.Ins.transform.rotation, targetRotation, 540f * Time.deltaTime);
+            _saveRotationY = PlayerCtrl.Ins.transform.eulerAngles.y;
         }
     }
 

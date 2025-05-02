@@ -13,14 +13,11 @@ public class PlayerSkillShootSpeed : PlayerSkillAbstract
     private void CheckLevelAttackSpeed()
     {
         if (_levelSkill < 2 || _levelSkill > 3) return;
-        float SO = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.ShootSpeed;
+        float SO = PlayerCtrl.Ins.PlayerSkillSO.ShootSpeed;
+
         if (_levelSkill == 2)
-        {
-            _playerSkillCtrl.PlayerCtrl.PlayerShoot.ShootSpeed = SO - (SO * 0.15f);
-        }
+            PlayerCtrl.Ins.PlayerShoot.ShootSpeed = SO - (SO * 0.15f);
         else if (_levelSkill == 3)
-        {
-            _playerSkillCtrl.PlayerCtrl.PlayerShoot.ShootSpeed = SO - (SO * 0.25f);
-        }
+            PlayerCtrl.Ins.PlayerShoot.ShootSpeed = SO - (SO * 0.25f);
     }
 }

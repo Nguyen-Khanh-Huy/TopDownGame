@@ -18,7 +18,7 @@ public class EnemyLongMoving : EnemyMoving
          || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Attack
          || _enemyCtrl.EnemyAttack.CurState == EnemyNearLongState.Dying) return;
 
-        Vector3 targetPosition = _enemyCtrl.PlayerCtrl.transform.position;
+        Vector3 targetPosition = PlayerCtrl.Ins.transform.position;
         targetPosition.y = _enemyCtrl.transform.position.y;
         //_enemyCtrl.transform.LookAt(targetPosition);
         Quaternion targetRotation = Quaternion.LookRotation(targetPosition - _enemyCtrl.transform.position);

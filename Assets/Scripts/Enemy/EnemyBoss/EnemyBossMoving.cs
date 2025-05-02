@@ -21,7 +21,7 @@ public class EnemyBossMoving : EnemyMoving
          || stateInfo.IsName(EnemyBossState.AttackFire.ToString())
          || stateInfo.IsName(EnemyBossState.Dying.ToString())) return;
 
-        Vector3 targetPosition = _enemyCtrl.PlayerCtrl.transform.position;
+        Vector3 targetPosition = PlayerCtrl.Ins.transform.position;
         targetPosition.y = _enemyCtrl.transform.position.y;
         //_enemyCtrl.transform.LookAt(targetPosition);
         Quaternion targetRotation = Quaternion.LookRotation(targetPosition - _enemyCtrl.transform.position);
@@ -31,9 +31,9 @@ public class EnemyBossMoving : EnemyMoving
     protected override void EnemyMove()
     {
         if (!_enemyCtrl.Agent.isStopped)
-            _enemyCtrl.Agent.SetDestination(_enemyCtrl.PlayerCtrl.transform.position);
+            _enemyCtrl.Agent.SetDestination(PlayerCtrl.Ins.transform.position);
 
-        float sqrDistance = (_enemyCtrl.PlayerCtrl.transform.position - _enemyCtrl.transform.position).sqrMagnitude;
+        float sqrDistance = (PlayerCtrl.Ins.transform.position - _enemyCtrl.transform.position).sqrMagnitude;
         _isMoving = sqrDistance > (_distance * _distance);
 
         AnimatorStateInfo stateInfo = _enemyCtrl.Anim.GetCurrentAnimatorStateInfo(0);

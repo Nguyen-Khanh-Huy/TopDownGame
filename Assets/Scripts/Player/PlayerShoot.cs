@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerShoot : PISMonoBehaviour
+public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private float _shootSpeed;
     [SerializeField] private int _countEnemyDead;
 
@@ -12,12 +11,6 @@ public class PlayerShoot : PISMonoBehaviour
 
     public float ShootSpeed { get => _shootSpeed; set => _shootSpeed = value; }
     public int CountEnemyDead { get => _countEnemyDead; set => _countEnemyDead = value; }
-
-    protected override void LoadComponents()
-    {
-        if (_playerCtrl != null) return;
-        _playerCtrl = GetComponentInParent<PlayerController>();
-    }
 
     private void Start()
     {
@@ -28,7 +21,7 @@ public class PlayerShoot : PISMonoBehaviour
     {
         Invoke(nameof(FireBullet), _shootSpeed);
         if (!UIGamePlayManager.Ins.CheckPlayTime) return;
-        if (_playerCtrl.PlayerTarget.Target == null) return;
+        if (PlayerCtrl.Ins.PlayerTarget.Target == null) return;
 
         StartSkillShooting();
     }
@@ -42,7 +35,7 @@ public class PlayerShoot : PISMonoBehaviour
 
     private void SkillShooting()
     {
-        if (_shotCount >= _playerCtrl.PlayerSkillsCtrl.PlayerSkillMultiShot.MultiShotCount) return;
+        if (_shotCount >= PlayerCtrl.Ins.PlayerSkillsCtrl.PlayerSkillMultiShot.MultiShotCount) return;
 
         CheckLvSkillMultiDirection();
 
@@ -52,7 +45,7 @@ public class PlayerShoot : PISMonoBehaviour
 
     private void CheckLvSkillMultiDirection()
     {
-        int check = _playerCtrl.PlayerSkillsCtrl.PlayerSkillMultiDirection.MultiDirCount;
+        int check = PlayerCtrl.Ins.PlayerSkillsCtrl.PlayerSkillMultiDirection.MultiDirCount;
         switch (check)
         {
             case 0:
@@ -74,7 +67,7 @@ public class PlayerShoot : PISMonoBehaviour
     }
     private void ShootBullet(float angle)
     {
-        Quaternion bulletRotation = Quaternion.Euler(0, angle, 0) * _playerCtrl.transform.rotation;
-        PoolManager<BulletCtrlAbstract>.Ins.Spawn(_playerCtrl.PlayerSkillsCtrl.GetBullet(), _playerCtrl.FirePoint.position, bulletRotation);
+        Quaternion bulletRotation = Quaternion.Euler(0, angle, 0) * PlayerCtrl.Ins.transform.rotation;
+        PoolManager<BulletCtrlAbstract>.Ins.Spawn(PlayerCtrl.Ins.PlayerSkillsCtrl.GetBullet(), PlayerCtrl.Ins.FirePoint.position, bulletRotation);
     }
 }

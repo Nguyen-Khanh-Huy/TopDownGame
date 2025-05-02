@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class UIGamePlayMainSkills : PISMonoBehaviour
 {
-    [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private UIPrbBtnSkill _uiPrbBtnSkill;
     [SerializeField] private Transform _panelListSkills;
     [SerializeField] private List<UIPrbBtnSkill> _listDefaultSkills = new();
@@ -13,8 +12,7 @@ public class UIGamePlayMainSkills : PISMonoBehaviour
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null && _uiPrbBtnSkill != null && _panelListSkills != null && _listDefaultSkills.Count > 0) return;
-        _playerCtrl = FindObjectOfType<PlayerController>();
+        if (_uiPrbBtnSkill != null && _panelListSkills != null && _listDefaultSkills.Count > 0) return;
         _uiPrbBtnSkill = Resources.Load<UIPrbBtnSkill>("UI/UIPrbBtnSkill");
         _panelListSkills = transform.Find("PanelListSkills").GetComponent<Transform>();
         
@@ -54,7 +52,7 @@ public class UIGamePlayMainSkills : PISMonoBehaviour
 
         for (int i = 0; i < Mathf.Infinity && skillCount < 3; i++)
         {
-            PlayerSkillAbstract playerSkill = _playerCtrl.PlayerSkillsCtrl.GetRandomSkill();
+            PlayerSkillAbstract playerSkill = PlayerCtrl.Ins.PlayerSkillsCtrl.GetRandomSkill();
             if (playerSkill != null && !_listRandomSkills.Contains(playerSkill))
             {
                 _listRandomSkills.Add(playerSkill);

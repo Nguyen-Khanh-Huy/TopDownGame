@@ -10,12 +10,12 @@ public class PlayerSkillFreeze : PlayerSkillAbstract
 
     private void Update()
     {
-        if (_levelSkill < 2 || _levelSkill > _maxLevel || !UIGamePlayManager.Ins.CheckPlayTime || _playerSkillCtrl.PlayerCtrl.PlayerTarget.Target == null) return;
+        if (_levelSkill < 2 || _levelSkill > _maxLevel || !UIGamePlayManager.Ins.CheckPlayTime || PlayerCtrl.Ins.PlayerTarget.Target == null) return;
         _timeCount += Time.deltaTime;
         if (_timeCount >= _coolDown)
         {
             _timeCount = 0;
-            foreach (EnemyCtrlAbstract enemy in _playerSkillCtrl.PlayerCtrl.PlayerTarget.ListEnemyTarget)
+            foreach (EnemyCtrlAbstract enemy in PlayerCtrl.Ins.PlayerTarget.ListEnemyTarget)
             {
                 enemy.EnemyMoving.IsFreeze = true;
                 enemy.EnemyFlashingEffect.StartFreeze();

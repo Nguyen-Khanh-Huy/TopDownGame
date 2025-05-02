@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class PlayerTarget : PISMonoBehaviour
 {
-    [SerializeField] private PlayerController _playerCtrl;
-    [SerializeField] private SphereCollider _playerCollider;
+    [SerializeField] private SphereCollider _colliderTarget;
     [SerializeField] private EnemyCtrlAbstract _target;
     [SerializeField] private List<EnemyCtrlAbstract> _listEnemyTarget;
 
-    public SphereCollider PlayerCollider { get => _playerCollider; set => _playerCollider = value; }
+    public SphereCollider ColliderTarget { get => _colliderTarget; set => _colliderTarget = value; }
     public EnemyCtrlAbstract Target { get => _target; }
     public List<EnemyCtrlAbstract> ListEnemyTarget { get => _listEnemyTarget; set => _listEnemyTarget = value; }
 
@@ -33,7 +32,7 @@ public class PlayerTarget : PISMonoBehaviour
             float minDistance = Mathf.Infinity;
             foreach (EnemyCtrlAbstract enemyInList in _listEnemyTarget)
             {
-                float distance = (_playerCtrl.transform.position - enemyInList.transform.position).sqrMagnitude;
+                float distance = (PlayerCtrl.Ins.transform.position - enemyInList.transform.position).sqrMagnitude;
                 if (minDistance > distance)
                 {
                     minDistance = distance;
@@ -90,8 +89,7 @@ public class PlayerTarget : PISMonoBehaviour
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null && _playerCollider != null) return;
-        _playerCtrl = GetComponentInParent<PlayerController>();
-        _playerCollider = GetComponent<SphereCollider>();
+        if (_colliderTarget != null) return;
+        _colliderTarget = GetComponent<SphereCollider>();
     }
 }

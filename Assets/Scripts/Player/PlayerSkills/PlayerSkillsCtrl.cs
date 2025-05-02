@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class PlayerSkillsCtrl : PISMonoBehaviour
 {
-    [SerializeField] private PlayerController _playerCtrl;
-
     [SerializeField] private PlayerSkillMoveSpeed _playerSkillMoveSpeed;
     [SerializeField] private PlayerSkillShootRange _playerSkillShootRange;
     [SerializeField] private PlayerSkillShootSpeed _playerSkillShootSpeed;
@@ -20,7 +18,6 @@ public class PlayerSkillsCtrl : PISMonoBehaviour
 
     [SerializeField] private List<PlayerSkillAbstract> _listPlayerSkills = new();
 
-    public PlayerController PlayerCtrl { get => _playerCtrl; }
     public PlayerSkillMoveSpeed PlayerSkillMoveSpeed { get => _playerSkillMoveSpeed; }
     public PlayerSkillShootRange PlayerSkillShootRange { get => _playerSkillShootRange; }
     public PlayerSkillShootSpeed PlayerSkillShootSpeed { get => _playerSkillShootSpeed; }
@@ -35,8 +32,7 @@ public class PlayerSkillsCtrl : PISMonoBehaviour
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null && _playerSkillMoveSpeed != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillAoeDamage != null && _playerSkillLightning != null && _playerSkillSpinBall != null && _playerSkillFreeze != null && _playerSkillRocket != null) return;
-        _playerCtrl = GetComponentInParent<PlayerController>();
+        if (_playerSkillMoveSpeed != null && _playerSkillShootRange != null && _playerSkillShootSpeed != null && _playerSkillMultiShot != null && _playerSkillMultiDirection != null && _playerSkillAoeDamage != null && _playerSkillLightning != null && _playerSkillSpinBall != null && _playerSkillFreeze != null && _playerSkillRocket != null) return;
         _playerSkillMoveSpeed = GetComponentInChildren<PlayerSkillMoveSpeed>();
         _playerSkillShootRange = GetComponentInChildren<PlayerSkillShootRange>();
         _playerSkillShootSpeed = GetComponentInChildren<PlayerSkillShootSpeed>();
@@ -69,6 +65,6 @@ public class PlayerSkillsCtrl : PISMonoBehaviour
 
     public BulletCtrlAbstract GetBullet()
     {
-        return _playerCtrl.BulletPlayer; // Get Type Bullet
+        return PlayerCtrl.Ins.BulletPlayer; // Get Type Bullet
     }
 }

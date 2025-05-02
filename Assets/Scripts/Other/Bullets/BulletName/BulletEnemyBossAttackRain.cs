@@ -10,11 +10,8 @@ public class BulletEnemyBossAttackRain : BulletCtrlAbstract
 
     private void OnTriggerEnter(Collider other)
     {
-        PlayerController player = other.GetComponent<PlayerController>();
-        if (player != null)
-        {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
             Observer.NotifyObserver(ObserverID.PlayerTakeDmg);
-        }
     }
 
     protected override void OnUpdate()

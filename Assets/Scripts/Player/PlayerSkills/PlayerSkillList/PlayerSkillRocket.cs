@@ -11,12 +11,12 @@ public class PlayerSkillRocket : PlayerSkillAbstract
 
     private void Update()
     {
-        if (_levelSkill < 2 || _levelSkill > _maxLevel || !UIGamePlayManager.Ins.CheckPlayTime || _playerSkillCtrl.PlayerCtrl.PlayerTarget.Target == null) return;
+        if (_levelSkill < 2 || _levelSkill > _maxLevel || !UIGamePlayManager.Ins.CheckPlayTime || PlayerCtrl.Ins.PlayerTarget.Target == null) return;
         _timeCount += Time.deltaTime;
         if (_timeCount >= TimeRoket)
         {
             _timeCount = 0;
-            PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletRocket, _playerSkillCtrl.PlayerCtrl.transform.position + new Vector3(0f, 1.5f, 0f), Quaternion.identity);
+            PoolManager<BulletCtrlAbstract>.Ins.Spawn(_bulletRocket, PlayerCtrl.Ins.transform.position + new Vector3(0f, 1.5f, 0f), Quaternion.identity);
         }
     }
 

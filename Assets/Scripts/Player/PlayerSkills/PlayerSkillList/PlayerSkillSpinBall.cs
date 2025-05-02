@@ -12,7 +12,7 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
     private void Update()
     {
         if (_levelSkill < 2 || _levelSkill > _maxLevel || !UIGamePlayManager.Ins.CheckPlayTime) return;
-        _spinBallRotation.position = _playerSkillCtrl.PlayerCtrl.transform.position;
+        _spinBallRotation.position = PlayerCtrl.Ins.transform.position;
     }
 
     public override void Upgrade()
@@ -26,7 +26,7 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
     public void UpdateBallPos()
     {
         float angleStep = 360f / SpinBallCount;
-        float radius = _playerSkillCtrl.PlayerCtrl.PlayerTarget.PlayerCollider.radius / 2.5f;
+        float radius = PlayerCtrl.Ins.PlayerTarget.ColliderTarget.radius / 2.5f;
         for (int i = 0; i < _listBallSpin.Count; i++)
         {
             _listBallSpin[i].gameObject.SetActive(i < SpinBallCount);
@@ -49,8 +49,7 @@ public class PlayerSkillSpinBall : PlayerSkillAbstract
         _listBallSpin.Clear();
         foreach (Transform child in _spinBallRotation)
         {
-            SpinBall ball = child.GetComponent<SpinBall>();
-            if (ball != null)
+            if (child.TryGetComponent<SpinBall>(out var ball))
                 _listBallSpin.Add(ball);
         }
     }

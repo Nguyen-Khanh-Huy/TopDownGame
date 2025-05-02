@@ -13,14 +13,11 @@ public class PlayerSkillMoveSpeed : PlayerSkillAbstract
     public void CheckLevelMoveSpeed()
     {
         if (_levelSkill < 2 || _levelSkill > 3) return;
-        float SO = _playerSkillCtrl.PlayerCtrl.PlayerSkillSO.MoveSpeed;
+        float SO = PlayerCtrl.Ins.PlayerSkillSO.MoveSpeed;
+
         if (_levelSkill == 2)
-        {
-            _playerSkillCtrl.PlayerCtrl.PlayerMoving.MoveSpeed = SO + (SO * 0.15f);
-        }
+            PlayerCtrl.Ins.PlayerMoving.MoveSpeed = SO + (SO * 0.15f);
         else if (_levelSkill == 3)
-        {
-            _playerSkillCtrl.PlayerCtrl.PlayerMoving.MoveSpeed = SO + (SO * 0.3f);
-        }
+            PlayerCtrl.Ins.PlayerMoving.MoveSpeed = SO + (SO * 0.3f);
     }
 }

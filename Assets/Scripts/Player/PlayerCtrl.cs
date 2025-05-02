@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : PISMonoBehaviour
+public class PlayerCtrl : Singleton<PlayerCtrl>
 {
     [SerializeField] private Rigidbody _rb;
     [SerializeField] private Animator _anim;
@@ -34,7 +34,8 @@ public class PlayerController : PISMonoBehaviour
 
     protected override void LoadComponents()
     {
-        if(_rb != null && _anim != null && _firePoint && _playerSpriteAttackRange != null && _bulletPlayer && _playerMoving != null && _playerTarget != null && _playerShoot != null && _playerMana != null && _playerSkillsCtrl != null && _playerSO != null && _playerSkillSO != null) return;
+        DontDestroy(false);
+        if (_rb != null && _anim != null && _firePoint && _playerSpriteAttackRange != null && _bulletPlayer && _playerMoving != null && _playerTarget != null && _playerShoot != null && _playerMana != null && _playerSkillsCtrl != null && _playerSO != null && _playerSkillSO != null) return;
         _rb = GetComponent<Rigidbody>();
         _anim = GetComponent<Animator>();
         _firePoint = transform.Find("Model/Bip001/FirePoint").GetComponent<Transform>();
@@ -77,7 +78,7 @@ public class PlayerController : PISMonoBehaviour
 
         _playerMoving.MoveSpeed = _playerSkillSO.MoveSpeed;
         _playerShoot.ShootSpeed = _playerSkillSO.ShootSpeed;
-        _playerTarget.PlayerCollider.radius = _playerSkillSO.ShootRange;
-        _playerSpriteAttackRange.transform.localScale = new Vector3(_playerTarget.PlayerCollider.radius * 1.5f, _playerTarget.PlayerCollider.radius * 1.5f, 1);
+        _playerTarget.ColliderTarget.radius = _playerSkillSO.ShootRange;
+        _playerSpriteAttackRange.transform.localScale = new Vector3(_playerTarget.ColliderTarget.radius * 1.5f, _playerTarget.ColliderTarget.radius * 1.5f, 1);
     }
 }

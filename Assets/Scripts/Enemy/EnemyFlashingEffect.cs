@@ -40,7 +40,7 @@ public class EnemyFlashingEffect : PISMonoBehaviour
     private IEnumerator FreezeCoroutine()
     {
         SetFreeze();
-        float timeRemaining = _enemyCtrl.PlayerCtrl.PlayerSkillsCtrl.PlayerSkillFreeze.TimeFreeze;
+        float timeRemaining = PlayerCtrl.Ins.PlayerSkillsCtrl.PlayerSkillFreeze.TimeFreeze;
         while (timeRemaining > 0f)
         {
             if (_enemyCtrl.Hp <= 0)

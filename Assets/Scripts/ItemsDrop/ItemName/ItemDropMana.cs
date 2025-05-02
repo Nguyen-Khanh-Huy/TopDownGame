@@ -1,11 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class ItemDropMana : ItemDropCtrlAbstract
 {
-    [SerializeField] private PlayerController _playerCtrl;
     [SerializeField] private SphereCollider _col;
     private Vector3 _targetPos;
     private float _moveSpeed = 3f;
@@ -25,18 +23,17 @@ public class ItemDropMana : ItemDropCtrlAbstract
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent<PlayerController>(out var player))
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            _playerCtrl.PlayerMana.AddMana();
-            UIGamePlayManager.Ins.Slider.value = (float)_playerCtrl.PlayerMana.CurMana / _playerCtrl.PlayerMana.ManaNextLevel;
+            PlayerCtrl.Ins.PlayerMana.AddMana();
+            UIGamePlayManager.Ins.SliderMana.value = (float)PlayerCtrl.Ins.PlayerMana.CurMana / PlayerCtrl.Ins.PlayerMana.ManaNextLevel;
             DespawnItem();
         }
     }
 
     protected override void LoadComponents()
     {
-        if (_playerCtrl != null && _col != null) return;
-        _playerCtrl = FindObjectOfType<PlayerController>();
+        if (_col != null) return;
         _col = GetComponent<SphereCollider>();
     }
     public override string GetName()

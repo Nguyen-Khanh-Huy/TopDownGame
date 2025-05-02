@@ -13,8 +13,7 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
     public GameObject PanelSkillsDialog;
     [SerializeField] private GameObject PanelPlayerHp;
 
-    public PlayerController PlayerCtrl;
-    public Slider Slider;
+    public Slider SliderMana;
     public TMP_Text TxtCountEnemyDead;
     public TMP_Text TxtCountPlayTime;
 
@@ -45,11 +44,10 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
     protected override void LoadComponents()
     {
         DontDestroy(false);
-        if (ListPanelPlayerHp.Count <= 0 && ShaderWarningUI != null && PanelPlayerHp != null && PlayerCtrl != null && Slider != null && TxtCountEnemyDead != null && TxtCountPlayTime != null) return;
+        if (ListPanelPlayerHp.Count <= 0 && ShaderWarningUI != null && PanelPlayerHp != null && SliderMana != null && TxtCountEnemyDead != null && TxtCountPlayTime != null) return;
         ShaderWarningUI = GameObject.Find("PanelWarning").GetComponentInChildren<ShaderWarningUI>();
         PanelPlayerHp = GameObject.Find("PanelPlayerHp");
-        PlayerCtrl = FindObjectOfType<PlayerController>();
-        Slider = GameObject.Find("PanelMana").GetComponentInChildren<Slider>();
+        SliderMana = GameObject.Find("PanelMana").GetComponentInChildren<Slider>();
         TxtCountEnemyDead = GameObject.Find("TxtCountEnemyDead").GetComponentInChildren<TMP_Text>();
         TxtCountPlayTime = GameObject.Find("TxtCountPlayTime").GetComponentInChildren<TMP_Text>();
 
@@ -74,10 +72,10 @@ public class UIGamePlayManager : Singleton<UIGamePlayManager>
 
     private void Init()
     {
-        Slider.value = 0;
-        TxtCountEnemyDead.text = PlayerCtrl.PlayerShoot.CountEnemyDead.ToString();
+        SliderMana.value = 0;
         CheckPlayTime = true;
         _gamePlayTime = 0f;
+        TxtCountEnemyDead.text = PlayerCtrl.Ins.PlayerShoot.CountEnemyDead.ToString();
     }
 
     public string TimeConvert(double time)
