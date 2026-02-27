@@ -62,14 +62,14 @@ public class PlayerMoving : MonoBehaviour
         if (IsIdle)
         {
             ChangeState(PlayerState.Idle);
-            PlayerCtrl.Ins.Rb.velocity = new Vector3(0, PlayerCtrl.Ins.Rb.velocity.y, 0);
+            PlayerCtrl.Ins.Rb.linearVelocity = new Vector3(0, PlayerCtrl.Ins.Rb.linearVelocity.y, 0);
         }
 
         //if (_canMoveLeft || _canMoveRight || _canMoveUp || _canMoveDown)
         else
         {
             ChangeState(PlayerState.Walk);
-            PlayerCtrl.Ins.Rb.velocity = new Vector3(move.x, PlayerCtrl.Ins.Rb.velocity.y, move.z);
+            PlayerCtrl.Ins.Rb.linearVelocity = new Vector3(move.x, PlayerCtrl.Ins.Rb.linearVelocity.y, move.z);
         }
 
 
