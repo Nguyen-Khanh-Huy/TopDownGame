@@ -1,128 +1,96 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoving : MonoBehaviour
+public class PlayerMoving : PISMonoBehaviour
 {
-    //public Joystick Joystick;
-    //public bool IsOnMobile;
     [SerializeField] private float _moveSpeed;
+    [SerializeField] private PlayerMoveKeyboard _keyboardInput;
+    [SerializeField] private PlayerMoveJoystick _joystickInput;
 
-    [SerializeField] private bool _canMoveLeft;
-    [SerializeField] private bool _canMoveRight;
-    [SerializeField] private bool _canMoveUp;
-    [SerializeField] private bool _canMoveDown;
-
-    private float _hozMove, _vertMove;
+    private Vector2 _moveInput;
     private float _saveRotationY;
-    private bool IsIdle { get => !_canMoveLeft && !_canMoveRight && !_canMoveUp && !_canMoveDown; }
+    private bool IsIdle => _moveInput.sqrMagnitude <= 0.0001f;
 
     public float MoveSpeed { get => _moveSpeed; set => _moveSpeed = value; }
 
     private void Update()
     {
         if (!UIGamePlayManager.Ins.CheckPlayTime) return;
-        SetUpIsOnMobile();
+
+        ReadMoveInput();
         LookAtTarget();
-        Moving();
+        Move();
     }
 
-    private void SetUpIsOnMobile()
+    private void ReadMoveInput()
     {
-        //if (!IsOnMobile)
-        //{
-        _hozMove = Input.GetAxisRaw("Horizontal");
-        _vertMove = Input.GetAxisRaw("Vertical");
+        Vector2 keyboardInput = ReadKeyboardInput();
+        Vector2 joystickInput = ReadJoystickInput();
 
-        _canMoveLeft = _hozMove < 0;
-        _canMoveRight = _hozMove > 0;
-        _canMoveUp = _vertMove > 0;
-        _canMoveDown = _vertMove < 0;
-        //}
-        //else
-        //{
-        //if (Joystick == null) return;
-        //_canMoveLeft = Joystick.xValue < 0 ? true : false;
-        //_canMoveRight = Joystick.xValue > 0 ? true : false;
-        //_canMoveUp = Joystick.yValue > 0 ? true : false;
-        //_canMoveDown = Joystick.yValue < 0 ? true : false;
-        //}
+        _moveInput = joystickInput.sqrMagnitude > 0.0001f ? joystickInput : keyboardInput;
+    }
+
+    private Vector2 ReadKeyboardInput()
+    {
+        if (_keyboardInput == null || !_keyboardInput.isActiveAndEnabled) return Vector2.zero;
+        return _keyboardInput.ReadMoveInput();
+    }
+
+    private Vector2 ReadJoystickInput()
+    {
+        if (_joystickInput == null || !_joystickInput.isActiveAndEnabled) return Vector2.zero;
+        return _joystickInput.ReadMoveInput();
     }
 
     private void ChangeState(PlayerState newState)
     {
-        //_playerController.Anim.SetInteger("State", (int)State);
         if (PlayerCtrl.Ins.Anim.GetInteger("State") != (int)newState)
             PlayerCtrl.Ins.Anim.SetInteger("State", (int)newState);
     }
 
-    private void Moving()
+    private void Move()
     {
-        Vector3 move = new Vector3(_hozMove, 0f, _vertMove).normalized * _moveSpeed;
+        Rigidbody rb = PlayerCtrl.Ins.Rb;
+
         if (IsIdle)
         {
             ChangeState(PlayerState.Idle);
-            PlayerCtrl.Ins.Rb.linearVelocity = new Vector3(0, PlayerCtrl.Ins.Rb.linearVelocity.y, 0);
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+            return;
         }
 
-        //if (_canMoveLeft || _canMoveRight || _canMoveUp || _canMoveDown)
-        else
-        {
-            ChangeState(PlayerState.Walk);
-            PlayerCtrl.Ins.Rb.linearVelocity = new Vector3(move.x, PlayerCtrl.Ins.Rb.linearVelocity.y, move.z);
-        }
-
-
+        Vector3 move = new Vector3(_moveInput.x, 0f, _moveInput.y) * _moveSpeed;
+        ChangeState(PlayerState.Walk);
+        rb.linearVelocity = new Vector3(move.x, rb.linearVelocity.y, move.z);
     }
+
     private void LookAtTarget()
     {
-        if (PlayerCtrl.Ins.PlayerTarget.Target != null)
+        PlayerCtrl player = PlayerCtrl.Ins;
+
+        if (player.PlayerTarget.Target != null)
         {
-            Vector3 targetPosition = PlayerCtrl.Ins.PlayerTarget.Target.transform.position;
-            targetPosition.y = PlayerCtrl.Ins.transform.position.y;
-            PlayerCtrl.Ins.transform.LookAt(targetPosition);
+            Vector3 targetPosition = player.PlayerTarget.Target.transform.position;
+            targetPosition.y = player.transform.position.y;
+            player.transform.LookAt(targetPosition);
             return;
         }
 
         if (IsIdle)
         {
-            PlayerCtrl.Ins.transform.rotation = Quaternion.Euler(0f, _saveRotationY, 0f);
+            player.transform.rotation = Quaternion.Euler(0f, _saveRotationY, 0f);
             return;
         }
 
-        Vector3 moveDirection = new(_hozMove, 0, _vertMove);
-        if (moveDirection.sqrMagnitude > 0f)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection.normalized);
-            PlayerCtrl.Ins.transform.rotation = Quaternion.RotateTowards(PlayerCtrl.Ins.transform.rotation, targetRotation, 540f * Time.deltaTime);
-            _saveRotationY = PlayerCtrl.Ins.transform.eulerAngles.y;
-        }
+        Vector3 moveDirection = new(_moveInput.x, 0f, _moveInput.y);
+        Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+        player.transform.rotation = Quaternion.RotateTowards(player.transform.rotation, targetRotation, 540f * Time.deltaTime);
+        _saveRotationY = player.transform.eulerAngles.y;
     }
 
-    //private void LookAtTarget()
-    //{
-    //    if (_playerController.PlayerTarget.Target == null)
-    //    {
-    //        if (IsIdle)
-    //        {
-    //            _playerController.transform.rotation = Quaternion.Euler(0f, _yRotation, 0f);
-    //            return;
-    //        }
-    //        Vector3 moveDirection = new Vector3(_hozMove, 0, _vertMove).normalized;
-    //        Quaternion toRotation = Quaternion.LookRotation(moveDirection);
-
-    //        Quaternion targetRotation = Quaternion.RotateTowards(_playerController.transform.rotation, toRotation, 540f * Time.deltaTime);
-    //        targetRotation = Quaternion.Euler(0f, targetRotation.eulerAngles.y, 0f);
-
-    //        _yRotation = targetRotation.eulerAngles.y;
-
-    //        _playerController.transform.rotation = targetRotation;
-    //    }
-    //    else
-    //    {
-    //        Vector3 targetPosition = _playerController.PlayerTarget.Target.transform.position;
-    //        targetPosition.y = _playerController.transform.position.y;
-    //        _playerController.transform.LookAt(targetPosition);
-    //    }
-    //}
+    protected override void LoadComponents()
+    {
+        if (_keyboardInput != null && _joystickInput != null) return;
+        _keyboardInput = GetComponent<PlayerMoveKeyboard>();
+        _joystickInput = GetComponent<PlayerMoveJoystick>();
+    }
 }
